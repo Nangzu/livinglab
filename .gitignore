@@ -13,7 +13,7 @@ gradle-app.setting
 
 # Cache of project
 .gradletasknamecache
-
+aplication.propertise
 # Eclipse Gradle plugin generated files
 # Eclipse Core
 .project

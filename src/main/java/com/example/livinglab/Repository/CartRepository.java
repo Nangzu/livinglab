@@ -13,3 +13,4 @@ public interface CartRepository extends JpaRepository<Cart, Long> {
     // 사용자의 장바구니에서 특정 상품을 찾는 메소드
     Optional<Cart> findByUserAndGoods(Long userId, Long goodsId);
 }
+
