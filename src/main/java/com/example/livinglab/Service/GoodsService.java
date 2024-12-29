@@ -7,6 +7,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -53,6 +55,25 @@ public class GoodsService {
         } catch (Exception e) {
             log.error("상품 조회 중 오류 발생", e);
             throw new RuntimeException("상품 조회 실패: " + e.getMessage(), e);
+        }
+    }
+
+    // 특정 tag에 해당하는 상품 목록을 가져오는 메서드
+    public List<GoodsDTO> getGoodsByTag(String tag) {
+        try {
+            // tag에 맞는 상품 리스트를 가져오기
+            List<Goods> goodsList = goodsRepository.findByTag(tag);
+
+            // Goods 엔티티를 GoodsDTO로 변환하여 반환
+            List<GoodsDTO> goodsDTOList = goodsList.stream()
+                    .map(GoodsDTO::new) // 각 Goods를 GoodsDTO로 변환
+                    .collect(Collectors.toList());
+
+            log.info("{} tag에 해당하는 상품 목록 조회 완료", tag);
+            return goodsDTOList;
+        } catch (Exception e) {
+            log.error("상품 목록 조회 중 오류 발생", e);
+            throw new RuntimeException("상품 목록 조회 실패: " + e.getMessage(), e);
         }
     }
 }
