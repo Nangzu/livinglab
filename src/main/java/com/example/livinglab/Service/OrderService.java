@@ -38,11 +38,12 @@ public class OrderService {
         // 카트에서 상품 정보 가져오기
         List<Cart> carts = cartRepository.findAllById(cartIds);
 
+
+
         // 주문 생성
         Order order = new Order();
         order.setUser(user);  // 주문한 사용자
-        order.setPy_method(paymentMethod);  // 결제 방법
-        order.setCart(carts.get(0));  // 첫 번째 카트 항목을 주문에 설정 (여러 개의 카트가 있으면 로직 수정 필요)
+        order.setCart((Cart) carts);
 
         // 주문 저장
         order = orderRepository.save(order);
