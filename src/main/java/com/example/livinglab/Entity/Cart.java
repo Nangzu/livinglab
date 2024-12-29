@@ -4,7 +4,6 @@ import lombok.*;
 @Entity
 @Getter
 @Setter
-@IdClass(CartId.class)
 @Table(name = "CART")
 public class Cart {
     @Id

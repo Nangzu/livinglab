@@ -5,7 +5,6 @@ import lombok.*;
 @Entity
 @Getter
 @Setter
-@IdClass(OrderHistoryId.class)
 @Table(name = "ORDER_HISTORY")
 public class OrderHistory {
     @Id

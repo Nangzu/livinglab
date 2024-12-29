@@ -5,7 +5,6 @@ import lombok.*;
 @Entity
 @Getter
 @Setter
-@IdClass(GoodsId.class)
 @Table(name = "GOODS")
 public class Goods {
     @Id

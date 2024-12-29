@@ -4,7 +4,6 @@ import lombok.*;
 @Entity
 @Getter
 @Setter
-@IdClass(CollaborationId.class)
 @Table(name = "COLLABORATION")
 public class Collaboration {
     @Id

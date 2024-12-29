@@ -6,7 +6,6 @@ import lombok.*;
 @Entity
 @Getter
 @Setter
-@IdClass(MarketId.class)
 @Table(name = "MARKET")
 public class Market {
     @Id

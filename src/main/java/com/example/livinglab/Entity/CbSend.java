@@ -5,7 +5,6 @@ import lombok.*;
 @Entity
 @Getter
 @Setter
-@IdClass(CbSendId.class)
 @Table(name = "CB_SEND")
 public class CbSend {
     @Id
