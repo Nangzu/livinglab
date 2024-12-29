@@ -4,6 +4,7 @@ import lombok.*;
 
 @Entity
 @Getter
+@Setter
 @Table(name = "CB_SEND")
 public class CbSend {
     @Id
