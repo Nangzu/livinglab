@@ -1,6 +1,9 @@
 package com.example.livinglab.Entity;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -21,4 +24,7 @@ public class Cart {
     private User user;
 
     private int num;
+
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
+    private List<Order> orders;  // 여러 개의 주문이 이 카트에 연결될 수 있음
 }

@@ -1,16 +1,21 @@
 package com.example.livinglab.Repository;
-import com.example.livinglab.Entity.Cart;
-import com.example.livinglab.Entity.User;
-import com.example.livinglab.Entity.Goods;
 
+import com.example.livinglab.Entity.Cart;
+import com.example.livinglab.Entity.Goods;
+import com.example.livinglab.Entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface CartRepository extends JpaRepository<Cart, Long> {
-    List<Cart> findAllByUser(User user);
-    // 사용자의 장바구니에서 특정 상품을 찾는 메소드
+
+    // 여러 개의 카트 아이템을 한 번에 조회
+    List<Cart> findAllById(List<Long> cartIds);
+
+    // 사용자별 카트 아이템 조회
+    List<Cart> findByUser(User user);
+
+    // 사용자와 상품에 해당하는 장바구니 아이템 조회
     Optional<Cart> findByUserAndGoods(Long userId, Long goodsId);
 }
-
