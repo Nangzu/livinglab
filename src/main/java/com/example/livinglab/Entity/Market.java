@@ -9,9 +9,9 @@ import lombok.*;
 @Table(name = "MARKET")
 public class Market {
     @Id
+    @Column(name = "market_code", unique = true)
     private String market_code;
 
-    @Id
     @ManyToOne
     @JoinColumn(name = "user_num")
     private User user;

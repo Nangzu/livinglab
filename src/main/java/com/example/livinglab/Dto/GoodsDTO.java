@@ -17,7 +17,7 @@ public class GoodsDTO {
     private String mainImage;
 
     public GoodsDTO(Goods goods) {
-        this.goodsNum = goods.getGoods_num();
+        this.goodsNum = goods.getGoodsnum();
         this.goodsName = goods.getGoods_name();
         this.price = goods.getPrice();
         this.tag = goods.getTag();

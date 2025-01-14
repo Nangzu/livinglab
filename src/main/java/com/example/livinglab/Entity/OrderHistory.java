@@ -11,7 +11,6 @@ public class OrderHistory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long history_num;
 
-    @Id
     @ManyToOne
     @JoinColumn(name = "order_num")
     private Order order;

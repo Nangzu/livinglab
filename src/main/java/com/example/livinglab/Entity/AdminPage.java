@@ -8,14 +8,12 @@ import lombok.*;
 @Table(name = "ADMIN_PAGE")
 public class AdminPage {
     @Id
-    @ManyToOne
-    @JoinColumn(name = "market_code")
-    private Market market;
+    @Column(name = "market_code")
+    private String marketCode;
 
-    @Id
-    @ManyToOne
-    @JoinColumn(name = "user_num")
-    private User user;
+    @OneToOne
+    @JoinColumn(name = "market_code", insertable = false, updatable = false)
+    private Market market;
 
     private String page_cancel;
     private String refund;

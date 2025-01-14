@@ -9,22 +9,22 @@ import lombok.*;
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String role_code;
+    private Long role_code;
 
-    private String user;
+    private String users;
     private String seller;
     private String student;
-    private String admin;
+    private String admini;
 
     public String getRoleName() {
-        if (this.user != null) {
-            return "user";
+        if (this.users != null) {
+            return "users";
         } else if (this.seller != null) {
             return "seller";
         } else if (this.student != null) {
             return "student";
-        } else if (this.admin != null) {
-            return "admin";
+        } else if (this.admini != null) {
+            return "admini";
         }
         return null;  // 역할이 설정되지 않은 경우
     }

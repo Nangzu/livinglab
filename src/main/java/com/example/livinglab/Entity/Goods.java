@@ -11,12 +11,15 @@ import lombok.*;
 public class Goods {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long goods_num;
+    private Long goodsnum;
 
-    @Id
     @ManyToOne
     @JoinColumn(name = "user_num")
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "market_code")
+    private Market market;
 
     private String goods_name;
     private int price;
@@ -25,7 +28,4 @@ public class Goods {
     private String goods_option;
     private String main_image;
 
-    @ManyToOne
-    @JoinColumn(name = "market_code")
-    private Market market;
 }

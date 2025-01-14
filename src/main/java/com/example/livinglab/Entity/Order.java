@@ -5,7 +5,7 @@ import lombok.*;
 @Entity
 @Getter
 @Setter
-@Table(name = "ORDER")
+@Table(name = "ORDERS")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

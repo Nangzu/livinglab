@@ -11,7 +11,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "USERS", uniqueConstraints = {
-        @UniqueConstraint(columnNames = "id"),
+        @UniqueConstraint(columnNames = "userid"),
         @UniqueConstraint(columnNames = "email")
 })
 public class User {
@@ -21,7 +21,7 @@ public class User {
     private Long user_num;
 
     @Column(nullable = false, unique = true)
-    private String id;
+    private String userid;
 
     @JsonIgnore
     @Column(nullable = false)

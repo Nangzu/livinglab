@@ -24,7 +24,7 @@ public class OrderController {
 
     // 사용자별 주문 목록 조회
     @GetMapping("/user/{userId}")
-    public List<OrderDTO> getOrdersByUser(@PathVariable Long userId) {
+    public List<OrderDTO> getOrdersByUser(@PathVariable String userId) {
         return orderService.getOrdersByUser(userId);
     }
 
@@ -36,7 +36,7 @@ public class OrderController {
 
     // 장바구니에서 상품 삭제
     @DeleteMapping("/cart/{userId}/{goodsId}")
-    public void removeFromCart(@PathVariable Long userId, @PathVariable Long goodsId) {
+    public void removeFromCart(@PathVariable String userId, @PathVariable Long goodsId) {
         orderService.removeFromCart(userId, goodsId);
     }
 }

@@ -11,11 +11,11 @@ import java.util.Optional;
 public interface CartRepository extends JpaRepository<Cart, Long> {
 
     // 여러 개의 카트 아이템을 한 번에 조회
-    List<Cart> findAllById(List<Long> cartIds);
+    public List<Cart> findAllByCartnumIn(List<Long> cartnums);
 
     // 사용자별 카트 아이템 조회
     List<Cart> findByUser(User user);
 
     // 사용자와 상품에 해당하는 장바구니 아이템 조회
-    Optional<Cart> findByUserAndGoods(Long userId, Long goodsId);
+    Optional<Cart> findByUser_UseridAndGoods_Goodsnum(String userid, Long goodsnum);
 }

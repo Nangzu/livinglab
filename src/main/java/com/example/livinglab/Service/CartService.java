@@ -31,8 +31,8 @@ public class CartService {
 
         return carts.stream().map(cart -> {
             return new CartDTO(
-                    cart.getCart_num(),
-                    cart.getGoods().getGoods_num(),
+                    cart.getCartnum(),
+                    cart.getGoods().getGoodsnum(),
                     cart.getGoods().getGoods_name(),
                     cart.getNum()
             );

@@ -20,7 +20,7 @@ public class GoodsService {
         try {
             // 1. 제품 저장
             Goods savedGoods = goodsRepository.save(goods);
-            log.info("제품 정보 저장 완료 - ID : {}", savedGoods.getGoods_num());
+            log.info("제품 정보 저장 완료 - ID : {}", savedGoods.getGoodsnum());
 
             return goodsRepository.save(savedGoods); // 변경된 레시피 다시 저장
         } catch (Exception e) {
@@ -38,7 +38,7 @@ public class GoodsService {
 
             // 2. Goods 엔티티를 GoodsDTO로 변환
             GoodsDTO goodsDTO = new GoodsDTO(
-                    goods.getGoods_num(),
+                    goods.getGoodsnum(),
                     goods.getGoods_name(),
                     goods.getPrice(),
                     goods.getTag(),

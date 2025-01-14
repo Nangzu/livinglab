@@ -30,13 +30,13 @@ public class OrderService {
 
     // 주문 생성
     @Transactional
-    public OrderDTO createOrder(Long userId, List<Long> cartIds, String paymentMethod) {
+    public OrderDTO createOrder(Long userid, List<Long> cartIds, String paymentMethod) {
         // 사용자 확인
-        User user = userRepository.findById(userId)
+        User user = userRepository.findById(userid)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         // 카트에서 상품 정보 가져오기
-        List<Cart> carts = cartRepository.findAllById(cartIds);
+        List<Cart> carts = cartRepository.findAllByCartnumIn(cartIds);
 
 
 
@@ -51,8 +51,8 @@ public class OrderService {
         // DTO로 반환
         List<CartDTO> cartDTOs = carts.stream().map(cart -> {
             return new CartDTO(
-                    cart.getCart_num(),
-                    cart.getGoods().getGoods_num(),
+                    cart.getCartnum(),
+                    cart.getGoods().getGoodsnum(),
                     cart.getGoods().getGoods_name(),
                     cart.getNum()
             );
@@ -65,27 +65,26 @@ public class OrderService {
                 user.getPhone(),
                 user.getEmail(),
                 user.getAddress(),
-                user.getId(),
+                user.getUserid(),
                 user.getRole().getRoleName()
         );
 
         return new OrderDTO(
                 order.getOrder_num(),
-                order.getPy_method(),
                 userDTO,
                 cartDTOs
         );
     }
 
     // 사용자의 모든 주문 가져오기
-    public List<OrderDTO> getOrdersByUser(Long userId) {
-        List<Order> orders = orderRepository.findByUser_User_num(userId);  // 사용자 ID로 주문을 조회
+    public List<OrderDTO> getOrdersByUser(String userid) {
+        List<Order> orders = orderRepository.findByUser_Userid(userid);  // 사용자 ID로 주문을 조회
 
         return orders.stream().map(order -> {
             // Order 객체에서 CartDTO 정보 생성
             List<CartDTO> cartDTOs = order.getCart() != null ? List.of(new CartDTO(
-                    order.getCart().getCart_num(),
-                    order.getCart().getGoods().getGoods_num(),
+                    order.getCart().getCartnum(),
+                    order.getCart().getGoods().getGoodsnum(),
                     order.getCart().getGoods().getGoods_name(),
                     order.getCart().getNum()
             )) : List.of();  // Cart가 없는 경우 빈 리스트 처리
@@ -97,13 +96,12 @@ public class OrderService {
                     order.getUser().getPhone(),
                     order.getUser().getEmail(),
                     order.getUser().getAddress(),
-                    order.getUser().getId(),
+                    order.getUser().getUserid(),
                     order.getUser().getRole().getRoleName()
             );
 
             return new OrderDTO(
                     order.getOrder_num(),
-                    order.getPy_method(),
                     userDTO,
                     cartDTOs
             );
@@ -118,8 +116,8 @@ public class OrderService {
 
         // 단일 Cart에 대한 DTO 생성
         CartDTO cartDTO = (order.getCart() != null) ? new CartDTO(
-                order.getCart().getCart_num(),
-                order.getCart().getGoods().getGoods_num(),
+                order.getCart().getCartnum(),
+                order.getCart().getGoods().getGoodsnum(),
                 order.getCart().getGoods().getGoods_name(),
                 order.getCart().getNum()
         ) : null;  // Cart가 없으면 null 처리
@@ -131,22 +129,21 @@ public class OrderService {
                 order.getUser().getPhone(),
                 order.getUser().getEmail(),
                 order.getUser().getAddress(),
-                order.getUser().getId(),
+                order.getUser().getUserid(),
                 order.getUser().getRole().getRoleName()
         );
 
         // OrderDTO 반환
         return new OrderDTO(
                 order.getOrder_num(),
-                order.getPy_method(),
                 userDTO,
                 cartDTO != null ? List.of(cartDTO) : List.of()  // CartDTO를 리스트로 감싸서 반환
         );
     }
 
     // 장바구니에서 특정 상품 제거
-    public void removeFromCart(Long userId, Long goodsId) {
-        Cart cart = cartRepository.findByUserAndGoods(userId, goodsId)
+    public void removeFromCart(String userid, Long goodsnum) {
+        Cart cart = cartRepository.findByUser_UseridAndGoods_Goodsnum(userid, goodsnum)
                 .orElseThrow(() -> new RuntimeException("Item not found in cart"));
         cartRepository.delete(cart);
     }

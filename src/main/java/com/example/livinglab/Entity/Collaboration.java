@@ -10,7 +10,6 @@ public class Collaboration {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cow_num;
 
-    @Id
     @ManyToOne
     @JoinColumn(name = "market_code")
     private Market market;

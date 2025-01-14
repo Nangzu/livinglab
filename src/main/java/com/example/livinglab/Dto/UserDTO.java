@@ -10,7 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 public class UserDTO {
     private Long userNum;  // user_num
-    private String id;     // id
+    private String userid;     // id
     private String phone;   // phone
     private String email;   // email
     private String address; // address
@@ -22,7 +22,7 @@ public class UserDTO {
     // User 엔티티를 UserDTO로 변환하는 생성자 추가
     public UserDTO(User user) {
         this.userNum = user.getUser_num();
-        this.id = user.getId();
+        this.userid = user.getUserid();
         this.phone = user.getPhone();
         this.email = user.getEmail();
         this.address = user.getAddress();

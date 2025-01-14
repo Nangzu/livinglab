@@ -11,14 +11,12 @@ import java.util.List;
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long cart_num;
+    private Long cartnum;
 
-    @Id
     @ManyToOne
     @JoinColumn(name = "goods_num")
     private Goods goods;
 
-    @Id
     @ManyToOne
     @JoinColumn(name = "user_num")
     private User user;
