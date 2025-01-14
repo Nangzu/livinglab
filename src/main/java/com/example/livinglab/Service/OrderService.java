@@ -62,6 +62,7 @@ public class OrderService {
         UserDTO userDTO = new UserDTO(
                 user.getUser_num(),
                 user.getUser_name(),
+                user.getPw(),
                 user.getPhone(),
                 user.getEmail(),
                 user.getAddress(),
@@ -93,6 +94,7 @@ public class OrderService {
             UserDTO userDTO = new UserDTO(
                     order.getUser().getUser_num(),
                     order.getUser().getUser_name(),
+                    order.getUser().getPw(),
                     order.getUser().getPhone(),
                     order.getUser().getEmail(),
                     order.getUser().getAddress(),
@@ -126,6 +128,7 @@ public class OrderService {
         UserDTO userDTO = new UserDTO(
                 order.getUser().getUser_num(),
                 order.getUser().getUser_name(),
+                order.getUser().getPw(),
                 order.getUser().getPhone(),
                 order.getUser().getEmail(),
                 order.getUser().getAddress(),
