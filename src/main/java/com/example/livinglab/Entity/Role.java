@@ -9,11 +9,19 @@ import lombok.*;
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ROLE_CODE")  // 대문자 컬럼 이름
     private Long role_code;
 
+    @Column(name = "USERS")  // 대문자 컬럼 이름
     private String users;
+
+    @Column(name = "SELLER")  // 대문자 컬럼 이름
     private String seller;
+
+    @Column(name = "STUDENT")  // 대문자 컬럼 이름
     private String student;
+
+    @Column(name = "ADMINI")  // 대문자 컬럼 이름
     private String admini;
 
     public String getRoleName() {

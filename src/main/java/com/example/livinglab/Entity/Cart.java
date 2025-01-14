@@ -1,4 +1,5 @@
 package com.example.livinglab.Entity;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,18 +10,21 @@ import java.util.List;
 @Setter
 @Table(name = "CART")
 public class Cart {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "CARTNUM")  // 대문자 컬럼 이름
     private Long cartnum;
 
     @ManyToOne
-    @JoinColumn(name = "goods_num")
+    @JoinColumn(name = "GOODS_NUM")  // 대문자 외래 키 이름
     private Goods goods;
 
     @ManyToOne
-    @JoinColumn(name = "user_num")
+    @JoinColumn(name = "USER_NUM")  // 대문자 외래 키 이름
     private User user;
 
+    @Column(name = "NUM")  // 대문자 컬럼 이름
     private int num;
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)

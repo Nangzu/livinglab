@@ -10,15 +10,17 @@ public class CbSend {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "SEND_NUM")  // 대문자 컬럼 이름
     private Long send_num;
 
     @ManyToOne
-    @JoinColumn(name = "cow_num")
+    @JoinColumn(name = "COW_NUM")  // 대문자 외래 키 이름
     private Collaboration collaboration;
 
     @ManyToOne
-    @JoinColumn(name = "user_num")
+    @JoinColumn(name = "USER_NUM")  // 대문자 외래 키 이름
     private User user;
 
-    private String file;
+    @Column(name = "FILES")  // 대문자 컬럼 이름
+    private String files;
 }
