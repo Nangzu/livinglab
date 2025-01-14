@@ -15,6 +15,7 @@ public class UserDTO {
     private String email;   // email
     private String address; // address
     private String user_name; // user_name
+    private String pw;
 
     // Role 필드가 필요한 경우, RoleDTO를 사용하거나 Role 정보를 문자열로 반환할 수 있음
     private String role;    // role 정보가 필요하다면
@@ -28,5 +29,13 @@ public class UserDTO {
         this.address = user.getAddress();
         this.user_name = user.getUser_name();
         this.role = user.getRole() != null ? user.getRole().getRoleName() : null;  // roleName을 Role 클래스에서 가져올 수 있음
+    }
+
+    public String getPw() {
+        return pw;
+    }
+
+    public void setPw(String pw) {
+        this.pw = pw;
     }
 }

@@ -66,6 +66,7 @@ public class OrderService {
                 user.getEmail(),
                 user.getAddress(),
                 user.getUserid(),
+                null,
                 user.getRole().getRoleName()
         );
 
@@ -98,6 +99,7 @@ public class OrderService {
                     order.getUser().getEmail(),
                     order.getUser().getAddress(),
                     order.getUser().getUserid(),
+                    null,
                     order.getUser().getRole().getRoleName()
             );
 
@@ -132,6 +134,7 @@ public class OrderService {
                 order.getUser().getEmail(),
                 order.getUser().getAddress(),
                 order.getUser().getUserid(),
+                null,
                 order.getUser().getRole().getRoleName()
         );
 
