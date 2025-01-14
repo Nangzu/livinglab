@@ -8,16 +8,20 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class GoodsDTO {
-    private Long goodsNum;
-    private String goodsName;
-    private int price;
-    private String tag;
-    private String details;
-    private String goodsOption;
-    private String mainImage;
+    private Long goodsnum;  // 상품번호
+    private Long userNum;   // 사용자 번호
+    private Long marketCode; // 마켓 코드
+    private String goodsName; // 상품명
+    private int price;      // 가격
+    private String tag;     // 태그
+    private String details; // 상세 설명
+    private String goodsOption; // 상품 옵션
+    private String mainImage;  // 대표 이미지
 
     public GoodsDTO(Goods goods) {
-        this.goodsNum = goods.getGoodsnum();
+        this.goodsnum = goods.getGoodsnum();
+        this.userNum = goods.getUser().getUser_num();
+        this.marketCode = goods.getMarket().getMarket_code();
         this.goodsName = goods.getGoods_name();
         this.price = goods.getPrice();
         this.tag = goods.getTag();

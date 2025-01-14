@@ -1,79 +1,114 @@
 package com.example.livinglab.Service;
-import com.example.livinglab.Entity.Goods;
+
 import com.example.livinglab.Dto.GoodsDTO;
+import com.example.livinglab.Entity.Goods;
+import com.example.livinglab.Entity.User;
+import com.example.livinglab.Entity.Market;
 import com.example.livinglab.Repository.GoodsRepository;
-import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import com.example.livinglab.Repository.UserRepository;
+import com.example.livinglab.Repository.MarketRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-@Transactional
-@RequiredArgsConstructor
-@Slf4j
 public class GoodsService {
-    private final GoodsRepository goodsRepository;
-    public Goods createGoods(Goods goods) {
-        try {
-            // 1. 제품 저장
-            Goods savedGoods = goodsRepository.save(goods);
-            log.info("제품 정보 저장 완료 - ID : {}", savedGoods.getGoodsnum());
 
-            return goodsRepository.save(savedGoods); // 변경된 레시피 다시 저장
-        } catch (Exception e) {
-            log.error("제품 저장 중 오류 발생", e);
-            e.printStackTrace(); // 상세 에러 확인을 위해 추가
-            throw new RuntimeException("제품 저장 실패: " + e.getMessage(), e);
+    @Autowired
+    private GoodsRepository goodsRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private MarketRepository marketRepository;
+
+    // 상품 등록
+    public GoodsDTO addGoods(GoodsDTO goodsDTO) {
+
+        Optional<User> userOpt = userRepository.findById(goodsDTO.getUserNum());
+        Optional<Market> marketOpt = marketRepository.findById(goodsDTO.getMarketCode());
+
+        // 유효성 검사: 사용자와 마켓이 존재하는지 확인
+        if (userOpt.isEmpty() || marketOpt.isEmpty()) {
+            throw new IllegalArgumentException("User or Market not found");
         }
+
+        Goods goods = new Goods();
+        goods.setGoodsnum(goodsDTO.getGoodsnum());
+        goods.setUser(userOpt.get());  // 사용자 객체 설정
+        goods.setMarket(marketOpt.get());
+        goods.setGoods_name(goodsDTO.getGoodsName());
+        goods.setPrice(goodsDTO.getPrice());
+        goods.setTag(goodsDTO.getTag());
+        goods.setDetails(goodsDTO.getDetails());
+        goods.setGoods_option(goodsDTO.getGoodsOption());
+        goods.setMain_image(goodsDTO.getMainImage());
+
+        goods = goodsRepository.save(goods);
+        return new GoodsDTO(
+                goods.getGoodsnum(),
+                goods.getUser().getUser_num(),
+                goods.getMarket().getMarket_code(),
+                goods.getGoods_name(),
+                goods.getPrice(),
+                goods.getTag(),
+                goods.getDetails(),
+                goods.getGoods_option(),
+                goods.getMain_image()
+        );
     }
 
-    public GoodsDTO getGoodsDetails(Long goodsNum) {
-        try {
-            // 1. 상품 번호로 제품 찾기
-            Goods goods = goodsRepository.findById(goodsNum)
-                    .orElseThrow(() -> new EntityNotFoundException("상품을 찾을 수 없습니다. ID: " + goodsNum));
-
-            // 2. Goods 엔티티를 GoodsDTO로 변환
-            GoodsDTO goodsDTO = new GoodsDTO(
-                    goods.getGoodsnum(),
-                    goods.getGoods_name(),
-                    goods.getPrice(),
-                    goods.getTag(),
-                    goods.getDetails(),
-                    goods.getGoods_option(),
-                    goods.getMain_image()
-            );
-
-            log.info("상품 정보 조회 완료 - ID: {}", goodsDTO.getGoodsNum());
-            return goodsDTO;
-        } catch (EntityNotFoundException e) {
-            log.error("상품 조회 실패 - ID: {}", goodsNum, e);
-            throw e;  // 다시 던져서 호출한 곳에서 처리하도록 할 수 있음
-        } catch (Exception e) {
-            log.error("상품 조회 중 오류 발생", e);
-            throw new RuntimeException("상품 조회 실패: " + e.getMessage(), e);
-        }
+    // 상품 조회
+    public List<GoodsDTO> getAllGoods() {
+        List<Goods> goodsList = goodsRepository.findAll();
+        return goodsList.stream()
+                .map(goods -> new GoodsDTO(
+                        goods.getGoodsnum(),
+                        goods.getUser().getUser_num(),
+                        goods.getMarket().getMarket_code(),
+                        goods.getGoods_name(),
+                        goods.getPrice(),
+                        goods.getTag(),
+                        goods.getDetails(),
+                        goods.getGoods_option(),
+                        goods.getMain_image()))
+                .toList();
     }
 
-    // 특정 tag에 해당하는 상품 목록을 가져오는 메서드
-    public List<GoodsDTO> getGoodsByTag(String tag) {
-        try {
-            // tag에 맞는 상품 리스트를 가져오기
-            List<Goods> goodsList = goodsRepository.findByTag(tag);
+    // 특정 상품 조회
+    public Optional<GoodsDTO> getGoodsById(Long goodsnum) {
+        Optional<Goods> goods = goodsRepository.findById(goodsnum);
+        return goods.map(g -> new GoodsDTO(
+                g.getGoodsnum(),
+                g.getUser().getUser_num(),
+                g.getMarket().getMarket_code(),
+                g.getGoods_name(),
+                g.getPrice(),
+                g.getTag(),
+                g.getDetails(),
+                g.getGoods_option(),
+                g.getMain_image())
+        );
+    }
 
-            // Goods 엔티티를 GoodsDTO로 변환하여 반환
-            List<GoodsDTO> goodsDTOList = goodsList.stream()
-                    .map(GoodsDTO::new) // 각 Goods를 GoodsDTO로 변환
-                    .collect(Collectors.toList());
-
-            log.info("{} tag에 해당하는 상품 목록 조회 완료", tag);
-            return goodsDTOList;
-        } catch (Exception e) {
-            log.error("상품 목록 조회 중 오류 발생", e);
-            throw new RuntimeException("상품 목록 조회 실패: " + e.getMessage(), e);
-        }
+    public List<GoodsDTO> findGoodsByTag(String tag) {
+        List<Goods> goodsList = goodsRepository.findByTag(tag);
+        return goodsList.stream()
+                .map(goods -> new GoodsDTO(
+                        goods.getGoodsnum(),
+                        goods.getUser().getUser_num(),
+                        goods.getMarket().getMarket_code(),
+                        goods.getGoods_name(),
+                        goods.getPrice(),
+                        goods.getTag(),
+                        goods.getDetails(),
+                        goods.getGoods_option(),
+                        goods.getMain_image()
+                ))
+                .collect(Collectors.toList());
     }
 }

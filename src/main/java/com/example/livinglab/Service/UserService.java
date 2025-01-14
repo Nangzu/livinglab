@@ -2,6 +2,7 @@ package com.example.livinglab.Service;
 
 import com.example.livinglab.Dto.LoginDTO;
 import com.example.livinglab.Dto.UserDTO;
+import com.example.livinglab.Entity.Role;
 import com.example.livinglab.Entity.User;
 import com.example.livinglab.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +27,26 @@ public class UserService {
 
 
     public UserDTO createUser(UserDTO userDTO) {
+        // 비밀번호 인코딩
+        String encodedPassword = passwordEncoder.encode(userDTO.getPw());
+
+        // 기본 Role 설정 (예: 'user' 역할)
+        Role defaultRole = new Role();
+        defaultRole.setRole_code(4L);  // role_code를 4로 설정 (4는 'user' 역할로 가정)
+
+        // UserDTO를 User 엔티티로 변환
         User user = modelMapper.map(userDTO, User.class);
+
+        // 비밀번호 설정
+        user.setPw(encodedPassword);
+
+        // 역할 설정
+        user.setRole(defaultRole);
+
+        // User 저장
         User savedUser = userRepository.save(user);
+
+        // 저장된 User 엔티티를 UserDTO로 변환하여 반환
         return modelMapper.map(savedUser, UserDTO.class);
     }
 
@@ -74,24 +93,21 @@ public class UserService {
     }
 
     public UserDTO loginUser(LoginDTO loginDTO) {
-        // 사용자 id로 조회
+        // 사용자 아이디로 조회
         Optional<User> userOptional = userRepository.findByUserid(loginDTO.getUserid());
+
         if (userOptional.isPresent()) {
             User user = userOptional.get();
-            // 비밀번호 비교
+
+            // 입력된 비밀번호와 저장된 비밀번호 비교
             if (passwordEncoder.matches(loginDTO.getPw(), user.getPw())) {
                 // 비밀번호가 맞으면 UserDTO 반환
                 return new UserDTO(user);
             } else {
-                throw new RuntimeException("Invalid credentials");
+                throw new RuntimeException("Invalid credentials"); // 비밀번호 불일치
             }
         } else {
-            throw new RuntimeException("User not found");
+            throw new RuntimeException("User not found"); // 아이디를 찾을 수 없음
         }
-    }
-
-    // 비밀번호 암호화
-    public String encodePassword(String password) {
-        return passwordEncoder.encode(password);
     }
 }

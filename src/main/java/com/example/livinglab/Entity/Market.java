@@ -9,8 +9,9 @@ import lombok.*;
 @Table(name = "MARKET")
 public class Market {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "MARKET_CODE", unique = true)  // 대문자 컬럼 이름
-    private String market_code;
+    private Long market_code;
 
     @ManyToOne
     @JoinColumn(name = "USER_NUM")  // 대문자 외래 키 이름

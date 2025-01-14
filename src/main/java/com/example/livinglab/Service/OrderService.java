@@ -30,13 +30,13 @@ public class OrderService {
 
     // 주문 생성
     @Transactional
-    public OrderDTO createOrder(Long userid, List<Long> cartIds, String paymentMethod) {
+    public OrderDTO createOrder(Long userid, List<Long> cart_num, String py_method) {
         // 사용자 확인
         User user = userRepository.findById(userid)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         // 카트에서 상품 정보 가져오기
-        List<Cart> carts = cartRepository.findAllByCartnumIn(cartIds);
+        List<Cart> carts = cartRepository.findAllByCartnumIn(cart_num);
 
 
 
@@ -67,13 +67,15 @@ public class OrderService {
                 user.getEmail(),
                 user.getAddress(),
                 user.getUserid(),
+                null,
                 user.getRole().getRoleName()
         );
 
         return new OrderDTO(
                 order.getOrder_num(),
-                userDTO,
-                cartDTOs
+                order.getPy_method(),  // 결제 방법
+                order.getUser() != null ? new UserDTO(order.getUser()) : null,    // 사용자 정보 (UserDTO)
+                order.getCart() != null ? new CartDTO(order.getCart()) : null
         );
     }
 
@@ -99,13 +101,15 @@ public class OrderService {
                     order.getUser().getEmail(),
                     order.getUser().getAddress(),
                     order.getUser().getUserid(),
+                    null,
                     order.getUser().getRole().getRoleName()
             );
 
             return new OrderDTO(
                     order.getOrder_num(),
-                    userDTO,
-                    cartDTOs
+                    order.getPy_method(),  // 결제 방법
+                    order.getUser() != null ? new UserDTO(order.getUser()) : null,    // 사용자 정보 (UserDTO)
+                    order.getCart() != null ? new CartDTO(order.getCart()) : null
             );
         }).collect(Collectors.toList());
     }
@@ -133,14 +137,16 @@ public class OrderService {
                 order.getUser().getEmail(),
                 order.getUser().getAddress(),
                 order.getUser().getUserid(),
+                null,
                 order.getUser().getRole().getRoleName()
         );
 
         // OrderDTO 반환
         return new OrderDTO(
                 order.getOrder_num(),
-                userDTO,
-                cartDTO != null ? List.of(cartDTO) : List.of()  // CartDTO를 리스트로 감싸서 반환
+                order.getPy_method(),  // 결제 방법
+                order.getUser() != null ? new UserDTO(order.getUser()) : null,    // 사용자 정보 (UserDTO)
+                order.getCart() != null ? new CartDTO(order.getCart()) : null
         );
     }
 
