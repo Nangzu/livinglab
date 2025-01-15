@@ -35,7 +35,7 @@ public class UserService {
         String encodedPassword = passwordEncoder.encode(userDTO.getPw());
 
         // Role 설정 (Role Code가 1인 'user' 역할 조회)
-        Role defaultRole = roleRepository.findByRoleCode(1L)
+        Role defaultRole = roleRepository.findByRoleCode(4L)
                 .orElseThrow(() -> new RuntimeException("Default role not found"));
 
         // UserDTO를 User 엔티티로 변환
