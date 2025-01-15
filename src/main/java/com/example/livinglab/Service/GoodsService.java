@@ -127,4 +127,83 @@ public class GoodsService {
                 ))
                 .collect(Collectors.toList());
     }
+
+    // 상품 수정
+    public GoodsDTO updateGoods(Long goodsnum, GoodsDTO goodsDTO, MultipartFile file) throws IOException {
+        Optional<Goods> existingGoodsOpt = goodsRepository.findById(goodsnum);
+        if (existingGoodsOpt.isEmpty()) {
+            throw new IllegalArgumentException("Goods not found");
+        }
+
+        Goods existingGoods = existingGoodsOpt.get();
+
+        // 기존 상품 정보 업데이트
+        existingGoods.setGoods_name(goodsDTO.getGoodsName());
+        existingGoods.setPrice(goodsDTO.getPrice());
+        existingGoods.setTag(goodsDTO.getTag());
+        existingGoods.setDetails(goodsDTO.getDetails());
+        existingGoods.setGoods_option(goodsDTO.getGoodsOption());
+
+        // 파일이 존재하면 새로 저장
+        if (file != null && !file.isEmpty()) {
+            // goodsnum으로 기존 파일 찾기
+            List<Filestorage> filestorageList = filestorageRepository.findByGoods_Goodsnum(existingGoods.getGoodsnum());
+
+            // 기존 파일이 있으면, 모든 파일을 업데이트
+            if (!filestorageList.isEmpty()) {
+                // 모든 기존 파일 업데이트
+                for (Filestorage filestorage : filestorageList) {
+                    filestorage.setFiledata(file.getBytes());
+                    filestorage.setFilename(file.getOriginalFilename());  // 파일명 업데이트
+                    filestorage.setFiletype(file.getContentType());  // 파일타입 업데이트
+                    filestorageRepository.save(filestorage);  // 파일 저장
+                }
+            } else {
+                // 기존 파일이 없다면 새로 추가
+                Filestorage filestorage = new Filestorage();
+                filestorage.setFiledata(file.getBytes());
+                filestorage.setFilename(file.getOriginalFilename());
+                filestorage.setFiletype(file.getContentType());
+                filestorage.setGoods(existingGoods);
+                filestorageRepository.save(filestorage);  // 새 파일 저장
+            }
+        }
+
+        // 업데이트된 상품 저장
+        existingGoods = goodsRepository.save(existingGoods);
+
+        return new GoodsDTO(
+                existingGoods.getGoodsnum(),
+                existingGoods.getUser().getUser_num(),
+                existingGoods.getMarket().getMarket_code(),
+                existingGoods.getGoods_name(),
+                existingGoods.getPrice(),
+                existingGoods.getTag(),
+                existingGoods.getDetails(),
+                existingGoods.getGoods_option()
+        );
+    }
+
+    // 상품 삭제
+    public boolean deleteGoods(Long goodsnum) {
+        Optional<Goods> goodsOpt = goodsRepository.findById(goodsnum);
+        if (goodsOpt.isEmpty()) {
+            return false;  // 상품이 없으면 삭제할 수 없음
+        }
+
+        Goods goods = goodsOpt.get();
+
+        // 관련된 파일도 삭제
+        List<Filestorage> filestorageList = filestorageRepository.findByGoods_Goodsnum(goods.getGoodsnum());
+        if (filestorageList != null && !filestorageList.isEmpty()) {
+            // 기존 파일들이 있을 경우, 모두 삭제
+            for (Filestorage filestorage : filestorageList) {
+                filestorageRepository.delete(filestorage);
+            }
+        }
+
+        // 상품 삭제
+        goodsRepository.delete(goods);
+        return true;  // 삭제 성공
+    }
 }

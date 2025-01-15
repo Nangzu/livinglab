@@ -1,6 +1,9 @@
 package com.example.livinglab.Controller;
 
 import com.example.livinglab.Dto.GoodsDTO;
+import com.example.livinglab.Dto.UserDTO;
+import com.example.livinglab.Entity.Goods;
+import com.example.livinglab.Repository.GoodsRepository;
 import com.example.livinglab.Service.FilestorageService;
 import com.example.livinglab.Service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
@@ -24,12 +27,21 @@ public class GoodsController {
     @Autowired
     private FilestorageService filestorageService;
 
+    @Autowired
+    private GoodsRepository goodsRepository;
+
 
     // 상품 등록
     @PostMapping("/add")
     public ResponseEntity<GoodsDTO> addGoods(
             @RequestPart("goodsDTO") String goodsDTOJson, // JSON 문자열로 받음
-            @RequestPart(value = "file", required = false) MultipartFile file) throws IOException {
+            @RequestPart(value = "file", required = false) MultipartFile file, HttpSession session) throws IOException {
+
+        UserDTO userDTO = (UserDTO) session.getAttribute("user");
+        if (userDTO == null && userDTO.getRole() != 2L) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+
         System.out.println("Received goodsDTO: " + goodsDTOJson);
         // JSON 문자열을 GoodsDTO 객체로 변환
         ObjectMapper objectMapper = new ObjectMapper();
@@ -37,6 +49,72 @@ public class GoodsController {
 
         GoodsDTO createdGoods = goodsService.addGoods(goodsDTO, file);
         return new ResponseEntity<>(createdGoods, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/update/{goodsnum}")
+    public ResponseEntity<GoodsDTO> updateGoods(
+            @PathVariable Long goodsnum,
+            @RequestPart("goodsDTO") String goodsDTOJson,
+            @RequestPart(value = "file", required = false) MultipartFile file,
+            HttpSession session) throws IOException {
+
+        // 세션에서 사용자 정보 가져오기
+        UserDTO userDTO = (UserDTO) session.getAttribute("user");
+        if (userDTO == null || userDTO.getRole() != 2L) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED); // 권한이 없으면 401
+        }
+
+        // 상품 조회
+        Optional<Goods> existingGoodsOpt = goodsRepository.findById(goodsnum);
+        if (existingGoodsOpt.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 상품을 찾을 수 없으면 404
+        }
+
+        Goods existingGoods = existingGoodsOpt.get();
+
+        // 요청한 상품이 본인의 상품이 아닌 경우
+        if (!existingGoods.getUser().getUser_num().equals(userDTO.getUser_num())) {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN); // 403 상태 코드 반환
+        }
+
+        // JSON 문자열을 GoodsDTO 객체로 변환
+        ObjectMapper objectMapper = new ObjectMapper();
+        GoodsDTO goodsDTO = objectMapper.readValue(goodsDTOJson, GoodsDTO.class);
+
+        // 상품 수정
+        GoodsDTO updatedGoods = goodsService.updateGoods(goodsnum, goodsDTO, file);
+        return new ResponseEntity<>(updatedGoods, HttpStatus.OK);
+    }
+
+    // 상품 삭제
+    @DeleteMapping("/delete/{goodsnum}")
+    public ResponseEntity<Void> deleteGoods(@PathVariable Long goodsnum, HttpSession session) {
+        // 세션에서 사용자 정보 가져오기
+        UserDTO userDTO = (UserDTO) session.getAttribute("user");
+        if (userDTO == null || userDTO.getRole() != 2L) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED); // 권한이 없으면 401
+        }
+
+        // 상품 조회
+        Optional<Goods> existingGoodsOpt = goodsRepository.findById(goodsnum);
+        if (existingGoodsOpt.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 상품을 찾을 수 없으면 404
+        }
+
+        Goods existingGoods = existingGoodsOpt.get();
+
+        // 요청한 상품이 본인의 상품이 아닌 경우
+        if (!existingGoods.getUser().getUser_num().equals(userDTO.getUser_num())) {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN); // 403 상태 코드 반환
+        }
+
+        // 상품 삭제
+        boolean deleted = goodsService.deleteGoods(goodsnum);
+        if (deleted) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT); // 204 상태 코드 반환
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404 상태 코드 반환
+        }
     }
 
     // 모든 상품 조회

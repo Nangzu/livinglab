@@ -1,8 +1,12 @@
 package com.example.livinglab.Controller;
 
 import com.example.livinglab.Dto.OrderDTO;
+import com.example.livinglab.Dto.UserDTO;
 import com.example.livinglab.Service.OrderService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,27 +20,67 @@ public class OrderController {
 
     // 주문 생성
     @PostMapping("/create")
-    public OrderDTO createOrder(@RequestParam Long userId,
-                                @RequestParam List<Long> cartIds,
-                                @RequestParam String paymentMethod) {
-        return orderService.createOrder(userId, cartIds, paymentMethod);
-    }
+    public ResponseEntity<OrderDTO> createOrder(@RequestParam Long userId,
+                                                @RequestParam List<Long> cartIds,
+                                                @RequestParam String paymentMethod, HttpSession session) {
+        // 세션에서 사용자 정보 가져오기
+        UserDTO userDTO = (UserDTO) session.getAttribute("user");
 
+        // 사용자 정보가 없으면 Unauthorized 상태 코드와 함께 응답
+        if (userDTO == null) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);  // 401 상태 코드 반환
+        }
+
+        // 사용자 정보가 있는 경우, 주문 생성
+        OrderDTO createdOrder = orderService.createOrder(userId, cartIds, paymentMethod);
+        return new ResponseEntity<>(createdOrder, HttpStatus.CREATED);  // 201 상태 코드 반환
+    }
+    // 사용자별 주문 목록 조회
     // 사용자별 주문 목록 조회
     @GetMapping("/user/{userId}")
-    public List<OrderDTO> getOrdersByUser(@PathVariable String userId) {
-        return orderService.getOrdersByUser(userId);
+    public ResponseEntity<List<OrderDTO>> getOrdersByUser(@PathVariable String userId, HttpSession session) {
+        // 세션에서 사용자 정보 가져오기
+        UserDTO userDTO = (UserDTO) session.getAttribute("user");
+
+        // 세션에 사용자 정보가 없으면 Unauthorized 상태 코드와 함께 응답
+        if (userDTO == null) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);  // 401 상태 코드 반환
+        }
+
+        // 세션에서 userDTO의 user_num을 사용
+        Long userIdFromSession = userDTO.getUser_num();
+        List<OrderDTO> orders = orderService.getOrdersByUser(userIdFromSession.toString());
+
+        return ResponseEntity.ok(orders);
     }
 
     // 주문 상세 조회
     @GetMapping("/{orderId}")
-    public OrderDTO getOrderDetails(@PathVariable Long orderId) {
-        return orderService.getOrderDetails(orderId);
+    public ResponseEntity<OrderDTO> getOrderDetails(@PathVariable Long orderId, HttpSession session) {
+        // 세션에서 사용자 정보 가져오기
+        UserDTO userDTO = (UserDTO) session.getAttribute("user");
+
+        // 세션에 사용자 정보가 없으면 Unauthorized 상태 코드와 함께 응답
+        if (userDTO == null) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);  // 401 상태 코드 반환
+        }
+
+        OrderDTO orderDetails = orderService.getOrderDetails(orderId);
+        return ResponseEntity.ok(orderDetails);
     }
 
     // 장바구니에서 상품 삭제
     @DeleteMapping("/cart/{userId}/{goodsId}")
-    public void removeFromCart(@PathVariable String userId, @PathVariable Long goodsId) {
+    public ResponseEntity<Void> removeFromCart(@PathVariable String userId, @PathVariable Long goodsId, HttpSession session) {
+        // 세션에서 사용자 정보 가져오기
+        UserDTO userDTO = (UserDTO) session.getAttribute("user");
+
+        // 세션에 사용자 정보가 없으면 Unauthorized 상태 코드와 함께 응답
+        if (userDTO == null) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);  // 401 상태 코드 반환
+        }
+
         orderService.removeFromCart(userId, goodsId);
+        return ResponseEntity.noContent().build();  // 204 상태 코드 반환
     }
 }
