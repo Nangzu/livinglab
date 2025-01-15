@@ -1,0 +1,184 @@
+/* signup.css */
+.signup-container {
+    width: 90%;
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 40px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    position: relative;
+  }
+  
+  .signup-header {
+    margin-bottom: 15px;
+  }
+  
+  .signup-header h2 {
+    font-size: 28px;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+    text-align: center;
+  }
+  
+  .divider-bar {
+    width: 100%;
+    height: 1px;
+    background-color: #eee;
+    margin: 30px 0;
+  }
+  
+  .required-notice {
+    position: absolute;
+    top: 45px;
+    right: 40px;
+    font-size: 13px;
+    color: #666;
+  }
+  
+  .required-notice::before {
+    content: "*";
+    color: #ff4d4f;
+    margin-right: 4px;
+  }
+  
+  .signup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  
+  .form-group {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .form-group label {
+    font-size: 15px;
+    font-weight: 500;
+    color: #333;
+    text-align: left;
+  }
+  
+  .required {
+    color: #ff4d4f;
+    margin-left: 4px;
+  }
+  
+  input[type="text"],
+  input[type="password"],
+  input[type="email"],
+  input[type="date"] {
+    width: 100%;
+    max-width: 500px; /* 최대 너비 설정 */
+    padding: 12px 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 15px;
+    color: #333;
+    transition: all 0.2s ease;
+  }
+  
+  input[type="text"]:focus,
+  input[type="password"]:focus,
+  input[type="email"]:focus,
+  input[type="date"]:focus {
+    border-color: #4096ff;
+    box-shadow: 0 0 0 2px rgba(64, 150, 255, 0.1);
+    outline: none;
+  }
+  
+  input::placeholder {
+    color: #bbb;
+  }
+  
+  .gender-options {
+    display: flex;
+    gap: 32px;
+    padding: 8px 0;
+  }
+  
+  .gender-options input[type="radio"] {
+    display: none;
+  }
+  
+  .gender-options label {
+    position: relative;
+    padding-left: 28px;
+    cursor: pointer;
+    font-weight: normal;
+  }
+  
+  .gender-options label::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    border: 2px solid #ddd;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+  }
+  
+  .gender-options input[type="radio"]:checked + label::before {
+    border-color: #4096ff;
+    background: #4096ff;
+    box-shadow: inset 0 0 0 4px white;
+  }
+  
+  .submit-button {
+    margin-top: 16px;
+    padding: 14px;
+    background-color: #4096ff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .submit-button:hover {
+    background-color: #1677ff;
+  }
+  
+  /* 반응형 디자인 */
+  @media (max-width: 768px) {
+    .signup-container {
+      width: 95%;
+      margin: 20px auto;
+      padding: 30px 20px;
+    }
+  
+    .form-group {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+  
+    .required-notice {
+      position: relative;
+      top: 0;
+      right: 0;
+      text-align: right;
+      margin-bottom: 20px;
+    }
+  
+    .gender-options {
+      gap: 24px;
+    }
+  
+    input[type="text"],
+    input[type="password"],
+    input[type="email"],
+    input[type="date"] {
+      padding: 10px 14px;
+      max-width: 100%;  /* 모바일에서는 최대 너비 100%로 설정 */
+    }
+  }
+  
