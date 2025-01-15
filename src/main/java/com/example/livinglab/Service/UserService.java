@@ -4,6 +4,7 @@ import com.example.livinglab.Dto.LoginDTO;
 import com.example.livinglab.Dto.UserDTO;
 import com.example.livinglab.Entity.Role;
 import com.example.livinglab.Entity.User;
+import com.example.livinglab.Repository.RoleRepository;
 import com.example.livinglab.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,9 @@ public class UserService {
     private ModelMapper modelMapper;
 
     @Autowired
+    private RoleRepository roleRepository;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;  // BCryptPasswordEncoder 주입
 
 
@@ -30,9 +34,9 @@ public class UserService {
         // 비밀번호 인코딩
         String encodedPassword = passwordEncoder.encode(userDTO.getPw());
 
-        // 기본 Role 설정 (예: 'user' 역할)
-        Role defaultRole = new Role();
-        defaultRole.setRole_code(4L);  // role_code를 4로 설정 (4는 'user' 역할로 가정)
+        // Role 설정 (Role Code가 1인 'user' 역할 조회)
+        Role defaultRole = roleRepository.findByRoleCode(1L)
+                .orElseThrow(() -> new RuntimeException("Default role not found"));
 
         // UserDTO를 User 엔티티로 변환
         User user = modelMapper.map(userDTO, User.class);

@@ -68,7 +68,7 @@ public class OrderService {
                 user.getAddress(),
                 user.getUserid(),
                 null,
-                user.getRole().getRoleName()
+                user.getRole().getRoleCode()
         );
 
         return new OrderDTO(
@@ -102,7 +102,7 @@ public class OrderService {
                     order.getUser().getAddress(),
                     order.getUser().getUserid(),
                     null,
-                    order.getUser().getRole().getRoleName()
+                    order.getUser().getRole().getRoleCode()
             );
 
             return new OrderDTO(
@@ -138,7 +138,7 @@ public class OrderService {
                 order.getUser().getAddress(),
                 order.getUser().getUserid(),
                 null,
-                order.getUser().getRole().getRoleName()
+                order.getUser().getRole().getRoleCode()
         );
 
         // OrderDTO 반환

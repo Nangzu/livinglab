@@ -10,7 +10,7 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ROLE_CODE")  // 대문자 컬럼 이름
-    private Long role_code;
+    private Long roleCode;
 
     @Column(name = "USERS")  // 대문자 컬럼 이름
     private String users;
@@ -24,16 +24,16 @@ public class Role {
     @Column(name = "ADMINI")  // 대문자 컬럼 이름
     private String admini;
 
-    public String getRoleName() {
-        if (this.users != null) {
-            return "users";
+    public Long getRoleCode() {
+        if (this.admini != null) {
+            return 1L;
         } else if (this.seller != null) {
-            return "seller";
+            return 2L;
         } else if (this.student != null) {
-            return "student";
-        } else if (this.admini != null) {
-            return "admini";
+            return 3L;
+        } else if (this.users != null) {
+            return 4L;
         }
-        return null;  // 역할이 설정되지 않은 경우
+        return 4L;  // 역할이 설정되지 않은 경우
     }
 }

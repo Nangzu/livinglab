@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RegistService {
+public class RegisterService {
 
     @Autowired
     private UserRepository userRepository;
@@ -19,10 +19,8 @@ public class RegistService {
 
     public UserDTO createUser(UserDTO userDTO) {
         // Role 엔티티 조회
-        Role role = roleRepository.findByRoleName(userDTO.getRole());
-        if (role == null) {
-            throw new IllegalArgumentException("Invalid role: " + userDTO.getRole());
-        }
+        Role role = roleRepository.findByRoleCode(userDTO.getRole())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid role: " + userDTO.getRole()));
 
         // User 엔티티 생성
         User user = new User();

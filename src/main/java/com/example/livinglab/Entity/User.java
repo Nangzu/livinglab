@@ -42,7 +42,7 @@ public class User {
     @Column(name = "USER_NAME", nullable = false)  // 대문자 컬럼 이름
     private String user_name;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ROLE_CODE", nullable = false)  // 대문자 외래 키 이름
     private Role role;
 }
