@@ -18,10 +18,10 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping
-    public UserDTO createUser(@RequestBody UserDTO userDTO) {
-        return userService.createUser(userDTO);
-    }
+//    @PostMapping
+//    public UserDTO createUser(@RequestBody UserDTO userDTO) {
+//        return userService.createUser(userDTO);
+//    }
 
 
     @GetMapping
