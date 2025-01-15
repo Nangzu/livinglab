@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import './login.css';
+import axios from 'axios';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -21,7 +21,6 @@ const Login = () => {
     try {
       const response = await axios.post('http://localhost:8082/api/users/login', formData);
       console.log('로그인 성공:', response.data);
-      // 세션에 사용자 정보 저장 후 페이지 이동
       alert('로그인 성공!');
       window.location.href = '/main';
     } catch (error) {
@@ -32,49 +31,69 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      <div className="login-box">
-        <h2 className="login-title">로그인</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <input
-              type="text"
-              id="userid"
-              name="userid"
-              className="form-input"
-              placeholder="아이디를 입력해주세요"
-              value={formData.userid}
-              onChange={handleChange}
-              required
-            />
+      <div className="login-content">
+        <div className="login-left">
+          <div className="welcome-text">
+            <h1>Welcome Back!</h1>
+            <p>서비스를 이용하시려면 로그인해주세요.</p>
           </div>
-          
-          <div className="form-group">
-            <input
-              type="password"
-              id="pw"
-              name="pw"
-              className="form-input"
-              placeholder="비밀번호를 입력해주세요"
-              value={formData.pw}
-              onChange={handleChange}
-              required
-            />
+        </div>
+        
+        <div className="login-right">
+          <div className="login-box">
+            <h2 className="login-title">로그인</h2>
+            <form onSubmit={handleSubmit}>
+              <div className="form-group">
+                <label htmlFor="userid">아이디</label>
+                <input
+                  type="text"
+                  id="userid"
+                  name="userid"
+                  className="form-input"
+                  placeholder="아이디를 입력해주세요"
+                  value={formData.userid}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              
+              <div className="form-group">
+                <label htmlFor="pw">비밀번호</label>
+                <input
+                  type="password"
+                  id="pw"
+                  name="pw"
+                  className="form-input"
+                  placeholder="비밀번호를 입력해주세요"
+                  value={formData.pw}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+
+              <div className="links">
+                <a href="/find-username">아이디 찾기</a>
+                <span className="divider">|</span>
+                <a href="/find-password">비밀번호 찾기</a>
+              </div>
+
+              <button type="submit" className="login-button">
+                로그인
+              </button>
+
+              <div className="signup-section">
+                <p>아직 계정이 없으신가요?</p>
+                <button 
+                  type="button" 
+                  className="signup-button" 
+                  onClick={() => window.location.href = '/signup'}
+                >
+                  회원가입
+                </button>
+              </div>
+            </form>
           </div>
-
-          <div className="links">
-            <a href="/find-username">아이디 찾기</a>
-            <a href="/find-password">비밀번호 찾기</a>
-          </div>
-
-          <button type="submit" className="login-button">
-            로그인
-          </button>
-
-          {/* 회원가입을 버튼 형식으로 변경 */}
-          <button type="button" className="signup-button" onClick={() => window.location.href = '/signup'}>
-            계정이 없으신가요? 회원가입
-          </button>
-        </form>
+        </div>
       </div>
     </div>
   );

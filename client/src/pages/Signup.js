@@ -5,10 +5,10 @@ import './signup.css';
 
 const Signup = () => {
   const [formData, setFormData] = useState({
-    id: '',
-    password: '',
+    userid: '',
+    pw: '',
     confirmPassword: '',
-    name: '',
+    user_name: '',
     email: '',
     phone: '',
     address: '',
@@ -28,24 +28,22 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (formData.password !== formData.confirmpw) {
+    if (formData.pw !== formData.confirmPassword) {
       alert("비밀번호가 일치하지 않습니다.");
       return;
     }
 
     const data = {
-      id: formData.id,
-      password: formData.pw,
-      name: formData.name,
+      userid: formData.userid,
+      pw: formData.pw,
+      user_name: formData.user_name,
       email: formData.email,
       phone: formData.phone,
       address: formData.address,
-      gender: formData.gender,
-      birthDate: formData.birthDate,
     };
 
     try {
-      const response = await axios.post(`http://localhost:8080/api/signup`, data);
+      const response = await axios.post(`http://localhost:8082/api/users/register`, data);
 
       if (response.status === 200) {
         alert('회원가입 성공');
@@ -65,16 +63,13 @@ const Signup = () => {
         <h2>회원가입</h2>
       </div>
 
-      {/* 일자바 추가 */}
-      <div className="divider-bar"></div>
-
       <form className="signup-form" onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="id">아이디<span className="required">*</span></label>
+          <label htmlFor="userid">아이디<span className="required">*</span></label>
           <input
             type="text"
-            id="id"
-            name="id"
+            id="userid"
+            name="userid"
             placeholder="아이디를 입력해주세요"
             value={formData.userid}
             onChange={handleChange}
@@ -83,11 +78,11 @@ const Signup = () => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="password">비밀번호<span className="required">*</span></label>
+          <label htmlFor="pw">비밀번호<span className="required">*</span></label>
           <input
             type="password"
-            id="password"
-            name="password"
+            id="pw"
+            name="pw"
             placeholder="비밀번호를 입력해주세요"
             value={formData.pw}
             onChange={handleChange}
@@ -102,20 +97,20 @@ const Signup = () => {
             id="confirmPassword"
             name="confirmPassword"
             placeholder="비밀번호를 확인해주세요"
-            value={formData.confirmpw}
+            value={formData.confirmPassword}
             onChange={handleChange}
             required
           />
         </div>
 
         <div className="form-group">
-          <label htmlFor="name">이름<span className="required">*</span></label>
+          <label htmlFor="user_name">이름<span className="required">*</span></label>
           <input
             type="text"
-            id="name"
-            name="name"
+            id="user_name"
+            name="user_name"
             placeholder="이름을 입력해주세요"
-            value={formData.username}
+            value={formData.user_name}
             onChange={handleChange}
             required
           />
@@ -199,7 +194,6 @@ const Signup = () => {
         <button type="submit" className="submit-button">회원가입</button>
       </form>
 
-      {/* 필수 입력사항 위치 */}
       <div className="required-notice">필수입력사항</div>
     </div>
   );
