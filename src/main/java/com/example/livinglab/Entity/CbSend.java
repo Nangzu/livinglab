@@ -21,6 +21,6 @@ public class CbSend {
     @JoinColumn(name = "USER_NUM")  // 대문자 외래 키 이름
     private User user;
 
-    @Column(name = "FILES")  // 대문자 컬럼 이름
-    private String files;
+    @Column(name = "FILESS")  // 대문자 컬럼 이름
+    private String filess;
 }

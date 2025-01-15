@@ -38,6 +38,11 @@ public class Goods {
     @Column(name = "GOODS_OPTION")  // 대문자 컬럼 이름
     private String goods_option;
 
-    @Column(name = "MAIN_IMAGE")  // 대문자 컬럼 이름
-    private String main_image;
+    public Long getGoodsnum() {
+        return goodsnum;
+    }
+
+    public void setGoodsnum(Long goodsnum) {
+        this.goodsnum = goodsnum;
+    }
 }

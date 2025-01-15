@@ -1,15 +1,19 @@
 package com.example.livinglab.Service;
 
 import com.example.livinglab.Dto.GoodsDTO;
+import com.example.livinglab.Entity.Filestorage;
 import com.example.livinglab.Entity.Goods;
 import com.example.livinglab.Entity.User;
 import com.example.livinglab.Entity.Market;
+import com.example.livinglab.Repository.FilestorageRepository;
 import com.example.livinglab.Repository.GoodsRepository;
 import com.example.livinglab.Repository.UserRepository;
 import com.example.livinglab.Repository.MarketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -26,8 +30,15 @@ public class GoodsService {
     @Autowired
     private MarketRepository marketRepository;
 
+    @Autowired
+    private FilestorageService filestorageService;  // File storage service
+
+    @Autowired
+    private FilestorageRepository filestorageRepository;
+
+
     // 상품 등록
-    public GoodsDTO addGoods(GoodsDTO goodsDTO) {
+    public GoodsDTO addGoods(GoodsDTO goodsDTO, MultipartFile file) throws IOException {
 
         Optional<User> userOpt = userRepository.findById(goodsDTO.getUserNum());
         Optional<Market> marketOpt = marketRepository.findById(goodsDTO.getMarketCode());
@@ -46,9 +57,17 @@ public class GoodsService {
         goods.setTag(goodsDTO.getTag());
         goods.setDetails(goodsDTO.getDetails());
         goods.setGoods_option(goodsDTO.getGoodsOption());
-        goods.setMain_image(goodsDTO.getMainImage());
 
         goods = goodsRepository.save(goods);
+
+        Filestorage filestorage = new Filestorage();
+        filestorage.setFiledata(file.getBytes());
+        filestorage.setFilename(file.getOriginalFilename());  // 파일명 저장
+        filestorage.setFiletype(file.getContentType());  // 파일타입 저장
+        filestorage.setGoods(goods);
+
+        filestorageRepository.save(filestorage);
+
         return new GoodsDTO(
                 goods.getGoodsnum(),
                 goods.getUser().getUser_num(),
@@ -57,8 +76,7 @@ public class GoodsService {
                 goods.getPrice(),
                 goods.getTag(),
                 goods.getDetails(),
-                goods.getGoods_option(),
-                goods.getMain_image()
+                goods.getGoods_option()
         );
     }
 
@@ -74,8 +92,8 @@ public class GoodsService {
                         goods.getPrice(),
                         goods.getTag(),
                         goods.getDetails(),
-                        goods.getGoods_option(),
-                        goods.getMain_image()))
+                        goods.getGoods_option()
+                ))
                 .toList();
     }
 
@@ -90,9 +108,8 @@ public class GoodsService {
                 g.getPrice(),
                 g.getTag(),
                 g.getDetails(),
-                g.getGoods_option(),
-                g.getMain_image())
-        );
+                g.getGoods_option()
+        ));
     }
 
     public List<GoodsDTO> findGoodsByTag(String tag) {
@@ -106,8 +123,7 @@ public class GoodsService {
                         goods.getPrice(),
                         goods.getTag(),
                         goods.getDetails(),
-                        goods.getGoods_option(),
-                        goods.getMain_image()
+                        goods.getGoods_option()
                 ))
                 .collect(Collectors.toList());
     }

@@ -28,7 +28,7 @@ public class CbSendService {
         // CbSend 엔티티 생성 및 저장
         CbSend cbSend = new CbSend();
         cbSend.setUser(user);
-        cbSend.setFiles(filePath);
+        cbSend.setFiless(filePath);
 
         return cbSendRepository.save(cbSend);
     }
