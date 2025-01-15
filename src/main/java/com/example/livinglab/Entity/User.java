@@ -42,7 +42,23 @@ public class User {
     @Column(name = "USER_NAME", nullable = false)  // 대문자 컬럼 이름
     private String user_name;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ROLE_CODE", nullable = false)  // 대문자 외래 키 이름
     private Role role;
+
+
+    // 역할 부여 메서드
+    public void assignRole(Role newRole) {
+        this.role = newRole;
+    }
+
+    // 역할 제거 메서드
+    public void removeRole() {
+        this.role = null; // 역할 제거 시 null로 설정
+    }
+
+    // 역할 확인 메서드
+    public boolean hasRole(Long roleCode) {
+        return this.role != null && this.role.getRoleCode().equals(roleCode);
+    }
 }
