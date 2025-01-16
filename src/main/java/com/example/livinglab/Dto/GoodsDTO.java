@@ -15,7 +15,7 @@ public class GoodsDTO {
     private Long userNum;
     @JsonProperty("marketCode") // JSON에서 'marketCode'를 매핑
     private Long marketCode;
-    private String goodsName; // 상품명
+    private String goodsname; // 상품명
     private int price;      // 가격
     private String tag;     // 태그
     private String details; // 상세 설명
@@ -24,7 +24,7 @@ public class GoodsDTO {
         this.goodsnum = goods.getGoodsnum();
         this.userNum = goods.getUser().getUser_num();
         this.marketCode = goods.getMarket().getMarket_code();
-        this.goodsName = goods.getGoods_name();
+        this.goodsname = goods.getGoodsname();
         this.price = goods.getPrice();
         this.tag = goods.getTag();
         this.details = goods.getDetails();

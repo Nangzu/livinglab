@@ -2,14 +2,13 @@ package com.example.livinglab.Service;
 
 import com.example.livinglab.Dto.CartDTO;
 import com.example.livinglab.Entity.Cart;
+import com.example.livinglab.Entity.Goods;
 import com.example.livinglab.Entity.User;
 import com.example.livinglab.Repository.CartRepository;
+import com.example.livinglab.Repository.GoodsRepository;
 import com.example.livinglab.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class CartService {
@@ -18,24 +17,30 @@ public class CartService {
     private CartRepository cartRepository;
 
     @Autowired
+    private GoodsRepository goodsRepository;
+
+    @Autowired
     private UserRepository userRepository;
 
-    // 사용자별 장바구니 아이템 조회 (DTO로 반환)
-    public List<CartDTO> getCartItems(Long userId) {
-        // userId로 User 객체를 조회
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+    public CartDTO addToCart(CartDTO cartDTO) {
+        // 상품 조회
+        Goods goods = goodsRepository.findById(cartDTO.getGoodsnum())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid goods ID"));
 
-        // 조회한 User 객체를 사용하여 장바구니 아이템 조회
-        List<Cart> carts = cartRepository.findByUser(user);
+        // 사용자 조회
+        User user = userRepository.findById(cartDTO.getUserNum())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
 
-        return carts.stream().map(cart -> {
-            return new CartDTO(
-                    cart.getCartnum(),
-                    cart.getGoods().getGoodsnum(),
-                    cart.getGoods().getGoods_name(),
-                    cart.getNum()
-            );
-        }).collect(Collectors.toList());
+        // 새로운 카트 생성
+        Cart cart = new Cart();
+        cart.setGoods(goods);
+        cart.setUser(user);
+        cart.setQuantity(cartDTO.getQuantity());
+
+        // 카트 저장
+        Cart savedCart = cartRepository.save(cart);
+
+        // 저장된 카트를 DTO로 변환
+        return new CartDTO(savedCart);
     }
 }

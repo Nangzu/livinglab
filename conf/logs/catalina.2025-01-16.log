@@ -1,0 +1,205 @@
+16-Jan-2025 09:27:19.549 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 서버 버전 이름:    Apache Tomcat/9.0.97
+16-Jan-2025 09:27:19.552 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server 빌드 시각:  Nov 6 2024 19:55:19 UTC
+16-Jan-2025 09:27:19.552 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server 버전 번호:  9.0.97.0
+16-Jan-2025 09:27:19.552 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 운영체제 이름:     Windows 10
+16-Jan-2025 09:27:19.552 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 운영체제 버전:     10.0
+16-Jan-2025 09:27:19.552 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 아키텍처:          amd64
+16-Jan-2025 09:27:19.552 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 자바 홈:           C:\Users\1\.jdks\openjdk-23.0.1
+16-Jan-2025 09:27:19.552 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM 버전:          23.0.1+11-39
+16-Jan-2025 09:27:19.552 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM 벤더:          Oracle Corporation
+16-Jan-2025 09:27:19.552 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:     C:\Users\1\Desktop\Downloads\newliv\livinglab\conf
+16-Jan-2025 09:27:19.552 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:     C:\Program Files\Apache Software Foundation\apache-tomcat-9.0.97
+16-Jan-2025 09:27:19.557 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  --add-opens=java.base/java.lang=ALL-UNNAMED
+16-Jan-2025 09:27:19.557 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  --add-opens=java.base/java.io=ALL-UNNAMED
+16-Jan-2025 09:27:19.557 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  --add-opens=java.base/java.util=ALL-UNNAMED
+16-Jan-2025 09:27:19.557 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  --add-opens=java.base/java.util.concurrent=ALL-UNNAMED
+16-Jan-2025 09:27:19.557 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+16-Jan-2025 09:27:19.557 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Dcatalina.home=C:\Program Files\Apache Software Foundation\apache-tomcat-9.0.97
+16-Jan-2025 09:27:19.557 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Dcatalina.base=C:\Users\1\Desktop\Downloads\newliv\livinglab\conf
+16-Jan-2025 09:27:19.557 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Djava.io.tmpdir=C:\Users\1\Desktop\Downloads\newliv\livinglab\conf\temp
+16-Jan-2025 09:27:19.558 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Djava.util.logging.config.file=C:\Users\1\Desktop\Downloads\newliv\livinglab\conf\conf\logging.properties
+16-Jan-2025 09:27:19.558 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+16-Jan-2025 09:27:19.558 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -javaagent:C:\Program Files\JetBrains\IntelliJ IDEA 2023.1.2\lib\idea_rt.jar=14219:C:\Program Files\JetBrains\IntelliJ IDEA 2023.1.2\bin
+16-Jan-2025 09:27:19.558 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Dfile.encoding=UTF-8
+16-Jan-2025 09:27:19.558 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Dsun.stdout.encoding=UTF-8
+16-Jan-2025 09:27:19.558 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Dsun.stderr.encoding=UTF-8
+16-Jan-2025 09:27:19.562 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent APR 버전 [1.7.4]을(를) 사용한, APR 기반 Apache Tomcat Native 라이브러리 [1.3.1]을(를) 로드했습니다.
+16-Jan-2025 09:27:19.562 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent APR 용량정보들: IPv6 [true], sendfile [true], accept filters [false], random [true], UDS [true].
+16-Jan-2025 09:27:19.562 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent APR/OpenSSL 설정: useAprConnector [false], useOpenSSL [true]
+16-Jan-2025 09:27:19.574 INFO [main] org.apache.catalina.core.AprLifecycleListener.initializeSSL OpenSSL이 성공적으로 초기화되었습니다: [OpenSSL 3.0.14 4 Jun 2024]
+16-Jan-2025 09:27:19.788 INFO [main] org.apache.coyote.AbstractProtocol.init 프로토콜 핸들러 ["http-nio-8082"]을(를) 초기화합니다.
+16-Jan-2025 09:27:19.802 INFO [main] org.apache.catalina.startup.Catalina.load [412] 밀리초 내에 서버가 초기화되었습니다.
+16-Jan-2025 09:27:19.847 INFO [main] org.apache.catalina.core.StandardService.startInternal 서비스 [Catalina]을(를) 시작합니다.
+16-Jan-2025 09:27:19.847 INFO [main] org.apache.catalina.core.StandardEngine.startInternal 서버 엔진을 시작합니다: [Apache Tomcat/9.0.97]
+16-Jan-2025 09:27:19.854 INFO [main] org.apache.catalina.startup.HostConfig.deployDescriptor 배치 descriptor [C:\Users\1\Desktop\Downloads\newliv\livinglab\conf\conf\Catalina\localhost\ROOT.xml]을(를) 배치합니다.
+16-Jan-2025 09:27:20.173 INFO [main] org.apache.catalina.startup.HostConfig.deployDescriptor 배치 descriptor [C:\Users\1\Desktop\Downloads\newliv\livinglab\conf\conf\Catalina\localhost\ROOT.xml]의 배치가 [318] 밀리초 내에 완료되었습니다.
+16-Jan-2025 09:27:20.175 INFO [main] org.apache.coyote.AbstractProtocol.start 프로토콜 핸들러 ["http-nio-8082"]을(를) 시작합니다.
+16-Jan-2025 09:27:20.192 INFO [main] org.apache.catalina.startup.Catalina.start 서버가 [387] 밀리초 내에 시작되었습니다.
+16-Jan-2025 09:28:59.507 INFO [Thread-1] org.apache.coyote.AbstractProtocol.pause 프로토콜 핸들러 ["http-nio-8082"]을(를) 일시 정지 중
+16-Jan-2025 09:28:59.512 INFO [Thread-1] org.apache.catalina.core.StandardService.stopInternal 서비스 [Catalina]을(를) 중지시킵니다.
+16-Jan-2025 09:28:59.518 INFO [Thread-1] org.apache.coyote.AbstractProtocol.stop 프로토콜 핸들러 ["http-nio-8082"]을(를) 중지시킵니다.
+16-Jan-2025 09:28:59.520 INFO [Thread-1] org.apache.coyote.AbstractProtocol.destroy 프로토콜 핸들러 ["http-nio-8082"]을(를) 소멸시킵니다.
+16-Jan-2025 09:29:04.584 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 서버 버전 이름:    Apache Tomcat/9.0.97
+16-Jan-2025 09:29:04.587 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server 빌드 시각:  Nov 6 2024 19:55:19 UTC
+16-Jan-2025 09:29:04.587 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server 버전 번호:  9.0.97.0
+16-Jan-2025 09:29:04.587 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 운영체제 이름:     Windows 10
+16-Jan-2025 09:29:04.587 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 운영체제 버전:     10.0
+16-Jan-2025 09:29:04.587 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 아키텍처:          amd64
+16-Jan-2025 09:29:04.587 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 자바 홈:           C:\Users\1\.jdks\openjdk-23.0.1
+16-Jan-2025 09:29:04.587 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM 버전:          23.0.1+11-39
+16-Jan-2025 09:29:04.587 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM 벤더:          Oracle Corporation
+16-Jan-2025 09:29:04.587 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:     C:\Users\1\Desktop\Downloads\newliv\livinglab\conf
+16-Jan-2025 09:29:04.587 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:     C:\Program Files\Apache Software Foundation\apache-tomcat-9.0.97
+16-Jan-2025 09:29:04.594 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  --add-opens=java.base/java.lang=ALL-UNNAMED
+16-Jan-2025 09:29:04.594 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  --add-opens=java.base/java.io=ALL-UNNAMED
+16-Jan-2025 09:29:04.594 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  --add-opens=java.base/java.util=ALL-UNNAMED
+16-Jan-2025 09:29:04.594 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  --add-opens=java.base/java.util.concurrent=ALL-UNNAMED
+16-Jan-2025 09:29:04.594 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+16-Jan-2025 09:29:04.594 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Dcatalina.home=C:\Program Files\Apache Software Foundation\apache-tomcat-9.0.97
+16-Jan-2025 09:29:04.595 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Dcatalina.base=C:\Users\1\Desktop\Downloads\newliv\livinglab\conf
+16-Jan-2025 09:29:04.595 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Djava.io.tmpdir=C:\Users\1\Desktop\Downloads\newliv\livinglab\conf\temp
+16-Jan-2025 09:29:04.595 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Djava.util.logging.config.file=C:\Users\1\Desktop\Downloads\newliv\livinglab\conf\conf\logging.properties
+16-Jan-2025 09:29:04.595 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+16-Jan-2025 09:29:04.595 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -javaagent:C:\Program Files\JetBrains\IntelliJ IDEA 2023.1.2\lib\idea_rt.jar=14304:C:\Program Files\JetBrains\IntelliJ IDEA 2023.1.2\bin
+16-Jan-2025 09:29:04.595 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Dfile.encoding=UTF-8
+16-Jan-2025 09:29:04.595 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Dsun.stdout.encoding=UTF-8
+16-Jan-2025 09:29:04.595 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Dsun.stderr.encoding=UTF-8
+16-Jan-2025 09:29:04.598 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent APR 버전 [1.7.4]을(를) 사용한, APR 기반 Apache Tomcat Native 라이브러리 [1.3.1]을(를) 로드했습니다.
+16-Jan-2025 09:29:04.598 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent APR 용량정보들: IPv6 [true], sendfile [true], accept filters [false], random [true], UDS [true].
+16-Jan-2025 09:29:04.598 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent APR/OpenSSL 설정: useAprConnector [false], useOpenSSL [true]
+16-Jan-2025 09:29:04.604 INFO [main] org.apache.catalina.core.AprLifecycleListener.initializeSSL OpenSSL이 성공적으로 초기화되었습니다: [OpenSSL 3.0.14 4 Jun 2024]
+16-Jan-2025 09:29:04.854 INFO [main] org.apache.coyote.AbstractProtocol.init 프로토콜 핸들러 ["http-nio-8082"]을(를) 초기화합니다.
+16-Jan-2025 09:29:04.873 INFO [main] org.apache.catalina.startup.Catalina.load [450] 밀리초 내에 서버가 초기화되었습니다.
+16-Jan-2025 09:29:04.909 INFO [main] org.apache.catalina.core.StandardService.startInternal 서비스 [Catalina]을(를) 시작합니다.
+16-Jan-2025 09:29:04.909 INFO [main] org.apache.catalina.core.StandardEngine.startInternal 서버 엔진을 시작합니다: [Apache Tomcat/9.0.97]
+16-Jan-2025 09:29:04.916 INFO [main] org.apache.catalina.startup.HostConfig.deployDescriptor 배치 descriptor [C:\Users\1\Desktop\Downloads\newliv\livinglab\conf\conf\Catalina\localhost\ROOT.xml]을(를) 배치합니다.
+16-Jan-2025 09:29:05.189 INFO [main] org.apache.catalina.startup.HostConfig.deployDescriptor 배치 descriptor [C:\Users\1\Desktop\Downloads\newliv\livinglab\conf\conf\Catalina\localhost\ROOT.xml]의 배치가 [272] 밀리초 내에 완료되었습니다.
+16-Jan-2025 09:29:05.192 INFO [main] org.apache.coyote.AbstractProtocol.start 프로토콜 핸들러 ["http-nio-8082"]을(를) 시작합니다.
+16-Jan-2025 09:29:05.208 INFO [main] org.apache.catalina.startup.Catalina.start 서버가 [334] 밀리초 내에 시작되었습니다.
+16-Jan-2025 09:31:15.544 INFO [Thread-1] org.apache.coyote.AbstractProtocol.pause 프로토콜 핸들러 ["http-nio-8082"]을(를) 일시 정지 중
+16-Jan-2025 09:31:15.549 INFO [Thread-1] org.apache.catalina.core.StandardService.stopInternal 서비스 [Catalina]을(를) 중지시킵니다.
+16-Jan-2025 09:31:15.555 INFO [Thread-1] org.apache.coyote.AbstractProtocol.stop 프로토콜 핸들러 ["http-nio-8082"]을(를) 중지시킵니다.
+16-Jan-2025 09:31:15.558 INFO [Thread-1] org.apache.coyote.AbstractProtocol.destroy 프로토콜 핸들러 ["http-nio-8082"]을(를) 소멸시킵니다.
+16-Jan-2025 09:31:28.239 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 서버 버전 이름:    Apache Tomcat/9.0.97
+16-Jan-2025 09:31:28.241 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server 빌드 시각:  Nov 6 2024 19:55:19 UTC
+16-Jan-2025 09:31:28.241 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server 버전 번호:  9.0.97.0
+16-Jan-2025 09:31:28.241 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 운영체제 이름:     Windows 10
+16-Jan-2025 09:31:28.241 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 운영체제 버전:     10.0
+16-Jan-2025 09:31:28.241 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 아키텍처:          amd64
+16-Jan-2025 09:31:28.241 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 자바 홈:           C:\Users\1\.jdks\openjdk-23.0.1
+16-Jan-2025 09:31:28.241 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM 버전:          23.0.1+11-39
+16-Jan-2025 09:31:28.242 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM 벤더:          Oracle Corporation
+16-Jan-2025 09:31:28.242 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:     C:\Users\1\Desktop\Downloads\newliv\livinglab\conf
+16-Jan-2025 09:31:28.242 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:     C:\Program Files\Apache Software Foundation\apache-tomcat-9.0.97
+16-Jan-2025 09:31:28.246 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  --add-opens=java.base/java.lang=ALL-UNNAMED
+16-Jan-2025 09:31:28.246 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  --add-opens=java.base/java.io=ALL-UNNAMED
+16-Jan-2025 09:31:28.246 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  --add-opens=java.base/java.util=ALL-UNNAMED
+16-Jan-2025 09:31:28.246 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  --add-opens=java.base/java.util.concurrent=ALL-UNNAMED
+16-Jan-2025 09:31:28.247 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+16-Jan-2025 09:31:28.247 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Dcatalina.home=C:\Program Files\Apache Software Foundation\apache-tomcat-9.0.97
+16-Jan-2025 09:31:28.247 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Dcatalina.base=C:\Users\1\Desktop\Downloads\newliv\livinglab\conf
+16-Jan-2025 09:31:28.247 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Djava.io.tmpdir=C:\Users\1\Desktop\Downloads\newliv\livinglab\conf\temp
+16-Jan-2025 09:31:28.247 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Djava.util.logging.config.file=C:\Users\1\Desktop\Downloads\newliv\livinglab\conf\conf\logging.properties
+16-Jan-2025 09:31:28.247 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+16-Jan-2025 09:31:28.247 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -javaagent:C:\Program Files\JetBrains\IntelliJ IDEA 2023.1.2\lib\idea_rt.jar=14412:C:\Program Files\JetBrains\IntelliJ IDEA 2023.1.2\bin
+16-Jan-2025 09:31:28.247 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Dfile.encoding=UTF-8
+16-Jan-2025 09:31:28.247 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Dsun.stdout.encoding=UTF-8
+16-Jan-2025 09:31:28.247 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Dsun.stderr.encoding=UTF-8
+16-Jan-2025 09:31:28.249 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent APR 버전 [1.7.4]을(를) 사용한, APR 기반 Apache Tomcat Native 라이브러리 [1.3.1]을(를) 로드했습니다.
+16-Jan-2025 09:31:28.249 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent APR 용량정보들: IPv6 [true], sendfile [true], accept filters [false], random [true], UDS [true].
+16-Jan-2025 09:31:28.249 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent APR/OpenSSL 설정: useAprConnector [false], useOpenSSL [true]
+16-Jan-2025 09:31:28.254 INFO [main] org.apache.catalina.core.AprLifecycleListener.initializeSSL OpenSSL이 성공적으로 초기화되었습니다: [OpenSSL 3.0.14 4 Jun 2024]
+16-Jan-2025 09:31:28.457 INFO [main] org.apache.coyote.AbstractProtocol.init 프로토콜 핸들러 ["http-nio-8082"]을(를) 초기화합니다.
+16-Jan-2025 09:31:28.467 INFO [main] org.apache.catalina.startup.Catalina.load [367] 밀리초 내에 서버가 초기화되었습니다.
+16-Jan-2025 09:31:28.514 INFO [main] org.apache.catalina.core.StandardService.startInternal 서비스 [Catalina]을(를) 시작합니다.
+16-Jan-2025 09:31:28.514 INFO [main] org.apache.catalina.core.StandardEngine.startInternal 서버 엔진을 시작합니다: [Apache Tomcat/9.0.97]
+16-Jan-2025 09:31:28.522 INFO [main] org.apache.catalina.startup.HostConfig.deployDescriptor 배치 descriptor [C:\Users\1\Desktop\Downloads\newliv\livinglab\conf\conf\Catalina\localhost\ROOT.xml]을(를) 배치합니다.
+16-Jan-2025 09:31:28.808 INFO [main] org.apache.catalina.startup.HostConfig.deployDescriptor 배치 descriptor [C:\Users\1\Desktop\Downloads\newliv\livinglab\conf\conf\Catalina\localhost\ROOT.xml]의 배치가 [284] 밀리초 내에 완료되었습니다.
+16-Jan-2025 09:31:28.812 INFO [main] org.apache.coyote.AbstractProtocol.start 프로토콜 핸들러 ["http-nio-8082"]을(를) 시작합니다.
+16-Jan-2025 09:31:28.828 INFO [main] org.apache.catalina.startup.Catalina.start 서버가 [359] 밀리초 내에 시작되었습니다.
+16-Jan-2025 09:31:31.037 INFO [Thread-1] org.apache.coyote.AbstractProtocol.pause 프로토콜 핸들러 ["http-nio-8082"]을(를) 일시 정지 중
+16-Jan-2025 09:31:31.042 INFO [Thread-1] org.apache.catalina.core.StandardService.stopInternal 서비스 [Catalina]을(를) 중지시킵니다.
+16-Jan-2025 09:31:31.049 INFO [Thread-1] org.apache.coyote.AbstractProtocol.stop 프로토콜 핸들러 ["http-nio-8082"]을(를) 중지시킵니다.
+16-Jan-2025 09:31:31.052 INFO [Thread-1] org.apache.coyote.AbstractProtocol.destroy 프로토콜 핸들러 ["http-nio-8082"]을(를) 소멸시킵니다.
+16-Jan-2025 09:32:39.628 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 서버 버전 이름:    Apache Tomcat/9.0.97
+16-Jan-2025 09:32:39.630 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server 빌드 시각:  Nov 6 2024 19:55:19 UTC
+16-Jan-2025 09:32:39.631 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server 버전 번호:  9.0.97.0
+16-Jan-2025 09:32:39.631 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 운영체제 이름:     Windows 10
+16-Jan-2025 09:32:39.631 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 운영체제 버전:     10.0
+16-Jan-2025 09:32:39.631 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 아키텍처:          amd64
+16-Jan-2025 09:32:39.631 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 자바 홈:           C:\Users\1\.jdks\openjdk-23.0.1
+16-Jan-2025 09:32:39.631 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM 버전:          23.0.1+11-39
+16-Jan-2025 09:32:39.631 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM 벤더:          Oracle Corporation
+16-Jan-2025 09:32:39.631 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:     C:\Users\1\Desktop\Downloads\newliv\livinglab\conf
+16-Jan-2025 09:32:39.631 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:     C:\Program Files\Apache Software Foundation\apache-tomcat-9.0.97
+16-Jan-2025 09:32:39.636 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  --add-opens=java.base/java.lang=ALL-UNNAMED
+16-Jan-2025 09:32:39.636 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  --add-opens=java.base/java.io=ALL-UNNAMED
+16-Jan-2025 09:32:39.636 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  --add-opens=java.base/java.util=ALL-UNNAMED
+16-Jan-2025 09:32:39.636 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  --add-opens=java.base/java.util.concurrent=ALL-UNNAMED
+16-Jan-2025 09:32:39.636 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+16-Jan-2025 09:32:39.636 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Dcatalina.home=C:\Program Files\Apache Software Foundation\apache-tomcat-9.0.97
+16-Jan-2025 09:32:39.636 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Dcatalina.base=C:\Users\1\Desktop\Downloads\newliv\livinglab\conf
+16-Jan-2025 09:32:39.636 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Djava.io.tmpdir=C:\Users\1\Desktop\Downloads\newliv\livinglab\conf\temp
+16-Jan-2025 09:32:39.636 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Djava.util.logging.config.file=C:\Users\1\Desktop\Downloads\newliv\livinglab\conf\conf\logging.properties
+16-Jan-2025 09:32:39.636 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+16-Jan-2025 09:32:39.636 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -javaagent:C:\Program Files\JetBrains\IntelliJ IDEA 2023.1.2\lib\idea_rt.jar=14465:C:\Program Files\JetBrains\IntelliJ IDEA 2023.1.2\bin
+16-Jan-2025 09:32:39.636 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Dfile.encoding=UTF-8
+16-Jan-2025 09:32:39.636 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Dsun.stdout.encoding=UTF-8
+16-Jan-2025 09:32:39.637 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Dsun.stderr.encoding=UTF-8
+16-Jan-2025 09:32:39.638 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent APR 버전 [1.7.4]을(를) 사용한, APR 기반 Apache Tomcat Native 라이브러리 [1.3.1]을(를) 로드했습니다.
+16-Jan-2025 09:32:39.639 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent APR 용량정보들: IPv6 [true], sendfile [true], accept filters [false], random [true], UDS [true].
+16-Jan-2025 09:32:39.639 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent APR/OpenSSL 설정: useAprConnector [false], useOpenSSL [true]
+16-Jan-2025 09:32:39.643 INFO [main] org.apache.catalina.core.AprLifecycleListener.initializeSSL OpenSSL이 성공적으로 초기화되었습니다: [OpenSSL 3.0.14 4 Jun 2024]
+16-Jan-2025 09:32:39.863 INFO [main] org.apache.coyote.AbstractProtocol.init 프로토콜 핸들러 ["http-nio-8082"]을(를) 초기화합니다.
+16-Jan-2025 09:32:39.877 INFO [main] org.apache.catalina.startup.Catalina.load [394] 밀리초 내에 서버가 초기화되었습니다.
+16-Jan-2025 09:32:39.929 INFO [main] org.apache.catalina.core.StandardService.startInternal 서비스 [Catalina]을(를) 시작합니다.
+16-Jan-2025 09:32:39.929 INFO [main] org.apache.catalina.core.StandardEngine.startInternal 서버 엔진을 시작합니다: [Apache Tomcat/9.0.97]
+16-Jan-2025 09:32:39.937 INFO [main] org.apache.catalina.startup.HostConfig.deployDescriptor 배치 descriptor [C:\Users\1\Desktop\Downloads\newliv\livinglab\conf\conf\Catalina\localhost\ROOT.xml]을(를) 배치합니다.
+16-Jan-2025 09:32:40.234 INFO [main] org.apache.catalina.startup.HostConfig.deployDescriptor 배치 descriptor [C:\Users\1\Desktop\Downloads\newliv\livinglab\conf\conf\Catalina\localhost\ROOT.xml]의 배치가 [296] 밀리초 내에 완료되었습니다.
+16-Jan-2025 09:32:40.237 INFO [main] org.apache.coyote.AbstractProtocol.start 프로토콜 핸들러 ["http-nio-8082"]을(를) 시작합니다.
+16-Jan-2025 09:32:40.253 INFO [main] org.apache.catalina.startup.Catalina.start 서버가 [374] 밀리초 내에 시작되었습니다.
+16-Jan-2025 09:33:25.750 INFO [Thread-1] org.apache.coyote.AbstractProtocol.pause 프로토콜 핸들러 ["http-nio-8082"]을(를) 일시 정지 중
+16-Jan-2025 09:33:25.756 INFO [Thread-1] org.apache.catalina.core.StandardService.stopInternal 서비스 [Catalina]을(를) 중지시킵니다.
+16-Jan-2025 09:33:25.762 INFO [Thread-1] org.apache.coyote.AbstractProtocol.stop 프로토콜 핸들러 ["http-nio-8082"]을(를) 중지시킵니다.
+16-Jan-2025 09:33:25.764 INFO [Thread-1] org.apache.coyote.AbstractProtocol.destroy 프로토콜 핸들러 ["http-nio-8082"]을(를) 소멸시킵니다.
+16-Jan-2025 09:34:16.225 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 서버 버전 이름:    Apache Tomcat/9.0.97
+16-Jan-2025 09:34:16.227 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server 빌드 시각:  Nov 6 2024 19:55:19 UTC
+16-Jan-2025 09:34:16.227 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server 버전 번호:  9.0.97.0
+16-Jan-2025 09:34:16.227 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 운영체제 이름:     Windows 10
+16-Jan-2025 09:34:16.227 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 운영체제 버전:     10.0
+16-Jan-2025 09:34:16.228 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 아키텍처:          amd64
+16-Jan-2025 09:34:16.228 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 자바 홈:           C:\Users\1\.jdks\openjdk-23.0.1
+16-Jan-2025 09:34:16.228 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM 버전:          23.0.1+11-39
+16-Jan-2025 09:34:16.228 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM 벤더:          Oracle Corporation
+16-Jan-2025 09:34:16.228 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:     C:\Users\1\Desktop\Downloads\newliv\livinglab\conf
+16-Jan-2025 09:34:16.228 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:     C:\Program Files\Apache Software Foundation\apache-tomcat-9.0.97
+16-Jan-2025 09:34:16.232 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  --add-opens=java.base/java.lang=ALL-UNNAMED
+16-Jan-2025 09:34:16.232 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  --add-opens=java.base/java.io=ALL-UNNAMED
+16-Jan-2025 09:34:16.232 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  --add-opens=java.base/java.util=ALL-UNNAMED
+16-Jan-2025 09:34:16.233 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  --add-opens=java.base/java.util.concurrent=ALL-UNNAMED
+16-Jan-2025 09:34:16.233 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+16-Jan-2025 09:34:16.233 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Dcatalina.home=C:\Program Files\Apache Software Foundation\apache-tomcat-9.0.97
+16-Jan-2025 09:34:16.233 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Dcatalina.base=C:\Users\1\Desktop\Downloads\newliv\livinglab\conf
+16-Jan-2025 09:34:16.233 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Djava.io.tmpdir=C:\Users\1\Desktop\Downloads\newliv\livinglab\conf\temp
+16-Jan-2025 09:34:16.233 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Djava.util.logging.config.file=C:\Users\1\Desktop\Downloads\newliv\livinglab\conf\conf\logging.properties
+16-Jan-2025 09:34:16.233 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+16-Jan-2025 09:34:16.233 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -javaagent:C:\Program Files\JetBrains\IntelliJ IDEA 2023.1.2\lib\idea_rt.jar=14548:C:\Program Files\JetBrains\IntelliJ IDEA 2023.1.2\bin
+16-Jan-2025 09:34:16.233 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Dfile.encoding=UTF-8
+16-Jan-2025 09:34:16.233 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Dsun.stdout.encoding=UTF-8
+16-Jan-2025 09:34:16.233 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Dsun.stderr.encoding=UTF-8
+16-Jan-2025 09:34:16.235 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent APR 버전 [1.7.4]을(를) 사용한, APR 기반 Apache Tomcat Native 라이브러리 [1.3.1]을(를) 로드했습니다.
+16-Jan-2025 09:34:16.235 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent APR 용량정보들: IPv6 [true], sendfile [true], accept filters [false], random [true], UDS [true].
+16-Jan-2025 09:34:16.235 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent APR/OpenSSL 설정: useAprConnector [false], useOpenSSL [true]
+16-Jan-2025 09:34:16.240 INFO [main] org.apache.catalina.core.AprLifecycleListener.initializeSSL OpenSSL이 성공적으로 초기화되었습니다: [OpenSSL 3.0.14 4 Jun 2024]
+16-Jan-2025 09:34:16.454 INFO [main] org.apache.coyote.AbstractProtocol.init 프로토콜 핸들러 ["http-nio-8082"]을(를) 초기화합니다.
+16-Jan-2025 09:34:16.464 INFO [main] org.apache.catalina.startup.Catalina.load [381] 밀리초 내에 서버가 초기화되었습니다.
+16-Jan-2025 09:34:16.508 INFO [main] org.apache.catalina.core.StandardService.startInternal 서비스 [Catalina]을(를) 시작합니다.
+16-Jan-2025 09:34:16.508 INFO [main] org.apache.catalina.core.StandardEngine.startInternal 서버 엔진을 시작합니다: [Apache Tomcat/9.0.97]
+16-Jan-2025 09:34:16.515 INFO [main] org.apache.catalina.startup.HostConfig.deployDescriptor 배치 descriptor [C:\Users\1\Desktop\Downloads\newliv\livinglab\conf\conf\Catalina\localhost\ROOT.xml]을(를) 배치합니다.
+16-Jan-2025 09:34:16.800 INFO [main] org.apache.catalina.startup.HostConfig.deployDescriptor 배치 descriptor [C:\Users\1\Desktop\Downloads\newliv\livinglab\conf\conf\Catalina\localhost\ROOT.xml]의 배치가 [283] 밀리초 내에 완료되었습니다.
+16-Jan-2025 09:34:16.803 INFO [main] org.apache.coyote.AbstractProtocol.start 프로토콜 핸들러 ["http-nio-8082"]을(를) 시작합니다.
+16-Jan-2025 09:34:16.820 INFO [main] org.apache.catalina.startup.Catalina.start 서버가 [354] 밀리초 내에 시작되었습니다.
+16-Jan-2025 09:35:17.707 INFO [Thread-1] org.apache.coyote.AbstractProtocol.pause 프로토콜 핸들러 ["http-nio-8082"]을(를) 일시 정지 중
+16-Jan-2025 09:35:17.712 INFO [Thread-1] org.apache.catalina.core.StandardService.stopInternal 서비스 [Catalina]을(를) 중지시킵니다.
+16-Jan-2025 09:35:17.718 INFO [Thread-1] org.apache.coyote.AbstractProtocol.stop 프로토콜 핸들러 ["http-nio-8082"]을(를) 중지시킵니다.
+16-Jan-2025 09:35:17.720 INFO [Thread-1] org.apache.coyote.AbstractProtocol.destroy 프로토콜 핸들러 ["http-nio-8082"]을(를) 소멸시킵니다.

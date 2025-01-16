@@ -52,7 +52,7 @@ public class GoodsService {
         goods.setGoodsnum(goodsDTO.getGoodsnum());
         goods.setUser(userOpt.get());  // 사용자 객체 설정
         goods.setMarket(marketOpt.get());
-        goods.setGoods_name(goodsDTO.getGoodsName());
+        goods.setGoodsname(goodsDTO.getGoodsname());
         goods.setPrice(goodsDTO.getPrice());
         goods.setTag(goodsDTO.getTag());
         goods.setDetails(goodsDTO.getDetails());
@@ -72,7 +72,7 @@ public class GoodsService {
                 goods.getGoodsnum(),
                 goods.getUser().getUser_num(),
                 goods.getMarket().getMarket_code(),
-                goods.getGoods_name(),
+                goods.getGoodsname(),
                 goods.getPrice(),
                 goods.getTag(),
                 goods.getDetails(),
@@ -88,7 +88,7 @@ public class GoodsService {
                         goods.getGoodsnum(),
                         goods.getUser().getUser_num(),
                         goods.getMarket().getMarket_code(),
-                        goods.getGoods_name(),
+                        goods.getGoodsname(),
                         goods.getPrice(),
                         goods.getTag(),
                         goods.getDetails(),
@@ -104,7 +104,7 @@ public class GoodsService {
                 g.getGoodsnum(),
                 g.getUser().getUser_num(),
                 g.getMarket().getMarket_code(),
-                g.getGoods_name(),
+                g.getGoodsname(),
                 g.getPrice(),
                 g.getTag(),
                 g.getDetails(),
@@ -119,7 +119,7 @@ public class GoodsService {
                         goods.getGoodsnum(),
                         goods.getUser().getUser_num(),
                         goods.getMarket().getMarket_code(),
-                        goods.getGoods_name(),
+                        goods.getGoodsname(),
                         goods.getPrice(),
                         goods.getTag(),
                         goods.getDetails(),
@@ -138,7 +138,7 @@ public class GoodsService {
         Goods existingGoods = existingGoodsOpt.get();
 
         // 기존 상품 정보 업데이트
-        existingGoods.setGoods_name(goodsDTO.getGoodsName());
+        existingGoods.setGoodsname(goodsDTO.getGoodsname());
         existingGoods.setPrice(goodsDTO.getPrice());
         existingGoods.setTag(goodsDTO.getTag());
         existingGoods.setDetails(goodsDTO.getDetails());
@@ -176,7 +176,7 @@ public class GoodsService {
                 existingGoods.getGoodsnum(),
                 existingGoods.getUser().getUser_num(),
                 existingGoods.getMarket().getMarket_code(),
-                existingGoods.getGoods_name(),
+                existingGoods.getGoodsname(),
                 existingGoods.getPrice(),
                 existingGoods.getTag(),
                 existingGoods.getDetails(),

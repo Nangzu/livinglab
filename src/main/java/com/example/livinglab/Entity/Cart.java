@@ -17,16 +17,22 @@ public class Cart {
     private Long cartnum;
 
     @ManyToOne
-    @JoinColumn(name = "GOODS_NUM")  // 대문자 외래 키 이름
+    @JoinColumn(name = "GOODSNUM")  // 대문자 외래 키 이름
     private Goods goods;
+
+    @ManyToOne
+    @JoinColumn(name = "GOODSNAME")  // 대문자 외래 키 이름
+    private Goods goodsname;
+
 
     @ManyToOne
     @JoinColumn(name = "USER_NUM")  // 대문자 외래 키 이름
     private User user;
 
-    @Column(name = "NUM")  // 대문자 컬럼 이름
-    private int num;
+    @Column(name = "QUANTITY")  // 대문자 컬럼 이름
+    private int quantity;
 
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
-    private List<Order> orders;  // 여러 개의 주문이 이 카트에 연결될 수 있음
+    @ManyToOne  // 'Order' 엔티티와의 관계를 설정
+    @JoinColumn(name = "ORDER_NUM")  // Cart에서 외래 키 관리
+    private Order order;  // 이 카트는 하나의 주문에 속함
 }

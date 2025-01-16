@@ -23,8 +23,8 @@ public class Goods {
     @JoinColumn(name = "MARKET_CODE")  // 대문자 외래 키 이름
     private Market market;
 
-    @Column(name = "GOODS_NAME")  // 대문자 컬럼 이름
-    private String goods_name;
+    @Column(name = "GOODSNAME")  // 대문자 컬럼 이름
+    private String goodsname;
 
     @Column(name = "PRICE")  // 대문자 컬럼 이름
     private int price;

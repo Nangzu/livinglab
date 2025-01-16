@@ -2,6 +2,8 @@ package com.example.livinglab.Entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -16,10 +18,13 @@ public class Order {
     private String py_method;
 
     @ManyToOne
-    @JoinColumn(name = "CART_NUM")  // 대문자 외래 키 이름
+    @JoinColumn(name = "CARTNUM")  // 대문자 외래 키 이름
     private Cart cart;
 
     @ManyToOne
     @JoinColumn(name = "USER_NUM")  // 대문자 외래 키 이름
     private User user;
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)  // 여러 카트를 처리하도록 설정
+    private List<Cart> carts;  // 여러 카트를 주문에 추가
 }

@@ -35,8 +35,7 @@ public class OrderController {
         OrderDTO createdOrder = orderService.createOrder(userId, cartIds, paymentMethod);
         return new ResponseEntity<>(createdOrder, HttpStatus.CREATED);  // 201 상태 코드 반환
     }
-    // 사용자별 주문 목록 조회
-    // 사용자별 주문 목록 조회
+
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<OrderDTO>> getOrdersByUser(@PathVariable String userId, HttpSession session) {
         // 세션에서 사용자 정보 가져오기
@@ -47,9 +46,13 @@ public class OrderController {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);  // 401 상태 코드 반환
         }
 
-        // 세션에서 userDTO의 user_num을 사용
-        Long userIdFromSession = userDTO.getUser_num();
-        List<OrderDTO> orders = orderService.getOrdersByUser(userIdFromSession.toString());
+        // 세션 사용자와 요청된 userId가 일치하는지 확인
+        if (!userDTO.getUser_num().toString().equals(userId)) {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);  // 403 상태 코드 반환
+        }
+
+        // 세션에서 userDTO의 user_num을 사용하여 주문 조회
+        List<OrderDTO> orders = orderService.getOrdersByUser(userId);
 
         return ResponseEntity.ok(orders);
     }
@@ -65,7 +68,14 @@ public class OrderController {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);  // 401 상태 코드 반환
         }
 
+        // 주문 조회
         OrderDTO orderDetails = orderService.getOrderDetails(orderId);
+
+        // 주문의 userNum과 세션의 userNum을 비교하여 일치하는지 확인
+        if (orderDetails == null || !orderDetails.getUser_num().equals(userDTO.getUser_num())) {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);  // 403 상태 코드 반환
+        }
+
         return ResponseEntity.ok(orderDetails);
     }
 
@@ -80,6 +90,12 @@ public class OrderController {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);  // 401 상태 코드 반환
         }
 
+        // 세션의 userId와 요청된 userId가 일치하는지 확인
+        if (!userDTO.getUser_num().toString().equals(userId)) {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);  // 403 상태 코드 반환
+        }
+
+        // 장바구니에서 상품 삭제
         orderService.removeFromCart(userId, goodsId);
         return ResponseEntity.noContent().build();  // 204 상태 코드 반환
     }
