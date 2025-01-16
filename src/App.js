@@ -6,6 +6,7 @@ import Sidebar from "./components/Sidebar";
 import Sign from "./pages/Sign";
 import Login from "./pages/Login";
 import Registration from "./pages/Registration";
+import ProductEdit from "./pages/ProductEdit";
 
 // 메인 콘텐츠를 렌더링할 AppContent 컴포넌트 생성
 function AppContent() {
@@ -83,6 +84,9 @@ function AppContent() {
 
           {/* 상품 등록 페이지 */}
           <Route path="/registration" element={<Registration isSidebarOpen={menuOpen} />} />
+
+          {/* 상품 수정 페이지 */}
+          <Route path="/product-edit" element={<ProductEdit isSidebarOpen={menuOpen} />} />
         </Routes>
       </main>
     </div>
