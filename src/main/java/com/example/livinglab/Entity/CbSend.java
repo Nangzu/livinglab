@@ -1,4 +1,5 @@
 package com.example.livinglab.Entity;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,17 +11,21 @@ public class CbSend {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "SEND_NUM")  // 대문자 컬럼 이름
-    private Long send_num;
+    @Column(name = "SEND_NUM")
+    private Long sendNum;
 
     @ManyToOne
-    @JoinColumn(name = "COW_NUM")  // 대문자 외래 키 이름
+    @JoinColumn(name = "COW_NUM")
     private Collaboration collaboration;
 
     @ManyToOne
-    @JoinColumn(name = "USER_NUM")  // 대문자 외래 키 이름
+    @JoinColumn(name = "USER_NUM")
     private User user;
 
-    @Column(name = "FILESS")  // 대문자 컬럼 이름
-    private String filess;
+    @Lob // BLOB 컬럼 매핑
+    @Column(name = "FILES")
+    private byte[] files;
+
+    @Column(name = "FILE_NAME")
+    private String fileName;
 }
