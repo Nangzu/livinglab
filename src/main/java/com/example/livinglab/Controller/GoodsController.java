@@ -45,7 +45,9 @@ public class GoodsController {
     public ResponseEntity<GoodsDTO> addGoods(
             @RequestPart("goodsDTO") String goodsDTOJson, // JSON 문자열로 받음
             @RequestPart(value = "file", required = false) MultipartFile file,
-            @RequestPart("goodsdetailDTO") String goodsdetailDTOJSON, HttpSession session) throws IOException {
+            @RequestPart("goodsdetailDTO") String goodsdetailDTOJSON,
+            @RequestPart(value = "file", required = false) MultipartFile file1,
+            HttpSession session) throws IOException {
 
         UserDTO userDTO = (UserDTO) session.getAttribute("user");
         if (userDTO == null && userDTO.getRole() != 2L) {
@@ -61,7 +63,7 @@ public class GoodsController {
 
         GoodsdetailDTO goodsdetailDTO = objectMapper.readValue(goodsdetailDTOJSON, GoodsdetailDTO.class);
 
-        GoodsDTO createdGoods = goodsService.addGoods(goodsDTO, file, goodsdetailDTO, session);
+        GoodsDTO createdGoods = goodsService.addGoods(goodsDTO, file, goodsdetailDTO, session, file1);
         return new ResponseEntity<>(createdGoods, HttpStatus.CREATED);
     }
 
@@ -71,6 +73,7 @@ public class GoodsController {
             @RequestPart("goodsDTO") String goodsDTOJson,
             @RequestPart(value = "file", required = false) MultipartFile file,
             @RequestPart("goodsdetailDTO") String goodsdetailDTOJSON,
+            @RequestPart(value = "file", required = false) MultipartFile file1,
             HttpSession session) throws IOException {
 
         // 세션에서 사용자 정보 가져오기
@@ -99,7 +102,7 @@ public class GoodsController {
 
 
         // 상품 수정
-        GoodsDTO updatedGoods = goodsService.updateGoods(goodsnum, goodsDTO, file, goodsdetailDTO);
+        GoodsDTO updatedGoods = goodsService.updateGoods(goodsnum, goodsDTO, file, goodsdetailDTO, file1);
         return new ResponseEntity<>(updatedGoods, HttpStatus.OK);
     }
 

@@ -45,7 +45,7 @@ public class GoodsService {
 
 
     // 상품 등록
-    public GoodsDTO addGoods(GoodsDTO goodsDTO, MultipartFile file, GoodsdetailDTO goodsdetailDTO, HttpSession session) throws IOException {
+    public GoodsDTO addGoods(GoodsDTO goodsDTO, MultipartFile file, GoodsdetailDTO goodsdetailDTO, HttpSession session, MultipartFile file1) throws IOException {
 
 
         UserDTO userDTO = (UserDTO) session.getAttribute("user");
@@ -73,7 +73,7 @@ public class GoodsService {
         goods = goodsRepository.save(goods);
 
         goodsdetailDTO.setGoodsnum(goods.getGoodsnum());
-        goodsdetailService.addGoodsDetails(goodsdetailDTO);
+        goodsdetailService.addGoodsDetails(goodsdetailDTO, file1);
 
         Filestorage filestorage = new Filestorage();
         filestorage.setFiledata(file.getBytes());
@@ -144,7 +144,7 @@ public class GoodsService {
     }
 
     // 상품 수정
-    public GoodsDTO updateGoods(Long goodsnum, GoodsDTO goodsDTO, MultipartFile file, GoodsdetailDTO goodsdetailDTO) throws IOException {
+    public GoodsDTO updateGoods(Long goodsnum, GoodsDTO goodsDTO, MultipartFile file, GoodsdetailDTO goodsdetailDTO, MultipartFile file1) throws IOException {
         Optional<Goods> existingGoodsOpt = goodsRepository.findById(goodsnum);
         if (existingGoodsOpt.isEmpty()) {
             throw new IllegalArgumentException("Goods not found");
@@ -160,7 +160,7 @@ public class GoodsService {
         existingGoods.setGoodsoption(goodsDTO.getGoodsOption());
 
 
-        goodsdetailService.updateGoodsDetails(goodsnum, goodsdetailDTO);
+        goodsdetailService.updateGoodsDetails(goodsnum, goodsdetailDTO, file1);
 
 
         // 파일이 존재하면 새로 저장
