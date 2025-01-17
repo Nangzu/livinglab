@@ -1,8 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./ProductEdit.css";
+import axios from "axios";
 
-const ProductEdit = ({ products }) => {
-  const [editedProducts, setEditedProducts] = useState(products);
+const ProductEdit = () => {
+  const [products, setProducts] = useState([]); // 모든 상품 데이터
+  const [editedProducts, setEditedProducts] = useState([]); // 수정된 상품 데이터
+
+  // 상품 데이터 불러오기
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get("http://localhost:8082/api/goods/all"); // 백엔드에서 모든 상품 가져오기
+        setProducts(response.data);
+        setEditedProducts(response.data); // 초기 데이터 설정
+      } catch (error) {
+        console.error("상품 데이터를 불러오는 중 오류 발생:", error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   const handleInputChange = (index, field, value) => {
     const updatedProducts = [...editedProducts];
@@ -10,11 +27,29 @@ const ProductEdit = ({ products }) => {
     setEditedProducts(updatedProducts);
   };
 
-  const handleSave = (index) => {
+  const handleSave = async (index) => {
     const product = editedProducts[index];
-    console.log("저장된 상품 정보:", product);
-    alert(`${product.name}이(가) 저장되었습니다.`);
+
+    try {
+      const response = await axios.put(
+        `http://localhost:8082/api/goods/update/${product.id}`,
+        {
+          goodsDTO: {
+            name: product.name,
+            price: product.price,
+            stock: product.stock,
+          },
+        }
+      );
+      alert(`${product.name}이(가) 성공적으로 저장되었습니다.`);
+      console.log("저장된 상품 데이터:", response.data);
+    } catch (error) {
+      console.error("상품 수정 중 오류 발생:", error);
+      alert("상품 저장 중 오류가 발생했습니다.");
+    }
   };
+
+  console.log(products);
 
   return (
     <div className="product-edit-container">

@@ -1,43 +1,65 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css"; // 스타일 파일 import
+import axios from "axios";
 
 const Login = ({ onLogin }) => {
   const [formData, setFormData] = useState({
-    username: "",
-    password: "",
+    userid: "", // 사용자 ID
+    pw: "", // 비밀번호
   });
 
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  // 입력값 처리
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  // 로그인 처리
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // localStorage에서 저장된 사용자 정보 가져오기
-    const storedUser = JSON.parse(localStorage.getItem("user"));
-    console.log("로그인 정보:", formData);
-    // 여기에 로그인 검증 로직 추가 가능
-  
-  
-  if (
-    storedUser &&
-    storedUser.username === formData.username &&
-    storedUser.password === formData.password
-  ) {
-    alert("로그인 성공!");
-    onLogin(storedUser); // 사용자 정보 전달
-    navigate("/main");
-  } else {
-    setError("아이디 또는 비밀번호가 일치하지 않습니다.");
-  }
-};
+    try {
+      // 마스터 계정 확인 추가!!! 나중에 삭제제
+      if (formData.userid === "master" && formData.pw === "master") {
+        alert("마스터 계정으로 로그인 성공!");
+        const masterData = {
+          user_num: 0, // 마스터 계정에 대한 고유 식별자 (예: 0)
+          role: "admin", // 마스터 계정의 역할
+        };
+        localStorage.setItem("userNum", masterData.user_num);
+        localStorage.setItem("role", masterData.role);
+        onLogin(masterData);
+        navigate("/main"); // 메인 페이지로 이동
+        return;
+      } //나중에 삭제제
 
+      const credentials = {
+        userid: formData.userid, 
+        pw: formData.pw, 
+      };
+
+      // 서버로 로그인 요청
+      const response = await axios.post("http://localhost:8082/api/users/login", credentials);
+      const { user_num, role } = response.data;
+
+      // 로컬 스토리지에 사용자 정보 저장
+      localStorage.setItem("userNum", user_num);
+      localStorage.setItem("role", role);
+
+      alert("로그인 성공!");
+      onLogin({ user_num, role }); // 로그인 콜백 호출
+      navigate("/main"); // 메인 페이지로 이동
+    } catch (error) {
+      console.error("로그인 오류:", error.response || error);
+      setError("로그인에 실패했습니다. 아이디와 비밀번호를 확인하세요.");
+    }
+  };
+
+  // 회원가입 페이지로 이동
   const handleSignup = () => {
     navigate("/signup");
   };
@@ -46,12 +68,12 @@ const Login = ({ onLogin }) => {
     <div className="login-container">
       <h2 className="login-title">로그인</h2>
       <form onSubmit={handleSubmit} className="login-form">
-        {/* 아이디 입력 */}
+        {/* 사용자 ID 입력 */}
         <div className="form-group">
           <input
             type="text"
-            name="username"
-            value={formData.username}
+            name="userid"
+            value={formData.userid}
             onChange={handleChange}
             placeholder="아이디를 입력해주세요"
           />
@@ -61,14 +83,14 @@ const Login = ({ onLogin }) => {
         <div className="form-group">
           <input
             type="password"
-            name="password"
-            value={formData.password}
+            name="pw"
+            value={formData.pw}
             onChange={handleChange}
             placeholder="비밀번호를 입력해주세요"
           />
         </div>
 
-        {/*오류 메시지 표시 */}
+        {/* 오류 메시지 표시 */}
         {error && <p className="error-message">{error}</p>}
 
         {/* 아이디/비밀번호 찾기 */}
@@ -83,11 +105,7 @@ const Login = ({ onLogin }) => {
         </button>
 
         {/* 회원가입 버튼 */}
-        <button
-          type="button"
-          className="signup-button"
-          onClick={handleSignup}
-        >
+        <button type="button" className="signup-button" onClick={handleSignup}>
           회원가입
         </button>
       </form>

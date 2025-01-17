@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Sign.css";
+import axios from "axios";
 
 const Sign = () => {
   const [formData, setFormData] = useState({
-    username: "",
-    password: "",
-    confirmPassword: "",
-    name: "",
-    email: "",
-    phone: "",
-    address: "",
+    userid: "", // 사용자 ID
+    pw: "", // 비밀번호
+    phone: "", // 전화번호
+    email: "", // 이메일
+    address: "", // 주소
+    user_name: "", // 사용자 이름
+    role: "2", // 기본값
   });
 
-  const [errors, setErrors] = useState({});
-  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -22,139 +22,124 @@ const Sign = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  // 유효성 검사
-  const validate = () => {
-    const newErrors = {};
-
-    if (!formData.username) newErrors.username = "아이디를 입력해주세요.";
-    if (!formData.password) newErrors.password = "비밀번호를 입력해주세요.";
-    if (formData.password !== formData.confirmPassword)
-      newErrors.confirmPassword = "비밀번호가 일치하지 않습니다.";
-    if (!formData.name) newErrors.name = "가게명을 입력해주세요.";
-    if (!formData.email) newErrors.email = "이메일을 입력해주세요.";
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email))
-      newErrors.email = "유효한 이메일 형식이 아닙니다.";
-    if (!formData.phone) newErrors.phone = "휴대폰 번호를 입력해주세요.";
-    if (!/^\d+$/.test(formData.phone))
-      newErrors.phone = "휴대폰 번호는 숫자만 입력해주세요.";
-    if (!formData.address) newErrors.address = "주소를 입력해주세요.";
-
-    return newErrors;
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const validationErrors = validate();
 
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-      setSuccess(false);
-    } else {
-      setErrors({});
-      setSuccess(true);
-      // 회원가입 정보 저장 (localStorge 사용)
-      localStorage.setItem("user", JSON.stringify(formData));
-      alert("회원가입이 완료되었습니다! 로그인 페이지로 이동합니다.");
-      navigate("/login");
-      console.log("회원가입 데이터:", formData);
-      // TODO: 서버로 데이터 전송
+    try {
+      const data = {
+        userid: formData.userid,
+        pw: formData.pw,
+        phone: formData.phone,
+        email: formData.email,
+        address: formData.address,
+        user_name: formData.user_name,
+        role: formData.role, // 선택한 역할을 전달
+      };
+
+      const response = await axios.post("http://localhost:8082/api/users/register", data);
+
+      if (response.status === 200) {
+        alert("회원가입이 완료되었습니다!");
+        navigate("/login");
+      }
+    } catch (error) {
+      console.error("회원가입 중 오류 발생:", error.response || error);
+      setError(error.response?.data?.message || "회원가입에 실패했습니다. 다시 시도해주세요.");
     }
   };
 
   return (
     <div className="signup-container">
       <h2 className="signup-title">회원가입</h2>
-      {success && (
-        <p className="success-message">회원가입이 성공적으로 완료되었습니다!</p>
-      )}
       <form onSubmit={handleSubmit} className="signup-form">
-        {/* 아이디 */}
+        {/* 사용자 ID */}
         <div className="form-group">
-          <label>아이디 *</label>
+          <label htmlFor="userid">아이디</label>
           <input
             type="text"
-            name="username"
-            value={formData.username}
+            name="userid"
+            value={formData.userid}
             onChange={handleChange}
+            placeholder="아이디를 입력하세요."
           />
-          {errors.username && <p className="error-message">{errors.username}</p>}
         </div>
 
         {/* 비밀번호 */}
         <div className="form-group">
-          <label>비밀번호 *</label>
+          <label htmlFor="pw">비밀번호</label>
           <input
             type="password"
-            name="password"
-            value={formData.password}
+            name="pw"
+            value={formData.pw}
             onChange={handleChange}
+            placeholder="비밀번호를 입력하세요."
           />
-          {errors.password && <p className="error-message">{errors.password}</p>}
         </div>
 
-        {/* 비밀번호 확인 */}
+        {/* 전화번호 */}
         <div className="form-group">
-          <label>비밀번호 확인 *</label>
-          <input
-            type="password"
-            name="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-          />
-          {errors.confirmPassword && <p className="error-message">{errors.confirmPassword}</p>}
-        </div>
-
-        {/* 가게명 */}
-        <div className="form-group">
-          <label>가게명 *</label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-          />
-          {errors.name && <p className="error-message">{errors.name}</p>}
-        </div>
-
-        {/* 이메일 */}
-        <div className="form-group">
-          <label>이메일 *</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-          />
-          {errors.email && <p className="error-message">{errors.email}</p>}
-        </div>
-
-        {/* 휴대폰 */}
-        <div className="form-group">
-          <label>휴대폰 *</label>
+          <label htmlFor="phone">전화번호</label>
           <input
             type="text"
             name="phone"
             value={formData.phone}
             onChange={handleChange}
+            placeholder="전화번호를 입력하세요."
           />
-          {errors.phone && <p className="error-message">{errors.phone}</p>}
+        </div>
+
+        {/* 이메일 */}
+        <div className="form-group">
+          <label htmlFor="email">이메일</label>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="이메일을 입력하세요."
+          />
         </div>
 
         {/* 주소 */}
-        <div className="form-group address-group">
-          <label>주소 *</label>
+        <div className="form-group">
+          <label htmlFor="address">주소</label>
           <input
             type="text"
             name="address"
             value={formData.address}
             onChange={handleChange}
+            placeholder="주소를 입력하세요."
           />
-          <button type="button" className="address-button">주소 검색</button>
-          {errors.address && <p className="error-message">{errors.address}</p>}
         </div>
 
-        {/* 제출 버튼 */}
-        <button type="submit" className="submit-button">회원가입</button>
+        {/* 사용자 이름 */}
+        <div className="form-group">
+          <label htmlFor="user_name">이름</label>
+          <input
+            type="text"
+            name="user_name"
+            value={formData.user_name}
+            onChange={handleChange}
+            placeholder="이름을 입력하세요."
+          />
+        </div>
+
+        {/* 역할 선택
+        <div className="role-select-group">
+          <label htmlFor="role">역할 선택</label>
+          <select name="role" value={formData.role} onChange={handleChange}>
+            <option value="2">판매자</option>
+            <option value="3">학생</option>
+          </select>
+        </div> */}
+
+        {/* 오류 메시지 */}
+        {error && <p className="error-message">{error}</p>}
+
+        {/* 회원가입 버튼 */}
+        <button type="submit" className="submit-button">
+          회원가입
+        </button>
       </form>
     </div>
   );

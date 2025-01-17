@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { Link, useLocation} from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Sidebar = ({ isOpen }) => {
-  // 각 카테고리의 확장 상태 관리
   const [expanded, setExpanded] = useState({});
   const location = useLocation();
 
@@ -89,23 +88,32 @@ const Sidebar = ({ isOpen }) => {
         </div>
         {expanded["상품관리"] && (
           <div style={styles.subMenu}>
-            {/* 상품등록 */}
             <Link
-            to="registration"
-            style={{
-              ...styles.subMenuItem,
-              ...(location.pathname === "/registration"
-                ? styles.activeMenuItem
-                : {}),
+              to="registration"
+              style={{
+                ...styles.subMenuItem,
+                ...(location.pathname === "/registration"
+                  ? styles.activeMenuItem
+                  : {}),
               }}
-              >
-                상품등록
-              </Link>
-              {/* 상품수정 */}
-            <div style={styles.subMenuItem}>상품수정</div>
+            >
+              상품등록
+            </Link>
+            <Link
+              to="/product-edit"
+              style={{
+                ...styles.subMenuItem,
+                ...(location.pathname === "/product-edit"
+                  ? styles.activeMenuItem
+                  : {}),
+              }}
+            >
+              상품수정
+            </Link>
           </div>
         )}
 
+        {/* 직원관리 */}
         <div style={styles.category} onClick={() => toggleExpand("직원관리")}>
           <div>
             <img src="employee.png" alt="직원관리" style={styles.icon} />
@@ -122,12 +130,23 @@ const Sidebar = ({ isOpen }) => {
         </div>
         {expanded["직원관리"] && (
           <div style={styles.subMenu}>
-            <div style={styles.subMenuItem}>학생 요청 승인</div>
+            <Link
+              to="/student-approval"
+              style={{
+                ...styles.subMenuItem,
+                ...(location.pathname === "/student-approval"
+                  ? styles.activeMenuItem
+                  : {}),
+              }}
+            >
+              학생 요청 승인
+            </Link>
             <div style={styles.subMenuItem}>직원 권한 관리</div>
             <div style={styles.subMenuItem}>직원 정보 관리</div>
           </div>
         )}
 
+        {/* 주문/배송 */}
         <div style={styles.category} onClick={() => toggleExpand("주문/배송")}>
           <div>
             <img src="delivery.png" alt="주문/배송" style={styles.icon} />
@@ -152,6 +171,7 @@ const Sidebar = ({ isOpen }) => {
           </div>
         )}
 
+        {/* 정산 */}
         <div style={styles.category} onClick={() => toggleExpand("정산")}>
           <div>
             <img src="adjustment.png" alt="정산" style={styles.icon} />
@@ -175,6 +195,7 @@ const Sidebar = ({ isOpen }) => {
           </div>
         )}
 
+        {/* 고객관리 */}
         <div style={styles.category} onClick={() => toggleExpand("고객관리")}>
           <div>
             <img src="customer.png" alt="고객관리" style={styles.icon} />
@@ -197,8 +218,6 @@ const Sidebar = ({ isOpen }) => {
         )}
       </div>
     </div>
-    
-    
   );
 };
 

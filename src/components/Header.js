@@ -84,7 +84,10 @@ const Header = ({ toggleSidebar, user, onLogout }) => {
           <div style={styles.bar}></div>
           <div style={styles.bar}></div>
         </div>
-        <div style={styles.logo}>
+        <div 
+        style={styles.logo}
+        onClick={() => navigate("/main")}
+        >
           <img src="logo.png" alt="Logo" style={styles.logoImage} />
         </div>
       </div>

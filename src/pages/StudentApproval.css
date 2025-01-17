@@ -1,0 +1,67 @@
+.student-approval-container {
+    margin: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .student-approval-container h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .student-approval-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .student-approval-table th,
+  .student-approval-table td {
+    border: 1px solid #ddd;
+    text-align: center;
+    padding: 10px;
+  }
+  
+  .student-approval-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+  }
+  
+  .student-approval-table td a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .student-approval-table td a:hover {
+    text-decoration: underline;
+  }
+  
+  .approve-button,
+  .reject-button {
+    padding: 5px 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .approve-button {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .approve-button:hover {
+    background-color: #218838;
+  }
+  
+  .reject-button {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .reject-button:hover {
+    background-color: #c82333;
+  }
+  

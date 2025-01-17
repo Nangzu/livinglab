@@ -7,6 +7,7 @@ import Sign from "./pages/Sign";
 import Login from "./pages/Login";
 import Registration from "./pages/Registration";
 import ProductEdit from "./pages/ProductEdit";
+import StudentApproval from "./pages/StudentApproval";
 
 // 메인 콘텐츠를 렌더링할 AppContent 컴포넌트 생성
 function AppContent() {
@@ -75,7 +76,7 @@ function AppContent() {
           <Route
             path="/main" element = {
               user ? (
-              <h1>안녕하세요, {user.username}님!</h1>
+              <h1>안녕하세요, {user.userid}님!</h1>
               ) : (
                 <Navigate to ="/login" />
               )
@@ -87,6 +88,9 @@ function AppContent() {
 
           {/* 상품 수정 페이지 */}
           <Route path="/product-edit" element={<ProductEdit isSidebarOpen={menuOpen} />} />
+
+          {/* 학생 요청 승인 페이지 */}
+          <Route path="student-approval" element={<StudentApproval />} />
         </Routes>
       </main>
     </div>
