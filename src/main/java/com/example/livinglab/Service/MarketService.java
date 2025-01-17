@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.yaml.snakeyaml.error.Mark;
 
 import java.util.Optional;
 
@@ -36,29 +37,21 @@ public class MarketService {
         });
     }
 
-    public MarketDTO createmarket(MarketDTO marketdto, HttpSession session) {
-        // 세션에서 사용자 정보 가져오기
-        UserDTO userDTO = (UserDTO) session.getAttribute("user");
-        if (userDTO == null) {
-            throw new RuntimeException("User is not logged in");
-        }
+    public MarketDTO createmarket(String marketname, UserDTO userDTO) {
 
         // 사용자 정보 확인
-        Long num = userDTO.getUsernum();
-        Optional<User> userOpt = userRepository.findById(num);
+        String userid = userDTO.getUserid();
+        Optional<User> userOpt = userRepository.findByUserid(userid);
 
-        System.out.println(num);
         if (userOpt.isEmpty()) {
             throw new RuntimeException("User not found");
         }
         User user = userOpt.get();
-        System.out.println(user.getUsernum());
 
         // Market 엔티티 생성 및 설정
-        Market market = modelMapper.map(marketdto, Market.class);
+        Market market = new Market();
         market.setUser(user);
-        System.out.println(market.getUser().getUsernum());
-        market.setMarketname(marketdto.getMarketname());
+        market.setMarketname(marketname);
 
         // Market 저장
         Market savedMarket = marketRepository.save(market);
