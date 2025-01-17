@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface FilestorageRepository extends JpaRepository<Filestorage, Long> {
     List<Filestorage> findByGoods_Goodsnum(Long goodsnum);
+    List<Filestorage> findByGoods_Goodsname(String goodsname);
 }

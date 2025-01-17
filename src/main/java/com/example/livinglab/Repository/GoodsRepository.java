@@ -7,5 +7,6 @@ import java.util.Optional;
 
 public interface GoodsRepository extends JpaRepository<Goods, Long> {
     List<Goods> findByTag(String tag);
+    List<Goods> findByGoodsname(String goodsname);
     Optional<Goods> findByGoodsnum(Long goodsnum);
 }
