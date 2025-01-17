@@ -51,7 +51,8 @@ public class GoodsService {
         UserDTO userDTO = (UserDTO) session.getAttribute("user");
         Long num = userDTO.getUsernum();
         Optional<User> userOpt = userRepository.findById(num);
-        Optional<Market> marketOpt = marketRepository.findById(goodsDTO.getMarketCode());
+        Optional<Market> marketOpt = marketRepository.findByUser_Usernum(num);
+
 
         // 유효성 검사: 사용자와 마켓이 존재하는지 확인
         if (userOpt.isEmpty() || marketOpt.isEmpty()) {

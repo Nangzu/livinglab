@@ -1,5 +1,12 @@
 package com.example.livinglab.Repository;
+import com.example.livinglab.Entity.Goods;
 import com.example.livinglab.Entity.Market;
+import com.example.livinglab.Entity.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface MarketRepository extends JpaRepository<Market, Long> {}
+import java.util.List;
+import java.util.Optional;
+
+public interface MarketRepository extends JpaRepository<Market, Long> {
+    Optional<Market> findByUser_Usernum(Long usernum);
+}
