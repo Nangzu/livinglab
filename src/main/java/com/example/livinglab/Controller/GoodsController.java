@@ -1,9 +1,6 @@
 package com.example.livinglab.Controller;
 
-import com.example.livinglab.Dto.FileDTO;
-import com.example.livinglab.Dto.GoodsDTO;
-import com.example.livinglab.Dto.GoodsdetailDTO;
-import com.example.livinglab.Dto.UserDTO;
+import com.example.livinglab.Dto.*;
 import com.example.livinglab.Entity.Goods;
 import com.example.livinglab.Repository.GoodsRepository;
 import com.example.livinglab.Repository.GoodsdetailRepository;
@@ -162,8 +159,8 @@ public class GoodsController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<GoodsDTO>> getGoodsByTag(@RequestParam String tag) {
-        List<GoodsDTO> goodsDTOList = goodsService.findGoodsByTag(tag);
-        return ResponseEntity.ok(goodsDTOList);
+    public ResponseEntity<List<GoodsSubDTO>> getGoodsByname(@RequestParam String goodsname, @RequestParam Long goodsnum) {
+        List<GoodsSubDTO> goodsDTOList = goodsService.findGoodsByGoodsname(goodsname, goodsnum);
+        return ResponseEntity.ok(goodsDTOList); // 결과를 반환
     }
 }

@@ -1,9 +1,6 @@
 package com.example.livinglab.Service;
 
-import com.example.livinglab.Dto.FileDTO;
-import com.example.livinglab.Dto.GoodsDTO;
-import com.example.livinglab.Dto.GoodsdetailDTO;
-import com.example.livinglab.Dto.UserDTO;
+import com.example.livinglab.Dto.*;
 import com.example.livinglab.Entity.Filestorage;
 import com.example.livinglab.Entity.Goods;
 import com.example.livinglab.Entity.User;
@@ -17,9 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -128,20 +125,18 @@ public class GoodsService {
         ));
     }
 
-    public List<GoodsDTO> findGoodsByTag(String tag) {
-        List<Goods> goodsList = goodsRepository.findByTag(tag);
-        return goodsList.stream()
-                .map(goods -> new GoodsDTO(
-                        goods.getGoodsnum(),
-                        goods.getUser().getUsernum(),
-                        goods.getMarket().getMarketcode(),
-                        goods.getGoodsname(),
-                        goods.getPrice(),
-                        goods.getTag(),
-                        goods.getDetails(),
-                        goods.getGoodsoption()
-                ))
-                .collect(Collectors.toList());
+    public List<GoodsSubDTO> findGoodsByGoodsname(String goodsname, Long goodsnum) {
+        List<Goods> goodsList = goodsRepository.findByGoodsname(goodsname);
+        List<Filestorage> filestorageList = filestorageRepository.findByGoods_Goodsnum(goodsnum);
+
+        String firstGoodsname = goodsList.isEmpty() ? null : goodsList.get(0).getGoodsname();
+        byte[] firstFileData = filestorageList.isEmpty() ? null : filestorageList.get(0).getFiledata();
+
+        GoodsSubDTO goodsSubDTO = new GoodsSubDTO(firstGoodsname, firstFileData);
+        List<GoodsSubDTO> result = new ArrayList<>();
+        result.add(goodsSubDTO);
+
+        return result;
     }
 
     // 상품 수정
