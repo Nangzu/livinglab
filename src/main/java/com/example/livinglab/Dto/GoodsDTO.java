@@ -23,7 +23,7 @@ public class GoodsDTO {
     private String details; // 상세 설명
     private String goodsOption; // 상품 옵션
 
-    private List<FileDTO> files;
+    private FileDTO file;
 
     public GoodsDTO(Goods goods) {
         this.goodsnum = goods.getGoodsnum();
