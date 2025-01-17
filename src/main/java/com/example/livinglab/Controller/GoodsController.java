@@ -1,5 +1,6 @@
 package com.example.livinglab.Controller;
 
+import com.example.livinglab.Dto.FileDTO;
 import com.example.livinglab.Dto.GoodsDTO;
 import com.example.livinglab.Dto.GoodsdetailDTO;
 import com.example.livinglab.Dto.UserDTO;
@@ -150,6 +151,13 @@ public class GoodsController {
     public ResponseEntity<GoodsDTO> getGoodsById(@PathVariable Long goodsnum) {
         Optional<GoodsDTO> goodsDTO = goodsService.getGoodsById(goodsnum);
         return goodsDTO.map(dto -> new ResponseEntity<>(dto, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @GetMapping("/{goodsnum}/file")
+    public ResponseEntity<FileDTO> getFileByGoodsNum(@PathVariable Long goodsnum) {
+        Optional<FileDTO> fileDTO = goodsService.getFileByGoodsNum(goodsnum);
+        return fileDTO.map(ResponseEntity::ok)
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 

@@ -115,35 +115,17 @@ public class GoodsService {
 
     // 특정 상품 조회
     public Optional<GoodsDTO> getGoodsById(Long goodsnum) {
-        Optional<Goods> goodsOpt = goodsRepository.findById(goodsnum);
-
-        return goodsOpt.map(goods -> {
-            // 기본 GoodsDTO 생성
-            GoodsDTO goodsDTO = new GoodsDTO(
-                    goods.getGoodsnum(),
-                    goods.getUser().getUsernum(),
-                    goods.getMarket().getMarketcode(),
-                    goods.getGoodsname(),
-                    goods.getPrice(),
-                    goods.getTag(),
-                    goods.getDetails(),
-                    goods.getGoodsoption()
-            );
-
-            // 해당 Goods에 연결된 단일 파일 데이터 조회
-            Optional<Filestorage> fileOpt = filestorageRepository.findByGoods_Goodsnum(goodsnum).stream().findFirst();
-
-            // 파일 데이터가 존재하면 FileDTO 생성 및 설정
-            fileOpt.ifPresent(file -> {
-                FileDTO fileDTO = new FileDTO();
-                fileDTO.setFilename(file.getFilename());
-                fileDTO.setFiletype(file.getFiletype());
-                fileDTO.setFiledata(file.getFiledata());
-                goodsDTO.setFile(fileDTO);
-            });
-
-            return goodsDTO;
-        });
+        Optional<Goods> goods = goodsRepository.findById(goodsnum);
+        return goods.map(g -> new GoodsDTO(
+                g.getGoodsnum(),
+                g.getUser().getUsernum(),
+                g.getMarket().getMarketcode(),
+                g.getGoodsname(),
+                g.getPrice(),
+                g.getTag(),
+                g.getDetails(),
+                g.getGoodsoption()
+        ));
     }
 
     public List<GoodsDTO> findGoodsByTag(String tag) {
@@ -243,5 +225,18 @@ public class GoodsService {
         // 상품 삭제
         goodsRepository.delete(goods);
         return true;  // 삭제 성공
+    }
+    public Optional<FileDTO> getFileByGoodsNum(Long goodsnum) {
+        // 특정 상품에 연결된 첫 번째 파일 데이터 반환
+        return filestorageRepository.findByGoods_Goodsnum(goodsnum)
+                .stream()
+                .findFirst()
+                .map(file -> {
+                    FileDTO fileDTO = new FileDTO();
+                    fileDTO.setFilename(file.getFilename());
+                    fileDTO.setFiletype(file.getFiletype());
+                    fileDTO.setFiledata(file.getFiledata());
+                    return fileDTO;
+                });
     }
 }
