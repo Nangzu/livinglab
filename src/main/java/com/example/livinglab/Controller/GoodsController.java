@@ -1,11 +1,14 @@
 package com.example.livinglab.Controller;
 
 import com.example.livinglab.Dto.GoodsDTO;
+import com.example.livinglab.Dto.GoodsdetailDTO;
 import com.example.livinglab.Dto.UserDTO;
 import com.example.livinglab.Entity.Goods;
 import com.example.livinglab.Repository.GoodsRepository;
+import com.example.livinglab.Repository.GoodsdetailRepository;
 import com.example.livinglab.Service.FilestorageService;
 import com.example.livinglab.Service.GoodsService;
+import com.example.livinglab.Service.GoodsdetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,12 +33,19 @@ public class GoodsController {
     @Autowired
     private GoodsRepository goodsRepository;
 
+    @Autowired
+    private GoodsdetailService goodsdetailService;
+
+    @Autowired
+    private GoodsdetailRepository goodsdetailRepository;
+
 
     // 상품 등록
     @PostMapping("/add")
     public ResponseEntity<GoodsDTO> addGoods(
             @RequestPart("goodsDTO") String goodsDTOJson, // JSON 문자열로 받음
-            @RequestPart(value = "file", required = false) MultipartFile file, HttpSession session) throws IOException {
+            @RequestPart(value = "file", required = false) MultipartFile file,
+            @RequestPart("goodsdetailDTO") String goodsdetailDTOJSON, HttpSession session) throws IOException {
 
         UserDTO userDTO = (UserDTO) session.getAttribute("user");
         if (userDTO == null && userDTO.getRole() != 2L) {
@@ -46,8 +56,9 @@ public class GoodsController {
         // JSON 문자열을 GoodsDTO 객체로 변환
         ObjectMapper objectMapper = new ObjectMapper();
         GoodsDTO goodsDTO = objectMapper.readValue(goodsDTOJson, GoodsDTO.class);
+        GoodsdetailDTO goodsdetailDTO = objectMapper.readValue(goodsdetailDTOJSON, GoodsdetailDTO.class);
 
-        GoodsDTO createdGoods = goodsService.addGoods(goodsDTO, file);
+        GoodsDTO createdGoods = goodsService.addGoods(goodsDTO, file, goodsdetailDTO);
         return new ResponseEntity<>(createdGoods, HttpStatus.CREATED);
     }
 

@@ -1,6 +1,7 @@
 package com.example.livinglab.Service;
 
 import com.example.livinglab.Dto.GoodsDTO;
+import com.example.livinglab.Dto.GoodsdetailDTO;
 import com.example.livinglab.Entity.Filestorage;
 import com.example.livinglab.Entity.Goods;
 import com.example.livinglab.Entity.User;
@@ -36,9 +37,13 @@ public class GoodsService {
     @Autowired
     private FilestorageRepository filestorageRepository;
 
+    @Autowired
+    private GoodsdetailService goodsdetailService; // GoodsdetailService 추가
+
+
 
     // 상품 등록
-    public GoodsDTO addGoods(GoodsDTO goodsDTO, MultipartFile file) throws IOException {
+    public GoodsDTO addGoods(GoodsDTO goodsDTO, MultipartFile file, GoodsdetailDTO goodsdetailDTO) throws IOException {
 
         Optional<User> userOpt = userRepository.findById(goodsDTO.getUsernum());
         Optional<Market> marketOpt = marketRepository.findById(goodsDTO.getMarketCode());
@@ -59,6 +64,9 @@ public class GoodsService {
         goods.setGoodsoption(goodsDTO.getGoodsOption());
 
         goods = goodsRepository.save(goods);
+
+        goodsdetailDTO.setGoodsnum(goods.getGoodsnum());
+        goodsdetailService.addGoodsDetails(goodsdetailDTO);
 
         Filestorage filestorage = new Filestorage();
         filestorage.setFiledata(file.getBytes());
