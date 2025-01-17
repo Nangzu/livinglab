@@ -3,6 +3,7 @@ package com.example.livinglab.Controller;
 import com.example.livinglab.Dto.CartDTO;
 import com.example.livinglab.Dto.UserDTO;
 import com.example.livinglab.Service.CartService;
+import com.example.livinglab.Entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,8 @@ public class CartController {
     @PostMapping("/add")
     public ResponseEntity<CartDTO> addToCart(@RequestBody CartDTO cartDTO, HttpSession session) {
         // 세션에서 사용자 정보를 확인
+
+        User user = (User) session.getAttribute("user");
         if (session.getAttribute("user") == null) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED); // 사용자 인증 실패
         }

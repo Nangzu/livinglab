@@ -1,6 +1,7 @@
 package com.example.livinglab.Controller;
 
 import com.example.livinglab.Dto.MarketDTO;
+import com.example.livinglab.Dto.RegisterDTO;
 import com.example.livinglab.Dto.UserDTO;
 import com.example.livinglab.Service.MarketService;
 import com.example.livinglab.Service.UserService;
@@ -24,9 +25,9 @@ public class RegisterController {
     }
 
     @PostMapping("/sellerregister")
-    public UserDTO registerSellerUser(@RequestBody UserDTO userDTO, @RequestParam String marketname) {
-        UserDTO userdto = userService.createSellerUser(userDTO);
-        marketService.createmarket(marketname, userdto);
+    public UserDTO registerSellerUser(@RequestBody RegisterDTO registerDTO) {
+        UserDTO userdto = userService.createSellerUser(registerDTO);
+        marketService.createmarket(registerDTO);
         return userdto;
     }
 }

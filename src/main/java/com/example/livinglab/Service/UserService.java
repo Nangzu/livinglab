@@ -1,6 +1,7 @@
 package com.example.livinglab.Service;
 
 import com.example.livinglab.Dto.LoginDTO;
+import com.example.livinglab.Dto.RegisterDTO;
 import com.example.livinglab.Dto.UserDTO;
 import com.example.livinglab.Entity.Role;
 import com.example.livinglab.Entity.User;
@@ -54,16 +55,16 @@ public class UserService {
         return modelMapper.map(savedUser, UserDTO.class);
     }
 
-    public UserDTO createSellerUser(UserDTO userDTO) {
+    public UserDTO createSellerUser(RegisterDTO registerDTO) {
         // 비밀번호 인코딩
-        String encodedPassword = passwordEncoder.encode(userDTO.getPw());
+        String encodedPassword = passwordEncoder.encode(registerDTO.getPw());
 
         // Role 설정 (Role Code가 1인 'user' 역할 조회)
         Role defaultRole = roleRepository.findByRoleCode(2L)
                 .orElseThrow(() -> new RuntimeException("Default role not found"));
 
         // UserDTO를 User 엔티티로 변환
-        User user = modelMapper.map(userDTO, User.class);
+        User user = modelMapper.map(registerDTO, User.class);
 
         // 비밀번호 설정
         user.setPw(encodedPassword);

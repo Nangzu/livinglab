@@ -1,6 +1,7 @@
 package com.example.livinglab.Service;
 
 import com.example.livinglab.Dto.MarketDTO;
+import com.example.livinglab.Dto.RegisterDTO;
 import com.example.livinglab.Dto.UserDTO;
 import com.example.livinglab.Entity.Market;
 import com.example.livinglab.Entity.Role;
@@ -37,10 +38,10 @@ public class MarketService {
         });
     }
 
-    public MarketDTO createmarket(String marketname, UserDTO userDTO) {
+    public MarketDTO createmarket(RegisterDTO registerDTO) {
 
         // 사용자 정보 확인
-        String userid = userDTO.getUserid();
+        String userid = registerDTO.getUserid();
         Optional<User> userOpt = userRepository.findByUserid(userid);
 
         if (userOpt.isEmpty()) {
@@ -51,7 +52,7 @@ public class MarketService {
         // Market 엔티티 생성 및 설정
         Market market = new Market();
         market.setUser(user);
-        market.setMarketname(marketname);
+        market.setMarketname(registerDTO.getMarketname());
 
         // Market 저장
         Market savedMarket = marketRepository.save(market);
