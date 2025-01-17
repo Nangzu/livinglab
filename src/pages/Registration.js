@@ -22,8 +22,8 @@ const Registration = ({ isSidebarOpen }) => {
 
   useEffect(() => {
     // 로컬 스토리지에서 사용자 번호와 마켓 코드 가져오기
-    const userNum = localStorage.getItem("userNum");
-    const marketCode = localStorage.getItem("marketCode");
+    const userNum = sessionStorage.getItem("userNum");
+    const marketCode = sessionStorage.getItem("marketCode");
 
     if (userNum && marketCode) {
       setFormData((prevState) => ({
@@ -63,19 +63,18 @@ const Registration = ({ isSidebarOpen }) => {
         tag: formData.tag,
         details: formData.details,
         goodsOption: formData.goodsOption,
-        userNum: formData.userNum,
-        marketCode: formData.marketCode,
+        userNum: formData.userNum
       })
     );
 
     formDataToSend.append(
-      "goodsDetailDTO",
+      "goodsdetailDTO",
       JSON.stringify({
         packagingtype: formData.packagingtype,
         salesunit: formData.salesunit,
         weightcapacity: formData.weightcapacity,
         expirydate: formData.expirydate,
-        notes: formData.notes,
+        notes: formData.notes
       })
     );
 
@@ -127,32 +126,6 @@ const Registration = ({ isSidebarOpen }) => {
       <form onSubmit={handleSubmit} className="registration-form">
         <table>
           <tbody>
-            {/* 사용자 번호 */}
-            <tr>
-              <td><label>사용자 번호</label></td>
-              <td>
-                <input
-                  type="text"
-                  name="userNum"
-                  value={formData.userNum}
-                  readOnly
-                />
-              </td>
-            </tr>
-
-            {/* 마켓 코드 */}
-            <tr>
-              <td><label>마켓 코드</label></td>
-              <td>
-                <input
-                  type="text"
-                  name="marketCode"
-                  value={formData.marketCode}
-                  readOnly
-                />
-              </td>
-            </tr>
-
             {/* 상품명 */}
             <tr>
               <td><label>상품명</label></td>

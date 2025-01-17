@@ -30,8 +30,8 @@ const Login = ({ onLogin }) => {
           user_num: 0, // 마스터 계정에 대한 고유 식별자 (예: 0)
           role: "admin", // 마스터 계정의 역할
         };
-        localStorage.setItem("userNum", masterData.user_num);
-        localStorage.setItem("role", masterData.role);
+        sessionStorage.setItem("userNum", masterData.user_num);
+        sessionStorage.setItem("role", masterData.role);
         onLogin(masterData);
         navigate("/main"); // 메인 페이지로 이동
         return;
@@ -46,12 +46,14 @@ const Login = ({ onLogin }) => {
       const response = await axios.post("http://localhost:8082/api/users/login", credentials);
       const { user_num, role } = response.data;
 
-      // 로컬 스토리지에 사용자 정보 저장
-      localStorage.setItem("userNum", user_num);
-      localStorage.setItem("role", role);
+      // // 로컬 스토리지에 사용자 정보 저장
+      // sessionStorage.setItem("userNum", user_num);
+      // sessionStorage.setItem("role", role);
 
       alert("로그인 성공!");
       onLogin({ user_num, role }); // 로그인 콜백 호출
+      sessionStorage.setItem("userid", formData.userid);
+      sessionStorage.setItem("userNum", formData.user_num);
       navigate("/main"); // 메인 페이지로 이동
     } catch (error) {
       console.error("로그인 오류:", error.response || error);
