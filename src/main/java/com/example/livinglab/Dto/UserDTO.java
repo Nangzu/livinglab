@@ -34,8 +34,8 @@ public class UserDTO {
     }
 
 
-    public UserDTO(Long userNum,
-                   String userName,
+    public UserDTO(Long usernum,
+                   String username,
                    String pw,
                    @Pattern(regexp = "^\\d{3}-\\d{3,4}-\\d{4}$", message = "전화번호 형식이 올바르지 않습니다.") String phone,
                    @Email(message = "이메일 형식이 올바르지 않습니다.") String email,
@@ -44,6 +44,14 @@ public class UserDTO {
 
     public String getPw() {
         return pw;
+    }
+
+    public Long getUsernum() {
+        return usernum;
+    }
+
+    public void setUsernum(Long usernum) {
+        this.usernum = usernum;
     }
 
     public void setPw(String pw) {

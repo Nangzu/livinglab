@@ -18,7 +18,7 @@ public class RegisterController {
     }
 
     @PostMapping("/sellerregister")
-    public UserDTO registerSellerUser(@RequestBody UserDTO userDTO) {
+    public UserDTO registerSellerUser(@RequestPart UserDTO userDTO) {
         return userService.createSellerUser(userDTO);
     }
 }

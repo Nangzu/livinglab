@@ -20,4 +20,12 @@ public class MarketDTO {
         this.usernum = market.getUser().getUsernum();
         this.marketname = market.getMarketname();
     }
+
+    public Long getUsernum() {
+        return usernum;
+    }
+
+    public void setUsernum(Long usernum) {
+        this.usernum = usernum;
+    }
 }
