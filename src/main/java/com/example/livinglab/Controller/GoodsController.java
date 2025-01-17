@@ -126,8 +126,9 @@ public class GoodsController {
         }
 
         // 상품 삭제
+        boolean deleted1 = goodsdetailService.deleteGoodsDetails(goodsnum);
         boolean deleted = goodsService.deleteGoods(goodsnum);
-        if (deleted) {
+        if (deleted || deleted1) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT); // 204 상태 코드 반환
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404 상태 코드 반환
