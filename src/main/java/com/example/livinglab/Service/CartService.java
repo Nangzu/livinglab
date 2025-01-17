@@ -58,4 +58,32 @@ public class CartService {
                 .collect(Collectors.toList());
     }
 
+    public void removeFromCart(Long cartId) {
+        // 카트 항목 조회
+        Cart cart = cartRepository.findById(cartId)
+                .orElseThrow(() -> new IllegalArgumentException("Cart item not found"));
+
+        // 카트 항목 삭제
+        cartRepository.delete(cart);
+    }
+
+    public CartDTO updateCart(Long cartId, CartDTO cartDTO) {
+        // 카트 항목 조회
+        Cart cart = cartRepository.findById(cartId)
+                .orElseThrow(() -> new IllegalArgumentException("Cart item not found"));
+
+        // 새로운 수량과 상품 적용
+        Goods goods = goodsRepository.findById(cartDTO.getGoodsnum())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid goods ID"));
+
+        cart.setGoods(goods);
+        cart.setQuantity(cartDTO.getQuantity());
+
+        // 업데이트된 카트 저장
+        Cart updatedCart = cartRepository.save(cart);
+
+        // 저장된 카트를 DTO로 변환
+        return new CartDTO(updatedCart);
+    }
+
 }

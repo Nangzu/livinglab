@@ -50,4 +50,40 @@ public class CartController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR); // 서버 에러
         }
     }
+
+    // 카트 삭제
+    @DeleteMapping("/remove/{cartId}")
+    public ResponseEntity<?> removeFromCart(@PathVariable Long cartId, HttpSession session) {
+        // 세션에서 사용자 정보를 확인
+        if (session.getAttribute("user") == null) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED); // 사용자 인증 실패
+        }
+
+        try {
+            cartService.removeFromCart(cartId);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT); // 204 No Content
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND); // 404 Not Found
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR); // 500 Internal Server Error
+        }
+    }
+
+    // 카트 업데이트
+    @PutMapping("/update/{cartId}")
+    public ResponseEntity<?> updateCart(@PathVariable Long cartId, @RequestBody CartDTO cartDTO, HttpSession session) {
+        // 세션에서 사용자 정보를 확인
+        if (session.getAttribute("user") == null) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED); // 사용자 인증 실패
+        }
+
+        try {
+            CartDTO updatedCart = cartService.updateCart(cartId, cartDTO);
+            return new ResponseEntity<>(updatedCart, HttpStatus.OK); // 200 OK
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND); // 404 Not Found
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR); // 500 Internal Server Error
+        }
+    }
 }
