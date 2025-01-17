@@ -1,0 +1,58 @@
+.delivery-manager-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+  
+  .delivery-manager-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .delivery-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .delivery-table th,
+  .delivery-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .delivery-table th {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .product-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-right: 10px;
+  }
+  
+  .button-group {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .button-group button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .button-group button:hover {
+    background-color: #0056b3;
+  }
+  
+  .button-group button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  

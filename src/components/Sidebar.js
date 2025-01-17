@@ -183,7 +183,17 @@ const Sidebar = ({ isOpen }) => {
         </div>
         {expanded["주문/배송"] && (
           <div style={styles.subMenu}>
-            <div style={styles.subMenuItem}>배송 관리</div>
+            <Link
+              to="/delivery-manager"
+              style={{
+                ...styles.subMenuItem,
+                ...(location.pathname === "/delivery-manager"
+                  ? styles.activeMenuItem
+                  : {}),
+              }}
+            >
+              배송 관리
+            </Link>
             <div style={styles.subMenuItem}>출고중지 요청</div>
             <div style={styles.subMenuItem}>반품 관리</div>
             <div style={styles.subMenuItem}>교환 관리</div>

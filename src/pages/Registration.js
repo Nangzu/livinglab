@@ -11,6 +11,11 @@ const Registration = ({ isSidebarOpen }) => {
     goodsOption: "", // 상품 옵션
     userNum: "", // 사용자 번호
     marketCode: "", // 마켓 코드
+    packagingtype: "",
+    salesunit: "",
+    weightcapacity: "",
+    expirydate: "",
+    notes: "",
     images: [],
     detailImages: [],
   });
@@ -62,6 +67,18 @@ const Registration = ({ isSidebarOpen }) => {
         marketCode: formData.marketCode,
       })
     );
+
+    formDataToSend.append(
+      "goodsDetailDTO",
+      JSON.stringify({
+        packagingtype: formData.packagingtype,
+        salesunit: formData.salesunit,
+        weightcapacity: formData.weightcapacity,
+        expirydate: formData.expirydate,
+        notes: formData.notes,
+      })
+    );
+
 
     // 일반 이미지 추가
     formData.images.forEach((image) => {
@@ -201,6 +218,76 @@ const Registration = ({ isSidebarOpen }) => {
                   value={formData.goodsOption}
                   onChange={handleChange}
                   placeholder="상품 옵션을 입력하세요."
+                />
+              </td>
+            </tr>
+
+            {/* 포장 타입 */}
+            <tr>
+              <td><label>포장 타입</label></td>
+              <td>
+                <input
+                  type="text"
+                  name="packagingtype"
+                  value={formData.packagingtype}
+                  onChange={handleChange}
+                  placeholder="포장 타입을 입력하세요."
+                />
+              </td>
+            </tr>
+
+            {/* 판매 단위 */}
+            <tr>
+              <td><label>판매 단위</label></td>
+              <td>
+                <input
+                  type="text"
+                  name="salesunit"
+                  value={formData.salesunit}
+                  onChange={handleChange}
+                  placeholder="판매 단위를 입력하세요."
+                />
+              </td>
+            </tr>
+
+            {/* 중량 또는 용량 */}
+            <tr>
+              <td><label>중량(용량)</label></td>
+              <td>
+                <input
+                  type="text"
+                  name="weightcapacity"
+                  value={formData.weightcapacity}
+                  onChange={handleChange}
+                  placeholder="중량을 입력하세요."
+                />
+              </td>
+            </tr>
+
+            {/* 소비 기한 */}
+            <tr>
+              <td><label>소비 기한</label></td>
+              <td>
+                <input
+                  type="text"
+                  name="expirydate"
+                  value={formData.expirydate}
+                  onChange={handleChange}
+                  placeholder="소비 기한을 입력하세요."
+                />
+              </td>
+            </tr>
+
+            {/* 안내 사항 */}
+            <tr>
+              <td><label>안내 사항</label></td>
+              <td>
+                <textarea
+                  type="text"
+                  name="notes"
+                  value={formData.notes}
+                  onChange={handleChange}
+                  placeholder="안내 사항을 입력하세요."
                 />
               </td>
             </tr>

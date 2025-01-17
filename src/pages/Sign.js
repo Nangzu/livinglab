@@ -126,15 +126,6 @@ const Sign = () => {
           />
         </div>
 
-        {/* 역할 선택 */}
-        <div className="role-select-group">
-          <label htmlFor="role">역할 선택</label>
-          <select name="role" value={formData.role} onChange={handleChange}>
-            <option value="2">판매자</option>
-            <option value="3">학생</option>
-          </select>
-        </div>
-
         {/* 마켓 이름 */}
         <div className="form-group">
           <label htmlFor="marketName">마켓 이름</label>

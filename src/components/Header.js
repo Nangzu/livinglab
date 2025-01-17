@@ -106,7 +106,7 @@ const Header = ({ toggleSidebar, user, onLogout }) => {
         ) : (
           <>
             <span style={styles.navItem}>도움말</span>
-            <span style={styles.navItem}>안녕하세요, {user.user_name}님!</span>
+            <span style={styles.navItem}>안녕하세요, {user.userName}님!</span>
             <span style={styles.navItem} onClick={onLogout}>
               로그아웃
             </span>

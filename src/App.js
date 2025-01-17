@@ -10,6 +10,7 @@ import ProductEdit from "./pages/ProductEdit";
 import StudentApproval from "./pages/StudentApproval";
 import EmployeeRole from "./pages/EmployeeRole";
 import EmployeeForm from "./pages/EmployeeForm";
+import DeliveryManager from "./pages/DeliveryManager";
 
 // 메인 콘텐츠를 렌더링할 AppContent 컴포넌트 생성
 function AppContent() {
@@ -78,7 +79,7 @@ function AppContent() {
           <Route
             path="/main" element = {
               user ? (
-              <h1>안녕하세요, {user.user_name}님!</h1>
+              <h1>안녕하세요, {user.userName}님!</h1>
               ) : (
                 <Navigate to ="/login" />
               )
@@ -99,6 +100,9 @@ function AppContent() {
 
           {/* 직원 권한 관리 페이지 */}
           <Route path="employee-management" element={<EmployeeForm />} />
+
+          {/* 배송 관리 페이지 */}
+          <Route path="delivey-manager" element={<DeliveryManager />} />
         </Routes>
       </main>
     </div>
