@@ -23,7 +23,6 @@ public class GoodsDTO {
     private String details; // 상세 설명
     private String goodsOption; // 상품 옵션
 
-    private FileDTO file;
 
     public GoodsDTO(Goods goods) {
         this.goodsnum = goods.getGoodsnum();
@@ -34,8 +33,5 @@ public class GoodsDTO {
         this.tag = goods.getTag();
         this.details = goods.getDetails();
         this.goodsOption = goods.getGoodsoption();
-    }
-
-    public GoodsDTO(Long goodsnum, Long usernum, Long marketcode, String goodsname, int price, String tag, String details, String goodsoption) {
     }
 }
