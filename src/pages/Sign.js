@@ -11,7 +11,8 @@ const Sign = () => {
     email: "", // 이메일
     address: "", // 주소
     user_name: "", // 사용자 이름
-    role: "2", // 기본값
+    role: "", 
+    marketName: "",
   });
 
   const [error, setError] = useState("");
@@ -34,6 +35,7 @@ const Sign = () => {
         address: formData.address,
         user_name: formData.user_name,
         role: formData.role, // 선택한 역할을 전달
+        marketName: formData.marketName,
       };
 
       const response = await axios.post("http://localhost:8082/api/users/register", data);
@@ -124,14 +126,26 @@ const Sign = () => {
           />
         </div>
 
-        {/* 역할 선택
+        {/* 역할 선택 */}
         <div className="role-select-group">
           <label htmlFor="role">역할 선택</label>
           <select name="role" value={formData.role} onChange={handleChange}>
             <option value="2">판매자</option>
             <option value="3">학생</option>
           </select>
-        </div> */}
+        </div>
+
+        {/* 마켓 이름 */}
+        <div className="form-group">
+          <label htmlFor="marketName">마켓 이름</label>
+          <input
+            type="text"
+            name="marketName"
+            value={formData.marketName}
+            onChange={handleChange}
+            placeholder="마켓 이름을 입력하세요."
+          />
+        </div>
 
         {/* 오류 메시지 */}
         {error && <p className="error-message">{error}</p>}

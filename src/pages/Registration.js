@@ -48,6 +48,8 @@ const Registration = ({ isSidebarOpen }) => {
 
     // FormData 객체 생성
     const formDataToSend = new FormData();
+
+
     formDataToSend.append(
       "goodsDTO",
       JSON.stringify({
@@ -78,7 +80,10 @@ const Registration = ({ isSidebarOpen }) => {
         },
         withCredentials: true, // 세션/쿠키 사용 시 필요
       });
-      alert("상품이 성공적으로 등록되었습니다!");
+
+      if(response.status === 200) {
+        alert("상품이 성공적으로 등록되었습니다!");
+      }
       console.log("등록된 상품 데이터:", response.data);
     } catch (error) {
       console.error("상품 등록 중 오류 발생:", error.response || error);

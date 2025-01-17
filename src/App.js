@@ -78,7 +78,7 @@ function AppContent() {
           <Route
             path="/main" element = {
               user ? (
-              <h1>안녕하세요, {user.userid}님!</h1>
+              <h1>안녕하세요, {user.user_name}님!</h1>
               ) : (
                 <Navigate to ="/login" />
               )
