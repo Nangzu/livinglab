@@ -28,4 +28,11 @@ public class CbSend {
 
     @Column(name = "FILE_NAME")
     private String fileName;
+
+    @ManyToOne
+    @JoinColumn(name ="MARKETCODE")
+    private Market market;
+
+    @Column(name="ONE_LINER")
+    private String oneliner;
 }
