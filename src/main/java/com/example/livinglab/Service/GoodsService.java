@@ -1,5 +1,6 @@
 package com.example.livinglab.Service;
 
+import com.example.livinglab.Dto.FileDTO;
 import com.example.livinglab.Dto.GoodsDTO;
 import com.example.livinglab.Dto.GoodsdetailDTO;
 import com.example.livinglab.Dto.UserDTO;
@@ -114,17 +115,38 @@ public class GoodsService {
 
     // 특정 상품 조회
     public Optional<GoodsDTO> getGoodsById(Long goodsnum) {
-        Optional<Goods> goods = goodsRepository.findById(goodsnum);
-        return goods.map(g -> new GoodsDTO(
-                g.getGoodsnum(),
-                g.getUser().getUsernum(),
-                g.getMarket().getMarketcode(),
-                g.getGoodsname(),
-                g.getPrice(),
-                g.getTag(),
-                g.getDetails(),
-                g.getGoodsoption()
-        ));
+        Optional<Goods> goodsOpt = goodsRepository.findById(goodsnum);
+
+        return goodsOpt.map(goods -> {
+            // 기본 GoodsDTO 생성
+            GoodsDTO goodsDTO = new GoodsDTO(
+                    goods.getGoodsnum(),
+                    goods.getUser().getUsernum(),
+                    goods.getMarket().getMarketcode(),
+                    goods.getGoodsname(),
+                    goods.getPrice(),
+                    goods.getTag(),
+                    goods.getDetails(),
+                    goods.getGoodsoption()
+            );
+
+            // 해당 Goods에 연결된 파일 데이터를 조회
+            List<FileDTO> fileDTOs = filestorageRepository.findByGoods_Goodsnum(goodsnum)
+                    .stream()
+                    .map(file -> {
+                        FileDTO fileDTO = new FileDTO();
+                        fileDTO.setFilename(file.getFilename());
+                        fileDTO.setFiletype(file.getFiletype());
+                        fileDTO.setFiledata(file.getFiledata());
+                        return fileDTO;
+                    })
+                    .collect(Collectors.toList());
+
+            // 파일 데이터를 GoodsDTO에 설정
+            goodsDTO.setFiles(fileDTOs);
+
+            return goodsDTO;
+        });
     }
 
     public List<GoodsDTO> findGoodsByTag(String tag) {
