@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -20,6 +22,9 @@ public class GoodsDTO {
     private String tag;     // 태그
     private String details; // 상세 설명
     private String goodsOption; // 상품 옵션
+
+    private List<FileDTO> files;
+
     public GoodsDTO(Goods goods) {
         this.goodsnum = goods.getGoodsnum();
         this.usernum = goods.getUser().getUsernum();
@@ -31,4 +36,6 @@ public class GoodsDTO {
         this.goodsOption = goods.getGoodsoption();
     }
 
+    public GoodsDTO(Long goodsnum, Long usernum, Long marketcode, String goodsname, int price, String tag, String details, String goodsoption) {
+    }
 }
