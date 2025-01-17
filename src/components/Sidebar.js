@@ -141,8 +141,28 @@ const Sidebar = ({ isOpen }) => {
             >
               학생 요청 승인
             </Link>
-            <div style={styles.subMenuItem}>직원 권한 관리</div>
-            <div style={styles.subMenuItem}>직원 정보 관리</div>
+            <Link
+              to="/employee-role"
+              style={{
+                ...styles.subMenuItem,
+                ...(location.pathname === "/employee-role"
+                  ? styles.activeMenuItem
+                  : {}),
+              }}
+            >
+              직원 권한 관리
+            </Link>
+            <Link
+              to="/employee-management"
+              style={{
+                ...styles.subMenuItem,
+                ...(location.pathname === "/employee-management"
+                  ? styles.activeMenuItem
+                  : {}),
+              }}
+            >
+              직원 정보 관리
+            </Link>
           </div>
         )}
 

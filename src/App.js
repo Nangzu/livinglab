@@ -8,6 +8,8 @@ import Login from "./pages/Login";
 import Registration from "./pages/Registration";
 import ProductEdit from "./pages/ProductEdit";
 import StudentApproval from "./pages/StudentApproval";
+import EmployeeRole from "./pages/EmployeeRole";
+import EmployeeForm from "./pages/EmployeeForm";
 
 // 메인 콘텐츠를 렌더링할 AppContent 컴포넌트 생성
 function AppContent() {
@@ -91,6 +93,12 @@ function AppContent() {
 
           {/* 학생 요청 승인 페이지 */}
           <Route path="student-approval" element={<StudentApproval />} />
+
+          {/* 직원 권한 관리 페이지 */}
+          <Route path="employee-role" element={<EmployeeRole />} />
+
+          {/* 직원 권한 관리 페이지 */}
+          <Route path="employee-management" element={<EmployeeForm />} />
         </Routes>
       </main>
     </div>

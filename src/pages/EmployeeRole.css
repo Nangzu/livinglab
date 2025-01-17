@@ -1,0 +1,67 @@
+.employee-role-container {
+    padding: 30px;
+    background-color: #ffffff; /* 배경색을 흰색으로 변경 */
+    font-family: 'Arial', sans-serif;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+    border-radius: 8px; /* 모서리 둥글게 */
+}
+
+.employee-role-title {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 25px;
+    text-align: center; /* 제목을 가운데 정렬 */
+}
+
+.employee-role-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 25px;
+    font-size: 16px; /* 글자 크기 확대 */
+}
+
+.employee-role-table th,
+.employee-role-table td {
+    border: 1px solid #ddd;
+    padding: 10px; /* 여백 확대 */
+    text-align: center;
+    vertical-align: middle; /* 텍스트 가운데 정렬 */
+}
+
+.employee-role-table th {
+    background-color: #f3f3f3; /* 더 진한 파란색 */
+    color: black;
+    font-weight: bold;
+}
+
+.role-checkbox {
+    cursor: pointer;
+    transform: scale(1.2); /* 체크박스 크기 확대 */
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px; /* 간격 확대 */
+}
+
+.pagination button {
+    padding: 10px 15px;
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease; /* 색상 변화 추가 */
+}
+
+.pagination button:hover {
+    background-color: #003d80; /* hover 시 더 어두운 파란색 */
+}
+
+.pagination button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
