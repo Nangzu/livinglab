@@ -73,7 +73,7 @@ public class GoodsController {
         Goods existingGoods = existingGoodsOpt.get();
 
         // 요청한 상품이 본인의 상품이 아닌 경우
-        if (!existingGoods.getUser().getUser_num().equals(userDTO.getUser_num())) {
+        if (!existingGoods.getUser().getUsernum().equals(userDTO.getUsernum())) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN); // 403 상태 코드 반환
         }
 
@@ -104,7 +104,7 @@ public class GoodsController {
         Goods existingGoods = existingGoodsOpt.get();
 
         // 요청한 상품이 본인의 상품이 아닌 경우
-        if (!existingGoods.getUser().getUser_num().equals(userDTO.getUser_num())) {
+        if (!existingGoods.getUser().getUsernum().equals(userDTO.getUsernum())) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN); // 403 상태 코드 반환
         }
 

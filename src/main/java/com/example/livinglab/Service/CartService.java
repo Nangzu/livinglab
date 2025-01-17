@@ -10,6 +10,10 @@ import com.example.livinglab.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 @Service
 public class CartService {
 
@@ -43,4 +47,15 @@ public class CartService {
         // 저장된 카트를 DTO로 변환
         return new CartDTO(savedCart);
     }
+    public List<CartDTO> getCartItems(Long usernum) {
+
+        // 특정 사용자의 카트를 조회
+        List<Cart> cartList = cartRepository.findCartsByUser_Usernum(usernum);
+
+        // 조회된 카트를 DTO로 변환
+        return cartList.stream()
+                .map(CartDTO::new)
+                .collect(Collectors.toList());
+    }
+
 }

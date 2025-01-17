@@ -40,7 +40,7 @@ public class GoodsService {
     // 상품 등록
     public GoodsDTO addGoods(GoodsDTO goodsDTO, MultipartFile file) throws IOException {
 
-        Optional<User> userOpt = userRepository.findById(goodsDTO.getUserNum());
+        Optional<User> userOpt = userRepository.findById(goodsDTO.getUsernum());
         Optional<Market> marketOpt = marketRepository.findById(goodsDTO.getMarketCode());
 
         // 유효성 검사: 사용자와 마켓이 존재하는지 확인
@@ -56,7 +56,7 @@ public class GoodsService {
         goods.setPrice(goodsDTO.getPrice());
         goods.setTag(goodsDTO.getTag());
         goods.setDetails(goodsDTO.getDetails());
-        goods.setGoods_option(goodsDTO.getGoodsOption());
+        goods.setGoodsoption(goodsDTO.getGoodsOption());
 
         goods = goodsRepository.save(goods);
 
@@ -70,13 +70,13 @@ public class GoodsService {
 
         return new GoodsDTO(
                 goods.getGoodsnum(),
-                goods.getUser().getUser_num(),
-                goods.getMarket().getMarket_code(),
+                goods.getUser().getUsernum(),
+                goods.getMarket().getMarketcode(),
                 goods.getGoodsname(),
                 goods.getPrice(),
                 goods.getTag(),
                 goods.getDetails(),
-                goods.getGoods_option()
+                goods.getGoodsoption()
         );
     }
 
@@ -86,13 +86,13 @@ public class GoodsService {
         return goodsList.stream()
                 .map(goods -> new GoodsDTO(
                         goods.getGoodsnum(),
-                        goods.getUser().getUser_num(),
-                        goods.getMarket().getMarket_code(),
+                        goods.getUser().getUsernum(),
+                        goods.getMarket().getMarketcode(),
                         goods.getGoodsname(),
                         goods.getPrice(),
                         goods.getTag(),
                         goods.getDetails(),
-                        goods.getGoods_option()
+                        goods.getGoodsoption()
                 ))
                 .toList();
     }
@@ -102,13 +102,13 @@ public class GoodsService {
         Optional<Goods> goods = goodsRepository.findById(goodsnum);
         return goods.map(g -> new GoodsDTO(
                 g.getGoodsnum(),
-                g.getUser().getUser_num(),
-                g.getMarket().getMarket_code(),
+                g.getUser().getUsernum(),
+                g.getMarket().getMarketcode(),
                 g.getGoodsname(),
                 g.getPrice(),
                 g.getTag(),
                 g.getDetails(),
-                g.getGoods_option()
+                g.getGoodsoption()
         ));
     }
 
@@ -117,13 +117,13 @@ public class GoodsService {
         return goodsList.stream()
                 .map(goods -> new GoodsDTO(
                         goods.getGoodsnum(),
-                        goods.getUser().getUser_num(),
-                        goods.getMarket().getMarket_code(),
+                        goods.getUser().getUsernum(),
+                        goods.getMarket().getMarketcode(),
                         goods.getGoodsname(),
                         goods.getPrice(),
                         goods.getTag(),
                         goods.getDetails(),
-                        goods.getGoods_option()
+                        goods.getGoodsoption()
                 ))
                 .collect(Collectors.toList());
     }
@@ -142,7 +142,7 @@ public class GoodsService {
         existingGoods.setPrice(goodsDTO.getPrice());
         existingGoods.setTag(goodsDTO.getTag());
         existingGoods.setDetails(goodsDTO.getDetails());
-        existingGoods.setGoods_option(goodsDTO.getGoodsOption());
+        existingGoods.setGoodsoption(goodsDTO.getGoodsOption());
 
         // 파일이 존재하면 새로 저장
         if (file != null && !file.isEmpty()) {
@@ -174,13 +174,13 @@ public class GoodsService {
 
         return new GoodsDTO(
                 existingGoods.getGoodsnum(),
-                existingGoods.getUser().getUser_num(),
-                existingGoods.getMarket().getMarket_code(),
+                existingGoods.getUser().getUsernum(),
+                existingGoods.getMarket().getMarketcode(),
                 existingGoods.getGoodsname(),
                 existingGoods.getPrice(),
                 existingGoods.getTag(),
                 existingGoods.getDetails(),
-                existingGoods.getGoods_option()
+                existingGoods.getGoodsoption()
         );
     }
 

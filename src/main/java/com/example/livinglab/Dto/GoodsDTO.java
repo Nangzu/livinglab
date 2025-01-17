@@ -11,8 +11,8 @@ import org.springframework.web.multipart.MultipartFile;
 @AllArgsConstructor
 public class GoodsDTO {
     private Long goodsnum;  // 상품번호
-    @JsonProperty("userNum") // JSON에서 'userNum'을 매핑
-    private Long userNum;
+    @JsonProperty("usernum") // JSON에서 'userNum'을 매핑
+    private Long usernum;
     @JsonProperty("marketCode") // JSON에서 'marketCode'를 매핑
     private Long marketCode;
     private String goodsname; // 상품명
@@ -22,13 +22,13 @@ public class GoodsDTO {
     private String goodsOption; // 상품 옵션
     public GoodsDTO(Goods goods) {
         this.goodsnum = goods.getGoodsnum();
-        this.userNum = goods.getUser().getUser_num();
-        this.marketCode = goods.getMarket().getMarket_code();
+        this.usernum = goods.getUser().getUsernum();
+        this.marketCode = goods.getMarket().getMarketcode();
         this.goodsname = goods.getGoodsname();
         this.price = goods.getPrice();
         this.tag = goods.getTag();
         this.details = goods.getDetails();
-        this.goodsOption = goods.getGoods_option();
+        this.goodsOption = goods.getGoodsoption();
     }
 
 }

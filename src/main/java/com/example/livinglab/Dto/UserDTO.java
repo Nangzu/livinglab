@@ -11,12 +11,12 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDTO {
-    private Long user_num;  // user_num
+    private Long usernum;  // user_num
     private String userid;     // id
     private String phone;   // phone
     private String email;   // email
     private String address; // address
-    private String user_name; // user_name
+    private String username; // user_name
     private String pw;
 
     // Role 필드가 필요한 경우, RoleDTO를 사용하거나 Role 정보를 문자열로 반환할 수 있음
@@ -24,12 +24,12 @@ public class UserDTO {
 
     // User 엔티티를 UserDTO로 변환하는 생성자 추가
     public UserDTO(User user) {
-        this.user_num = user.getUser_num();
+        this.usernum = user.getUsernum();
         this.userid = user.getUserid();
         this.phone = user.getPhone();
         this.email = user.getEmail();
         this.address = user.getAddress();
-        this.user_name = user.getUser_name();
+        this.username = user.getUsername();
         this.role = (long) Math.toIntExact(user.getRole() != null ? user.getRole().getRoleCode() : null);  // roleName을 Role 클래스에서 가져올 수 있음
     }
 

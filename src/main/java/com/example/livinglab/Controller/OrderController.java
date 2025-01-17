@@ -22,7 +22,7 @@ public class OrderController {
     @PostMapping("/create")
     public ResponseEntity<OrderDTO> createOrder(@RequestParam Long userId,
                                                 @RequestParam List<Long> cartIds,
-                                                @RequestParam String paymentMethod, HttpSession session) {
+                                                HttpSession session) {
         // 세션에서 사용자 정보 가져오기
         UserDTO userDTO = (UserDTO) session.getAttribute("user");
 
@@ -32,7 +32,7 @@ public class OrderController {
         }
 
         // 사용자 정보가 있는 경우, 주문 생성
-        OrderDTO createdOrder = orderService.createOrder(userId, cartIds, paymentMethod);
+        OrderDTO createdOrder = orderService.createOrder(userId, cartIds);
         return new ResponseEntity<>(createdOrder, HttpStatus.CREATED);  // 201 상태 코드 반환
     }
 
@@ -47,7 +47,7 @@ public class OrderController {
         }
 
         // 세션 사용자와 요청된 userId가 일치하는지 확인
-        if (!userDTO.getUser_num().toString().equals(userId)) {
+        if (!userDTO.getUserid().toString().equals(userId)) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);  // 403 상태 코드 반환
         }
 
@@ -72,7 +72,7 @@ public class OrderController {
         OrderDTO orderDetails = orderService.getOrderDetails(orderId);
 
         // 주문의 userNum과 세션의 userNum을 비교하여 일치하는지 확인
-        if (orderDetails == null || !orderDetails.getUser_num().equals(userDTO.getUser_num())) {
+        if (orderDetails == null || !orderDetails.getUsernum().equals(userDTO.getUsernum())) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);  // 403 상태 코드 반환
         }
 
@@ -80,8 +80,8 @@ public class OrderController {
     }
 
     // 장바구니에서 상품 삭제
-    @DeleteMapping("/cart/{userId}/{goodsId}")
-    public ResponseEntity<Void> removeFromCart(@PathVariable String userId, @PathVariable Long goodsId, HttpSession session) {
+    @DeleteMapping("/cart/{userId}/{cartnum}")
+    public ResponseEntity<Void> removeFromCart(@PathVariable String userId, @PathVariable Long cartnum, HttpSession session) {
         // 세션에서 사용자 정보 가져오기
         UserDTO userDTO = (UserDTO) session.getAttribute("user");
 
@@ -90,13 +90,40 @@ public class OrderController {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);  // 401 상태 코드 반환
         }
 
+        System.out.println(userDTO.getUserid());
+        System.out.println(userId);
+
+
         // 세션의 userId와 요청된 userId가 일치하는지 확인
-        if (!userDTO.getUser_num().toString().equals(userId)) {
+        if (!userDTO.getUserid().toString().equals(userId)) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);  // 403 상태 코드 반환
         }
 
         // 장바구니에서 상품 삭제
-        orderService.removeFromCart(userId, goodsId);
+        orderService.removeFromCart(cartnum, userId);
         return ResponseEntity.noContent().build();  // 204 상태 코드 반환
+    }
+
+    @PutMapping("/paid")
+    public ResponseEntity<OrderDTO> updateOrderState(@RequestBody OrderDTO requestDTO, HttpSession session){
+        UserDTO userDTO = (UserDTO) session.getAttribute("user");
+
+        // 세션에 사용자 정보가 없으면 Unauthorized 상태 코드와 함께 응답
+        if (userDTO == null) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);  // 401 상태 코드 반환
+        }
+
+        // 세션 사용자와 요청된 userId가 일치하는지 확인
+        if (!userDTO.getUsernum().equals(requestDTO.getUsernum())) {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);  // 403 상태 코드 반환
+        }
+
+        if (requestDTO.getOrdernum() == null || requestDTO.getUsernum() == null || requestDTO.getPymethod() == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST); // 400 상태 코드 반환
+        }
+
+        OrderDTO orderDTO = orderService.updateOrderState(requestDTO.getOrdernum(), requestDTO.getUsernum(), requestDTO.getPymethod());
+
+        return ResponseEntity.ok(orderDTO);
     }
 }

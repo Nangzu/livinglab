@@ -66,11 +66,11 @@ public class UserService {
         return userRepository.findAll().stream()
                 .map(user -> {
                     Map<String, Object> map = new HashMap<>();
-                    map.put("user_num", user.getUser_num());
+                    map.put("usernum", user.getUsernum());
                     map.put("userid", user.getUserid());
                     map.put("phone", user.getPhone());
                     map.put("email", user.getEmail());
-                    map.put("user_name", user.getUser_name());
+                    map.put("username", user.getUsername());
                     return map;
                 })
                 .collect(Collectors.toList());

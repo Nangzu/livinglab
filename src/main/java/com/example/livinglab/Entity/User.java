@@ -19,7 +19,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "USER_NUM")  // 대문자 컬럼 이름
-    private Long user_num;
+    private Long usernum;
 
     @Column(name = "USERID", nullable = false)  // 대문자 컬럼 이름
     private String userid;
@@ -40,7 +40,7 @@ public class User {
     private String address;
 
     @Column(name = "USER_NAME", nullable = false)  // 대문자 컬럼 이름
-    private String user_name;
+    private String username;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ROLE_CODE", nullable = false)  // 대문자 외래 키 이름

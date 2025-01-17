@@ -18,8 +18,8 @@ public class CbSendService {
     private UserRepository userRepository;
 
 
-    public CbSend uploadFile(Long user_num, MultipartFile file) {
-        User user = userRepository.findById(user_num)
+    public CbSend uploadFile(Long usernum, MultipartFile file) {
+        User user = userRepository.findById(usernum)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         if (user.getRole() == null || user.getRole().getRoleCode() != 3L) {

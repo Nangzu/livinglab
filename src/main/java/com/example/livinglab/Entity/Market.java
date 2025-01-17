@@ -11,12 +11,12 @@ public class Market {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "MARKET_CODE", unique = true)  // 대문자 컬럼 이름
-    private Long market_code;
+    private Long marketcode;
 
     @ManyToOne
     @JoinColumn(name = "USER_NUM")  // 대문자 외래 키 이름
     private User user;
 
     @Column(name = "MARKET_NAME")  // 대문자 컬럼 이름
-    private String market_name;
+    private String marketname;
 }

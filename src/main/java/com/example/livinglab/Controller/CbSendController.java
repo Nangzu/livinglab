@@ -20,7 +20,7 @@ public class CbSendController {
 
     @PostMapping("/upload")
     public ResponseEntity<CbSend> uploadFile(
-            @RequestParam("user_num") Long userId,
+            @RequestParam("usernum") Long userId,
             @RequestParam("file") MultipartFile file) {
         try {
             System.out.println("Received userId: " + userId);

@@ -12,14 +12,13 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ORDER_NUM")  // 대문자 컬럼 이름
-    private Long order_num;
+    private Long ordernum;
 
     @Column(name = "PY_METHOD")  // 대문자 컬럼 이름
-    private String py_method;
+    private String pymethod;
 
-    @ManyToOne
-    @JoinColumn(name = "CARTNUM")  // 대문자 외래 키 이름
-    private Cart cart;
+    @Column(name = "STATE")  // 대문자 컬럼 이름
+    private String state;
 
     @ManyToOne
     @JoinColumn(name = "USER_NUM")  // 대문자 외래 키 이름

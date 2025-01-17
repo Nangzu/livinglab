@@ -27,7 +27,7 @@ public class CartDTO {
         this.cartnum = cart.getCartnum();
         this.goodsnum = cart.getGoods() != null ? cart.getGoods().getGoodsnum() : null;
         this.goodsname = cart.getGoods() != null ? cart.getGoods().getGoodsname() : null;
-        this.userNum = cart.getUser() != null ? cart.getUser().getUser_num() : null;
+        this.userNum = cart.getUser() != null ? cart.getUser().getUsernum() : null;
         this.quantity = cart.getQuantity();
     }
 }

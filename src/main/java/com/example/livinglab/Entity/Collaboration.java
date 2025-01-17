@@ -11,7 +11,7 @@ public class Collaboration {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "COW_NUM")  // 대문자 컬럼 이름
-    private Long cow_num;
+    private Long cownum;
 
     @ManyToOne
     @JoinColumn(name = "MARKET_CODE")  // 대문자 외래 키 이름

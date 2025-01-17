@@ -31,8 +31,8 @@ public class CollaborationController {
 
         // UserDTO를 User 엔티티로 변환
         User user = new User();
-        user.setUser_num(userDTO.getUser_num());  // 필요한 필드들로 초기화
-        user.setUser_name(userDTO.getUser_name());
+        user.setUsernum(userDTO.getUsernum());  // 필요한 필드들로 초기화
+        user.setUsername(userDTO.getUsername());
         user.setEmail(userDTO.getEmail());
         // 필요한 경우 다른 필드들도 설정
         // 협업 생성

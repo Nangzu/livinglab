@@ -36,7 +36,7 @@ public class Goods {
     private String details;
 
     @Column(name = "GOODS_OPTION")  // 대문자 컬럼 이름
-    private String goods_option;
+    private String goodsoption;
 
     public Long getGoodsnum() {
         return goodsnum;

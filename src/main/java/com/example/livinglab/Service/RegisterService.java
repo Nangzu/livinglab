@@ -29,7 +29,7 @@ public class RegisterService {
         user.setPhone(userDTO.getPhone());
         user.setEmail(userDTO.getEmail());
         user.setAddress(userDTO.getAddress());
-        user.setUser_name(userDTO.getUser_name());
+        user.setUsername(userDTO.getUsername());
         user.setRole(role); // Role 설정
 
         // 저장

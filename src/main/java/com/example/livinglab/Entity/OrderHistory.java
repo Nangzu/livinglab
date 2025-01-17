@@ -10,7 +10,7 @@ public class OrderHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "HISTORY_NUM")  // 대문자 컬럼 이름
-    private Long history_num;
+    private Long historynum;
 
     @ManyToOne
     @JoinColumn(name = "ORDER_NUM")  // 대문자 외래 키 이름

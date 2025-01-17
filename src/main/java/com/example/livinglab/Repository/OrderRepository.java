@@ -10,4 +10,6 @@ import java.util.Optional;
 
 public interface OrderRepository extends JpaRepository<Order, Long> {
     List<Order> findByUser_Userid(String userid);
+
+    public Order findByOrdernumAndUser_Usernum(Long ordernum, Long usernum);
 }

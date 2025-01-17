@@ -30,33 +30,41 @@ public class OrderService {
 
     // 주문 생성
     @Transactional
-    public OrderDTO createOrder(Long userid, List<Long> cart_num, String py_method) {
+    public OrderDTO createOrder(Long userid, List<Long> cartnum) {
         // 사용자 확인
         User user = userRepository.findById(userid)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         // 선택된 카트 정보 가져오기 (선택한 cart_num만)
-        List<Cart> selectedCarts = cartRepository.findAllByCartnumIn(cart_num);
+        List<Cart> selectedCarts = cartRepository.findAllByCartnumIn(cartnum);
 
         // 카트가 없으면 예외 처리
         if (selectedCarts.isEmpty()) {
             throw new RuntimeException("No selected items in the cart");
         }
 
+        String paid = "unpaid";
+        String paymethod = "unpaid";
+
         // 주문 생성
         Order order = new Order();
         order.setUser(user);  // 주문한 사용자
         order.setCarts(selectedCarts);  // 여러 개의 카트를 주문에 추가
+        order.setPymethod(paymethod);
+        order.setState(paid);
+        for (Cart cart : selectedCarts) {
+            cart.setOrder(order);  // 각 카트에 주문을 설정
+        }
 
         // 주문 저장
         order = orderRepository.save(order);
 
         // DTO로 반환
         return new OrderDTO(
-                order.getOrder_num(),
-                py_method,  // 결제 방법
-                order.getUser() != null ? order.getUser().getUser_num() : null,  // 사용자 정보 (user_num)
-                selectedCarts.stream().map(Cart::getCartnum).collect(Collectors.toList())  // 선택된 카트 번호 리스트
+                order.getOrdernum(),
+                order.getPymethod(),  // 결제 방법
+                order.getUser() != null ? order.getUser().getUsernum() : null,  // 사용자 정보 (user_num)
+                order.getState()  // 선택된 카트 번호 리스트
         );
     }
 
@@ -66,18 +74,11 @@ public class OrderService {
 
         return orders.stream().map(order -> {
             // Order 객체에서 CartDTO 정보 생성
-            List<CartDTO> cartDTOs = order.getCart() != null ? List.of(new CartDTO(
-                    order.getCart().getCartnum(),
-                    order.getCart().getGoods().getGoodsnum(),
-                    order.getCart().getGoods().getGoodsname(),
-                    order.getCart().getUser().getUser_num(),
-                    order.getCart().getQuantity()
-            )) : List.of();  // Cart가 없는 경우 빈 리스트 처리
 
             // UserDTO 생성
             UserDTO userDTO = new UserDTO(
-                    order.getUser().getUser_num(),
-                    order.getUser().getUser_name(),
+                    order.getUser().getUsernum(),
+                    order.getUser().getUsername(),
                     order.getUser().getPhone(),
                     order.getUser().getEmail(),
                     order.getUser().getAddress(),
@@ -87,10 +88,10 @@ public class OrderService {
             );
 
             return new OrderDTO(
-                    order.getOrder_num(),
-                    order.getPy_method(),  // 결제 방법
-                    order.getUser() != null ? order.getUser().getUser_num() : null,  // 사용자 정보 (UserDTO에서 user_num)
-                    cartDTOs.stream().map(cart -> cart.getCartnum()).collect(Collectors.toList())  // Cart의 cart_num 리스트
+                    order.getOrdernum(),
+                    order.getPymethod(),  // 결제 방법
+                    order.getUser() != null ? order.getUser().getUsernum() : null,  // 사용자 정보 (UserDTO에서 user_num)
+                    order.getState()  // Cart의 cart_num 리스트
             );
         }).collect(Collectors.toList());
     }
@@ -102,18 +103,10 @@ public class OrderService {
                 .orElseThrow(() -> new RuntimeException("Order not found"));
 
         // 단일 Cart에 대한 DTO 생성
-        CartDTO cartDTO = (order.getCart() != null) ? new CartDTO(
-                order.getCart().getCartnum(),
-                order.getCart().getGoods().getGoodsnum(),
-                order.getCart().getGoods().getGoodsname(),
-                order.getCart().getUser().getUser_num(),
-                order.getCart().getQuantity()
-                ) : null;  // Cart가 없으면 null 처리
-
         // UserDTO 생성
         UserDTO userDTO = new UserDTO(
-                order.getUser().getUser_num(),
-                order.getUser().getUser_name(),
+                order.getUser().getUsernum(),
+                order.getUser().getUsername(),
                 order.getUser().getPhone(),
                 order.getUser().getEmail(),
                 order.getUser().getAddress(),
@@ -124,19 +117,48 @@ public class OrderService {
 
         // OrderDTO 반환
         return new OrderDTO(
-                order.getOrder_num(),
-                order.getPy_method(),  // 결제 방법
-                order.getUser() != null ? order.getUser().getUser_num() : null,  // 사용자 정보
-                order.getCarts() != null ? order.getCarts().stream()  // 여러 카트 정보
-                        .map(Cart::getCartnum)  // 각 Cart의 cartnum을 가져와 리스트로 변환
-                        .collect(Collectors.toList()) : null  // 리스트로 변환
+                order.getOrdernum(),
+                order.getPymethod(),  // 결제 방법
+                order.getUser() != null ? order.getUser().getUsernum() : null,  // 사용자 정보
+                order.getState()
         );
     }
 
     // 장바구니에서 특정 상품 제거
-    public void removeFromCart(String userid, Long goodsnum) {
-        Cart cart = cartRepository.findByUser_UseridAndGoods_Goodsnum(userid, goodsnum)
+    public void removeFromCart(Long cartnum, String userid) {
+        Cart cart = cartRepository.findByCartnumAndUser_Userid(cartnum, userid)
                 .orElseThrow(() -> new RuntimeException("Item not found in cart"));
         cartRepository.delete(cart);
+    }
+
+    public OrderDTO updateOrderState(Long ordernum, Long usernum, String pymethod) {
+        // 사용자 확인
+        User user = userRepository.findById(usernum)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        // 사용자에 해당하는 미결제 주문 찾기 (주문번호와 사용자 ID로 찾기)
+        Order order = orderRepository.findByOrdernumAndUser_Usernum(ordernum, usernum);
+
+        if (order == null) {
+            throw new RuntimeException("Order not found for the user.");
+        }
+
+        System.out.println(order.getOrdernum());
+
+        // pymethod와 state를 수정
+        order.setPymethod(pymethod);  // 전달받은 pymethod로 설정
+        order.setState("paid");  // 상태를 "paid"로 변경
+
+        orderRepository.save(order);
+        // 주문 저장 (자동 커밋)
+        order = orderRepository.save(order);
+
+        // DTO로 반환
+        return new OrderDTO(
+                order.getOrdernum(),
+                order.getPymethod(),  // 결제 방법
+                order.getUser() != null ? order.getUser().getUsernum() : null,  // 사용자 정보 (user_num)
+                order.getState()  // 주문 상태
+        );
     }
 }
