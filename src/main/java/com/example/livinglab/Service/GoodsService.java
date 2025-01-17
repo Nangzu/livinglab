@@ -130,20 +130,17 @@ public class GoodsService {
                     goods.getGoodsoption()
             );
 
-            // 해당 Goods에 연결된 파일 데이터를 조회
-            List<FileDTO> fileDTOs = filestorageRepository.findByGoods_Goodsnum(goodsnum)
-                    .stream()
-                    .map(file -> {
-                        FileDTO fileDTO = new FileDTO();
-                        fileDTO.setFilename(file.getFilename());
-                        fileDTO.setFiletype(file.getFiletype());
-                        fileDTO.setFiledata(file.getFiledata());
-                        return fileDTO;
-                    })
-                    .collect(Collectors.toList());
+            // 해당 Goods에 연결된 단일 파일 데이터 조회
+            Optional<Filestorage> fileOpt = filestorageRepository.findByGoods_Goodsnum(goodsnum).stream().findFirst();
 
-            // 파일 데이터를 GoodsDTO에 설정
-            goodsDTO.setFiles(fileDTOs);
+            // 파일 데이터가 존재하면 FileDTO 생성 및 설정
+            fileOpt.ifPresent(file -> {
+                FileDTO fileDTO = new FileDTO();
+                fileDTO.setFilename(file.getFilename());
+                fileDTO.setFiletype(file.getFiletype());
+                fileDTO.setFiledata(file.getFiledata());
+                goodsDTO.setFile(fileDTO);
+            });
 
             return goodsDTO;
         });
