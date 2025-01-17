@@ -56,9 +56,12 @@ public class GoodsController {
         // JSON 문자열을 GoodsDTO 객체로 변환
         ObjectMapper objectMapper = new ObjectMapper();
         GoodsDTO goodsDTO = objectMapper.readValue(goodsDTOJson, GoodsDTO.class);
+
+
+
         GoodsdetailDTO goodsdetailDTO = objectMapper.readValue(goodsdetailDTOJSON, GoodsdetailDTO.class);
 
-        GoodsDTO createdGoods = goodsService.addGoods(goodsDTO, file, goodsdetailDTO);
+        GoodsDTO createdGoods = goodsService.addGoods(goodsDTO, file, goodsdetailDTO, session);
         return new ResponseEntity<>(createdGoods, HttpStatus.CREATED);
     }
 
@@ -67,6 +70,7 @@ public class GoodsController {
             @PathVariable Long goodsnum,
             @RequestPart("goodsDTO") String goodsDTOJson,
             @RequestPart(value = "file", required = false) MultipartFile file,
+            @RequestPart("goodsdetailDTO") String goodsdetailDTOJSON,
             HttpSession session) throws IOException {
 
         // 세션에서 사용자 정보 가져오기
@@ -91,9 +95,11 @@ public class GoodsController {
         // JSON 문자열을 GoodsDTO 객체로 변환
         ObjectMapper objectMapper = new ObjectMapper();
         GoodsDTO goodsDTO = objectMapper.readValue(goodsDTOJson, GoodsDTO.class);
+        GoodsdetailDTO goodsdetailDTO = objectMapper.readValue(goodsdetailDTOJSON, GoodsdetailDTO.class);
+
 
         // 상품 수정
-        GoodsDTO updatedGoods = goodsService.updateGoods(goodsnum, goodsDTO, file);
+        GoodsDTO updatedGoods = goodsService.updateGoods(goodsnum, goodsDTO, file, goodsdetailDTO);
         return new ResponseEntity<>(updatedGoods, HttpStatus.OK);
     }
 

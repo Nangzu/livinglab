@@ -2,6 +2,7 @@ package com.example.livinglab.Service;
 
 import com.example.livinglab.Dto.GoodsDTO;
 import com.example.livinglab.Dto.GoodsdetailDTO;
+import com.example.livinglab.Dto.UserDTO;
 import com.example.livinglab.Entity.Filestorage;
 import com.example.livinglab.Entity.Goods;
 import com.example.livinglab.Entity.User;
@@ -10,6 +11,7 @@ import com.example.livinglab.Repository.FilestorageRepository;
 import com.example.livinglab.Repository.GoodsRepository;
 import com.example.livinglab.Repository.UserRepository;
 import com.example.livinglab.Repository.MarketRepository;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -43,9 +45,12 @@ public class GoodsService {
 
 
     // 상품 등록
-    public GoodsDTO addGoods(GoodsDTO goodsDTO, MultipartFile file, GoodsdetailDTO goodsdetailDTO) throws IOException {
+    public GoodsDTO addGoods(GoodsDTO goodsDTO, MultipartFile file, GoodsdetailDTO goodsdetailDTO, HttpSession session) throws IOException {
 
-        Optional<User> userOpt = userRepository.findById(goodsDTO.getUsernum());
+
+        UserDTO userDTO = (UserDTO) session.getAttribute("user");
+        Long num = userDTO.getUsernum();
+        Optional<User> userOpt = userRepository.findById(num);
         Optional<Market> marketOpt = marketRepository.findById(goodsDTO.getMarketCode());
 
         // 유효성 검사: 사용자와 마켓이 존재하는지 확인
@@ -53,8 +58,9 @@ public class GoodsService {
             throw new IllegalArgumentException("User or Market not found");
         }
 
+
         Goods goods = new Goods();
-        goods.setGoodsnum(goodsDTO.getGoodsnum());
+        goods.setGoodsnum(goodsDTO.getGoodsnum()); // 여기서 받는다
         goods.setUser(userOpt.get());  // 사용자 객체 설정
         goods.setMarket(marketOpt.get());
         goods.setGoodsname(goodsDTO.getGoodsname());
@@ -137,7 +143,7 @@ public class GoodsService {
     }
 
     // 상품 수정
-    public GoodsDTO updateGoods(Long goodsnum, GoodsDTO goodsDTO, MultipartFile file) throws IOException {
+    public GoodsDTO updateGoods(Long goodsnum, GoodsDTO goodsDTO, MultipartFile file, GoodsdetailDTO goodsdetailDTO) throws IOException {
         Optional<Goods> existingGoodsOpt = goodsRepository.findById(goodsnum);
         if (existingGoodsOpt.isEmpty()) {
             throw new IllegalArgumentException("Goods not found");
@@ -151,6 +157,10 @@ public class GoodsService {
         existingGoods.setTag(goodsDTO.getTag());
         existingGoods.setDetails(goodsDTO.getDetails());
         existingGoods.setGoodsoption(goodsDTO.getGoodsOption());
+
+
+        goodsdetailService.updateGoodsDetails(goodsnum, goodsdetailDTO);
+
 
         // 파일이 존재하면 새로 저장
         if (file != null && !file.isEmpty()) {

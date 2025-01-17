@@ -41,4 +41,26 @@ public class GoodsdetailService {
 
         return new GoodsdetailDTO(goodsDetails);
     }
+
+    public GoodsdetailDTO updateGoodsDetails(Long goodsnum, GoodsdetailDTO goodsdetailDTO) {
+        Goodsdetail existingGoodsDetail = goodsdetailRepository.findByGoods_Goodsnum(goodsnum)
+                .orElseThrow(() -> new IllegalArgumentException("Goods details not found"));
+
+        existingGoodsDetail.setPackagingtype(goodsdetailDTO.getPackagingtype());
+        existingGoodsDetail.setSalesunit(goodsdetailDTO.getSalesunit());
+        existingGoodsDetail.setWeightcapacity(goodsdetailDTO.getWeightcapacity());
+        existingGoodsDetail.setExpirydate(goodsdetailDTO.getExpirydate());
+        existingGoodsDetail.setNotes(goodsdetailDTO.getNotes());
+
+        existingGoodsDetail = goodsdetailRepository.save(existingGoodsDetail);
+        return new GoodsdetailDTO(existingGoodsDetail);
+    }
+
+    public boolean deleteGoodsDetails(Long goodsnum) {
+        Goodsdetail existingGoodsDetail = goodsdetailRepository.findByGoods_Goodsnum(goodsnum)
+                .orElseThrow(() -> new IllegalArgumentException("Goods details not found"));
+
+        goodsdetailRepository.delete(existingGoodsDetail);
+        return true;
+    }
 }
