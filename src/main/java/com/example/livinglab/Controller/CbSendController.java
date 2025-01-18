@@ -5,8 +5,10 @@ import com.example.livinglab.Entity.CbSend;
 import com.example.livinglab.Entity.Market;
 import com.example.livinglab.Service.CbSendService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,13 +27,19 @@ public class CbSendController {
     @PostMapping("/upload")
     public ResponseEntity<CbSend> uploadFile(
             @RequestPart("cbsend") String cbsendDTOJSON,
-            @RequestPart("file") MultipartFile file) {
+            @RequestPart("file") MultipartFile file, HttpSession session) {
+
+        UserDTO userDTO = (UserDTO) session.getAttribute("user");
+        if (userDTO == null && userDTO.getRole() != 3L) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+
         try {
 
             ObjectMapper objectMapper = new ObjectMapper();
             CbsendDTO cbsendDTO = objectMapper.readValue(cbsendDTOJSON, CbsendDTO.class);
 
-            CbSend cbSend = cbSendService.uploadFile(cbsendDTO, file);
+            CbSend cbSend = cbSendService.uploadFile(cbsendDTO, file, session);
             return ResponseEntity.ok(cbSend);
         } catch (Exception e) {
             e.printStackTrace();

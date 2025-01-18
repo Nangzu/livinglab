@@ -9,6 +9,7 @@ import com.example.livinglab.Entity.User;
 import com.example.livinglab.Repository.CbSendRepository;
 import com.example.livinglab.Repository.MarketRepository;
 import com.example.livinglab.Repository.UserRepository;
+import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,19 +36,20 @@ public class CbSendService {
     private ModelMapper modelMapper;
 
     @Transactional
-    public CbSend uploadFile(CbsendDTO cbsendDTO, MultipartFile file) {
-        User user = userRepository.findById(cbsendDTO.getUserid())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+    public CbSend uploadFile(CbsendDTO cbsendDTO, MultipartFile file, HttpSession session) {
+        UserDTO userDTO = (UserDTO) session.getAttribute("user");
+        Long num = userDTO.getUsernum();
+        Optional<User> userOpt = userRepository.findById(num);
         Optional<Market> market = marketRepository.findById(cbsendDTO.getMarketcode());
 
-        if (user.getRole() == null || user.getRole().getRoleCode() != 3L) {
+        if (userOpt.get().getRole() == null || userOpt.get().getRole().getRoleCode() != 3L) {
             throw new RuntimeException("Only students (roleCode 3) can upload files.");
         }
         System.out.println(file.getOriginalFilename());
 
         try {
             CbSend cbSend = new CbSend();
-            cbSend.setUser(user);
+            cbSend.setUser(userOpt.get());
             cbSend.setFiles(file.getBytes());
             cbSend.setMarket(market.get());
             cbSend.setOneliner(cbsendDTO.getOneliner());
