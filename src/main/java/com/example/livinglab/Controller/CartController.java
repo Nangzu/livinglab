@@ -4,6 +4,7 @@ import com.example.livinglab.Dto.CartDTO;
 import com.example.livinglab.Dto.UserDTO;
 import com.example.livinglab.Entity.Cart;
 import com.example.livinglab.Repository.CartRepository;
+import com.example.livinglab.Repository.UserRepository;
 import com.example.livinglab.Service.CartService;
 import com.example.livinglab.Entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.servlet.http.HttpSession;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/cart")
@@ -24,6 +26,9 @@ public class CartController {
     @Autowired
     private CartRepository cartRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     // 카트에 상품 추가
     @PostMapping("/add")
     public ResponseEntity<CartDTO> addToCart(@RequestBody CartDTO cartDTO) {
@@ -34,19 +39,16 @@ public class CartController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getCart(HttpSession session) {
-        // 세션에서 사용자 정보를 확인
-        if (session.getAttribute("user") == null) {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED); // 사용자 인증 실패
-        }
-
-        // 세션에서 사용자 번호 가져오기
-        UserDTO userDTO = (UserDTO) session.getAttribute("user");
-
-        Long usernum = userDTO.getUsernum();
-
+    public ResponseEntity<?> getCart(@RequestParam Long usernum) {
         // 사용자의 카트 조회
         try {
+            Optional<User> user = userRepository.findById(usernum);
+
+            if (user.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.UNAUTHORIZED); // 사용자 인증 실패
+            }
+
+            // 사용자의 카트 아이템 조회
             List<CartDTO> cartItems = cartService.getCartItems(usernum);
             return new ResponseEntity<>(cartItems, HttpStatus.OK); // 200 OK
         } catch (Exception e) {
