@@ -138,8 +138,8 @@ public class GoodsController {
 
     // 모든 상품 조회
     @GetMapping("/all")
-    public ResponseEntity<List<GoodsDTO>> getAllGoods() {
-        List<GoodsDTO> goodsList = goodsService.getAllGoods();
+    public ResponseEntity<List<GoodsSubDTO>> getAllGoods() {
+        List<GoodsSubDTO> goodsList = goodsService.getAllGoods();
         return new ResponseEntity<>(goodsList, HttpStatus.OK);
     }
 

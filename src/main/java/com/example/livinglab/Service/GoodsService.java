@@ -94,20 +94,32 @@ public class GoodsService {
     }
 
     // 상품 조회
-    public List<GoodsDTO> getAllGoods() {
+    public List<GoodsSubDTO> getAllGoods() {
         List<Goods> goodsList = goodsRepository.findAll();
-        return goodsList.stream()
-                .map(goods -> new GoodsDTO(
-                        goods.getGoodsnum(),
-                        goods.getUser().getUsernum(),
-                        goods.getMarket().getMarketcode(),
-                        goods.getGoodsname(),
-                        goods.getPrice(),
-                        goods.getTag(),
-                        goods.getDetails(),
-                        goods.getGoodsoption()
-                ))
-                .toList();
+        List<Filestorage> filestorageList = filestorageRepository.findAll();
+        List<Market> marketList = marketRepository.findAll();
+
+        List<GoodsSubDTO> result = new ArrayList<>();
+
+        for (Goods goods : goodsList) {
+            // Goods와 관련된 첫 번째 Filestorage 데이터 찾기
+            byte[] firstFileData = filestorageList.stream()
+                    .filter(file -> file.getGoods().getGoodsnum().equals(goods.getGoodsnum()))
+                    .findFirst()
+                    .map(Filestorage::getFiledata)
+                    .orElse(null);
+
+            // GoodsSubDTO 객체 생성 및 추가
+            GoodsSubDTO goodsSubDTO = new GoodsSubDTO(
+                    goods.getGoodsnum(),
+                    goods.getPrice(),
+                    goods.getGoodsname(),
+                    firstFileData,
+                    goods.getMarket().getMarketname()
+            );
+            result.add(goodsSubDTO);
+        }
+        return result;
     }
 
     // 특정 상품 조회
