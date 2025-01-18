@@ -11,14 +11,14 @@ import lombok.*;
 public class CartDTO {
     private Long cartnum;  // 카트 번호
 
-    @JsonProperty("goodsNum")  // JSON에서 'goodsNum'을 매핑
+    @JsonProperty("goodsnum")  // JSON에서 'goodsNum'을 매핑
     private Long goodsnum;  // 상품 번호
 
-    @JsonProperty("goodsName")  // JSON에서 'goodsNum'을 매핑
+    @JsonProperty("goodsname")  // JSON에서 'goodsNum'을 매핑
     private String goodsname;  // 상품 이름
 
-    @JsonProperty("userNum")  // JSON에서 'userNum'을 매핑
-    private Long userNum; // 사용자 번호
+    @JsonProperty("usernum")  // JSON에서 'userNum'을 매핑
+    private Long usernum; // 사용자 번호
 
     private int quantity;   // 수량
 
@@ -27,7 +27,33 @@ public class CartDTO {
         this.cartnum = cart.getCartnum();
         this.goodsnum = cart.getGoods() != null ? cart.getGoods().getGoodsnum() : null;
         this.goodsname = cart.getGoods() != null ? cart.getGoods().getGoodsname() : null;
-        this.userNum = cart.getUser() != null ? cart.getUser().getUsernum() : null;
+        this.usernum = cart.getUser() != null ? cart.getUser().getUsernum() : null;
         this.quantity = cart.getQuantity();
+    }
+
+
+    // Getters and Setters
+    public Long getUsernum() {
+        return usernum;
+    }
+
+    public void setUsernum(Long usernum) {
+        this.usernum = usernum;
+    }
+
+    public Long getGoodsnum() {
+        return goodsnum;
+    }
+
+    public void setGoodsnum(Long goodsnum) {
+        this.goodsnum = goodsnum;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 }
