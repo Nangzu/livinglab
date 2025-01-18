@@ -9,7 +9,7 @@ const Registration = ({ isSidebarOpen }) => {
     tag: "", // 태그
     details: "", // 상세 설명
     goodsOption: "", // 상품 옵션
-    userNum: "", // 사용자 번호
+    usernum: "", // 사용자 번호
     marketCode: "", // 마켓 코드
     packagingtype: "",
     salesunit: "",
@@ -22,13 +22,13 @@ const Registration = ({ isSidebarOpen }) => {
 
   useEffect(() => {
     // 로컬 스토리지에서 사용자 번호와 마켓 코드 가져오기
-    const userNum = sessionStorage.getItem("userNum");
+    const usernum = sessionStorage.getItem("usernum");
     const marketCode = sessionStorage.getItem("marketCode");
 
-    if (userNum && marketCode) {
+    if (usernum && marketCode) {
       setFormData((prevState) => ({
         ...prevState,
-        userNum,
+        usernum,
         marketCode,
       }));
     }
@@ -63,7 +63,7 @@ const Registration = ({ isSidebarOpen }) => {
         tag: formData.tag,
         details: formData.details,
         goodsOption: formData.goodsOption,
-        userNum: formData.userNum
+        usernum: formData.usernum
       })
     );
 

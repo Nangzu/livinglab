@@ -12,7 +12,7 @@ const Sign = () => {
     address: "", // 주소
     username: "", // 사용자 이름
     role: "", 
-    marketName: "",
+    marketname: "",
   });
 
   const [error, setError] = useState("");
@@ -35,10 +35,11 @@ const Sign = () => {
         address: formData.address,
         username: formData.username,
         role: formData.role, // 선택한 역할을 전달
-        marketName: formData.marketName,
+        marketname: formData.marketname,
       };
 
-      const response = await axios.post("http://localhost:8082/api/users/sellerregister", data);
+      const response = await axios.post("http://localhost:8082/api/users/sellerregister", data
+      );
 
       if (response.status === 200) {
         alert("회원가입이 완료되었습니다!");
@@ -128,11 +129,11 @@ const Sign = () => {
 
         {/* 마켓 이름 */}
         <div className="form-group">
-          <label htmlFor="marketName">마켓 이름</label>
+          <label htmlFor="marketname">마켓 이름</label>
           <input
             type="text"
-            name="marketName"
-            value={formData.marketName}
+            name="marketname"
+            value={formData.marketname}
             onChange={handleChange}
             placeholder="마켓 이름을 입력하세요."
           />
