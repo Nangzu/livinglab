@@ -125,14 +125,15 @@ public class GoodsService {
         ));
     }
 
-    public List<GoodsSubDTO> findGoodsByGoodsname(String goodsname, Long goodsnum) {
+    public List<GoodsSubDTO> findGoodsByGoodsname(String goodsname) {
         List<Goods> goodsList = goodsRepository.findByGoodsname(goodsname);
-        List<Filestorage> filestorageList = filestorageRepository.findByGoods_Goodsnum(goodsnum);
+        List<Filestorage> filestorageList = filestorageRepository.findByGoods_Goodsname(goodsname);
 
         String firstGoodsname = goodsList.isEmpty() ? null : goodsList.get(0).getGoodsname();
         byte[] firstFileData = filestorageList.isEmpty() ? null : filestorageList.get(0).getFiledata();
+        String marketname = goodsList.isEmpty() ? null : goodsList.get(0).getMarket().getMarketname();
 
-        GoodsSubDTO goodsSubDTO = new GoodsSubDTO(firstGoodsname, firstFileData);
+        GoodsSubDTO goodsSubDTO = new GoodsSubDTO(firstGoodsname, firstFileData, marketname);
         List<GoodsSubDTO> result = new ArrayList<>();
         result.add(goodsSubDTO);
 

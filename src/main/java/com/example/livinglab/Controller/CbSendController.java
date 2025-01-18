@@ -58,7 +58,7 @@ public class CbSendController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/market")
     public List<String> getAllMarketNames() {
         return cbSendService.getAllMarketNames();
     }

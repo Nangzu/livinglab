@@ -8,10 +8,12 @@ import lombok.*;
 public class GoodsSubDTO {
     private String firstGoodsname;
     private byte[] firstFileData;
+    private String marketname;
 
-    public GoodsSubDTO(String firstGoodsname, byte[] firstFileData) {
+    public GoodsSubDTO(String firstGoodsname, byte[] firstFileData, String marketname) {
         this.firstGoodsname = firstGoodsname;
         this.firstFileData = firstFileData;
+        this.marketname = marketname;
     }
 
     // Getters and Setters
@@ -29,5 +31,13 @@ public class GoodsSubDTO {
 
     public void setFirstFileData(byte[] firstFileData) {
         this.firstFileData = firstFileData;
+    }
+
+    public String getMarketname() {
+        return marketname;
+    }
+
+    public void setMarketname(String firstGoodsname) {
+        this.marketname = marketname;
     }
 }

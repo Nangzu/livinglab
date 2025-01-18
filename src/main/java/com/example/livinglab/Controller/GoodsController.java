@@ -159,8 +159,8 @@ public class GoodsController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<GoodsSubDTO>> getGoodsByname(@RequestParam String goodsname, @RequestParam Long goodsnum) {
-        List<GoodsSubDTO> goodsDTOList = goodsService.findGoodsByGoodsname(goodsname, goodsnum);
+    public ResponseEntity<List<GoodsSubDTO>> getGoodsByname(@RequestParam String goodsname) {
+        List<GoodsSubDTO> goodsDTOList = goodsService.findGoodsByGoodsname(goodsname);
         return ResponseEntity.ok(goodsDTOList); // 결과를 반환
     }
 }
