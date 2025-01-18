@@ -129,11 +129,13 @@ public class GoodsService {
         List<Goods> goodsList = goodsRepository.findByGoodsname(goodsname);
         List<Filestorage> filestorageList = filestorageRepository.findByGoods_Goodsname(goodsname);
 
+        Long goodsnum = goodsList.isEmpty() ? null : goodsList.get(0).getGoodsnum();
+        int price = goodsList.isEmpty() ? null : goodsList.get(0).getPrice();
         String firstGoodsname = goodsList.isEmpty() ? null : goodsList.get(0).getGoodsname();
         byte[] firstFileData = filestorageList.isEmpty() ? null : filestorageList.get(0).getFiledata();
         String marketname = goodsList.isEmpty() ? null : goodsList.get(0).getMarket().getMarketname();
 
-        GoodsSubDTO goodsSubDTO = new GoodsSubDTO(firstGoodsname, firstFileData, marketname);
+        GoodsSubDTO goodsSubDTO = new GoodsSubDTO(goodsnum, price, firstGoodsname, firstFileData, marketname);
         List<GoodsSubDTO> result = new ArrayList<>();
         result.add(goodsSubDTO);
 
