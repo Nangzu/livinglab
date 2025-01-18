@@ -57,4 +57,11 @@ public class UserDTO {
     public void setPw(String pw) {
         this.pw = pw;
     }
+        // UserDTO -> User 변환
+        public User toUser() {
+            User user = new User();
+            user.setUsernum(this.usernum);
+            user.setUsername(this.username);
+            return user;
+        }
 }

@@ -32,7 +32,7 @@ public class CartService {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid goods ID"));
 
         // 사용자 조회
-        User user = userRepository.findById(cartDTO.getUserNum())
+        User user = userRepository.findById(cartDTO.getUsernum())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
 
         // 새로운 카트 생성
