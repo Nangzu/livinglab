@@ -24,25 +24,26 @@ public class CartDTO {
 
     private int price;
 
+    private int totalprice;
+
+    private byte[] filedata;
+
+
     // Cart 엔티티에서 DTO로 변환하는 생성자
-    public CartDTO(Cart cart) {
+    public CartDTO(Cart cart, byte[] filedata) {
         this.cartnum = cart.getCartnum();
-        this.goodsnum = cart.getGoods() != null ? cart.getGoods().getGoodsnum() : null;
-        this.goodsname = cart.getGoods() != null ? cart.getGoods().getGoodsname() : null;
-        this.usernum = cart.getUser() != null ? cart.getUser().getUsernum() : null;
+        this.goodsnum = (cart.getGoods() != null) ? cart.getGoods().getGoodsnum() : null;
+        this.goodsname = (cart.getGoods() != null) ? cart.getGoods().getGoodsname() : "Unknown";
+        this.usernum = (cart.getUser() != null) ? cart.getUser().getUsernum() : null;
         this.quantity = cart.getQuantity();
-        this.price = cart.getGoods() != null ? cart.getGoods().getPrice() : null;
+        this.price = (cart.getGoods() != null) ? cart.getGoods().getPrice() : 0;
+        this.totalprice = cart.getTotalprice();
+        this.filedata = filedata;
     }
+
 
 
     // Getters and Setters
-    public Long getUsernum() {
-        return usernum;
-    }
-
-    public void setUsernum(Long usernum) {
-        this.usernum = usernum;
-    }
 
     public Long getGoodsnum() {
         return goodsnum;
@@ -66,5 +67,13 @@ public class CartDTO {
 
     public void setPrice(Integer price) {
         this.price = price;
+    }
+
+    public String getGoodsname() {
+        return goodsname;
+    }
+
+    public void setGoodsname(String goodsname) {
+        this.goodsname = goodsname;
     }
 }
