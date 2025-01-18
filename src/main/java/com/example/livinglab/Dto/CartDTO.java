@@ -22,6 +22,8 @@ public class CartDTO {
 
     private int quantity;   // 수량
 
+    private int price;
+
     // Cart 엔티티에서 DTO로 변환하는 생성자
     public CartDTO(Cart cart) {
         this.cartnum = cart.getCartnum();
@@ -29,6 +31,7 @@ public class CartDTO {
         this.goodsname = cart.getGoods() != null ? cart.getGoods().getGoodsname() : null;
         this.usernum = cart.getUser() != null ? cart.getUser().getUsernum() : null;
         this.quantity = cart.getQuantity();
+        this.price = cart.getGoods() != null ? cart.getGoods().getPrice() : null;
     }
 
 
@@ -55,5 +58,13 @@ public class CartDTO {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
     }
 }
