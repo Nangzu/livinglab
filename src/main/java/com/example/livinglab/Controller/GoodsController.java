@@ -145,8 +145,8 @@ public class GoodsController {
 
     // 특정 상품 조회
     @GetMapping("/{goodsnum}")
-    public ResponseEntity<GoodsDTO> getGoodsById(@PathVariable Long goodsnum) {
-        Optional<GoodsDTO> goodsDTO = goodsService.getGoodsById(goodsnum);
+    public ResponseEntity<GoodsallDTO> getGoodsById(@PathVariable Long goodsnum) {
+        Optional<GoodsallDTO> goodsDTO = goodsService.getGoodsById(goodsnum);
         return goodsDTO.map(dto -> new ResponseEntity<>(dto, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }

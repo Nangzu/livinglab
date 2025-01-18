@@ -1,14 +1,8 @@
 package com.example.livinglab.Service;
 
 import com.example.livinglab.Dto.*;
-import com.example.livinglab.Entity.Filestorage;
-import com.example.livinglab.Entity.Goods;
-import com.example.livinglab.Entity.User;
-import com.example.livinglab.Entity.Market;
-import com.example.livinglab.Repository.FilestorageRepository;
-import com.example.livinglab.Repository.GoodsRepository;
-import com.example.livinglab.Repository.UserRepository;
-import com.example.livinglab.Repository.MarketRepository;
+import com.example.livinglab.Entity.*;
+import com.example.livinglab.Repository.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +18,9 @@ public class GoodsService {
 
     @Autowired
     private GoodsRepository goodsRepository;
+
+    @Autowired
+    private GoodsdetailRepository goodsdetailRepository;
 
     @Autowired
     private UserRepository userRepository;
@@ -123,18 +120,32 @@ public class GoodsService {
     }
 
     // 특정 상품 조회
-    public Optional<GoodsDTO> getGoodsById(Long goodsnum) {
+    public Optional<GoodsallDTO> getGoodsById(Long goodsnum) {
         Optional<Goods> goods = goodsRepository.findById(goodsnum);
-        return goods.map(g -> new GoodsDTO(
-                g.getGoodsnum(),
-                g.getUser().getUsernum(),
-                g.getMarket().getMarketcode(),
-                g.getGoodsname(),
-                g.getPrice(),
-                g.getTag(),
-                g.getDetails(),
-                g.getGoodsoption()
-        ));
+
+
+        if (goods.isPresent()) {
+            Goods g = goods.get();
+            Optional<Goodsdetail> goodsdetailOptional = goodsdetailRepository.findByGoods_Goodsnum(goodsnum);
+            Goodsdetail goodsdetail = goodsdetailOptional.orElse(null);
+            Filestorage filestorage1 = filestorageRepository.findFirstByGoods_GoodsnumOrderByIdAsc(goodsnum).orElse(null);
+            Filestorage filestorage2 = filestorageRepository.findSecondByGoods_GoodsnumOrderByIdAsc(goodsnum).orElse(null);
+            Market market = g.getMarket();
+            User user = g.getUser();
+
+            GoodsallDTO goodsallDTO = new GoodsallDTO(
+                    g,
+                    goodsdetail,
+                    filestorage1,
+                    filestorage2,
+                    market,
+                    user
+            );
+
+            return Optional.of(goodsallDTO);
+        } else {
+            return Optional.empty();
+        }
     }
 
     public List<GoodsSubDTO> findGoodsByGoodsname(String goodsname) {
