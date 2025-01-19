@@ -15,6 +15,10 @@ import DeliveryStop from "./pages/Delivery/DeliveryStop";
 import ReturnManager from "./pages/Delivery/ReturnManager";
 import ChangeManager from "./pages/Delivery/ChangeManager";
 import OrderCheck from "./pages/Delivery/OrderCheck";
+import SettlementHistory from "./pages/Calculate/SettlementHistory";
+import SalesHistory from "./pages/Calculate/SalesHistory";
+import TaxHistory from "./pages/Calculate/TaxHistory";
+import PaymentHistory from "./pages/Calculate/PaymentHistory";
 
 // 메인 콘텐츠를 렌더링할 AppContent 컴포넌트 생성
 function AppContent() {
@@ -119,6 +123,21 @@ function AppContent() {
 
           {/* 주문 조회 페이지 */}
           <Route path="order-check" element={<OrderCheck />} />
+
+          {/* 정산 내역 페이지 */}
+          <Route path="settlement-history" element={<SettlementHistory />} />
+
+          {/* 매출 내역 페이지 */}
+          <Route path="sales-history" element={<SalesHistory />} />
+
+          {/* 부가세 신고 내역 페이지 */}
+          <Route path="tax-history" element={<TaxHistory />} />
+
+          {/* 지급 내역 페이지 */}
+          <Route path="payment-history" element={<PaymentHistory />} />
+
+          {/* 고객 문의 페이지 */}
+          <Route path="sales-history" element={<SalesHistory />} />
         </Routes>
       </main>
     </div>

@@ -258,10 +258,50 @@ const Sidebar = ({ isOpen }) => {
         </div>
         {expanded["정산"] && (
           <div style={styles.subMenu}>
-            <div style={styles.subMenuItem}>정산 내역</div>
-            <div style={styles.subMenuItem}>매출 내역</div>
-            <div style={styles.subMenuItem}>부가세 신고내역</div>
-            <div style={styles.subMenuItem}>지급 내역</div>
+            <Link
+              to="/settlement-history"
+              style={{
+                ...styles.subMenuItem,
+                ...(location.pathname === "/settlement-history"
+                  ? styles.activeMenuItem
+                  : {}),
+              }}
+            >
+              정산 내역
+            </Link>
+            <Link
+              to="/sales-history"
+              style={{
+                ...styles.subMenuItem,
+                ...(location.pathname === "/sales-history"
+                  ? styles.activeMenuItem
+                  : {}),
+              }}
+            >
+              매출 내역
+            </Link>
+            <Link
+              to="/tax-history"
+              style={{
+                ...styles.subMenuItem,
+                ...(location.pathname === "/tax-history"
+                  ? styles.activeMenuItem
+                  : {}),
+              }}
+            >
+              부가세 신고 내역
+            </Link>
+            <Link
+              to="/payment-history"
+              style={{
+                ...styles.subMenuItem,
+                ...(location.pathname === "/payment-history"
+                  ? styles.activeMenuItem
+                  : {}),
+              }}
+            >
+              지급 내역
+            </Link>
           </div>
         )}
 

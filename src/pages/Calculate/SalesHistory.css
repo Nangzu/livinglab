@@ -1,72 +1,74 @@
-.payment-history-container {
+.sales-history-container {
     padding: 20px;
     background-color: #f9f9f9;
   }
   
-  .payment-title {
+  .sales-title {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 20px;
     text-align: center;
   }
   
-  .payment-filter {
+  .sales-summary {
     display: flex;
-    gap: 10px;
+    justify-content: space-between;
     margin-bottom: 20px;
-    align-items: center;
-  }
-  
-  .payment-filter label {
-    display: flex;
-    flex-direction: column;
-    font-weight: bold;
-  }
-  
-  .payment-filter input,
-  .payment-filter select {
-    padding: 5px;
-    margin-top: 5px;
+    padding: 10px;
+    background-color: #f4f4f4;
     border: 1px solid #ddd;
     border-radius: 4px;
   }
   
-  .payment-filter button {
-    padding: 10px 15px;
-    background-color: #007bff;
+  .sales-filter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .sales-filter input[type="date"],
+  .sales-filter select {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .sales-filter button {
+    padding: 8px 12px;
+    background-color: blue;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
   }
   
-  .payment-filter button:hover {
-    background-color: #0056b3;
+  .sales-filter button:hover {
+    background-color: darkblue;
   }
   
-  .payment-table {
+  .sales-table {
     width: 100%;
     border-collapse: collapse;
   }
   
-  .payment-table th,
-  .payment-table td {
+  .sales-table th,
+  .sales-table td {
     border: 1px solid #ddd;
     padding: 10px;
     text-align: center;
   }
   
-  .payment-table th {
+  .sales-table th {
     background-color: #f4f4f4;
-    font-weight: bold;
     color: #333;
   }
   
-  .payment-table tr:nth-child(even) {
+  .sales-table tr:nth-child(even) {
     background-color: #f9f9f9;
   }
   
-  .payment-table tr:hover {
+  .sales-table tr:hover {
     background-color: #f1f1f1;
   }
   

@@ -1,0 +1,52 @@
+.tax-history-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+  
+  .tax-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .tax-summary {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .tax-filter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .tax-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .tax-table th,
+  .tax-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .tax-table th {
+    background-color: #f4f4f4;
+    color: #333;
+  }
+  
+  .tax-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .tax-table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
