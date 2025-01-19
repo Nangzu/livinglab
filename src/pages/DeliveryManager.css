@@ -1,58 +1,87 @@
+/* DeliveryManager 전용 스타일 */
 .delivery-manager-container {
-    padding: 20px;
-    background-color: #f9f9f9;
-  }
-  
-  .delivery-manager-title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-  
-  .delivery-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .delivery-table th,
-  .delivery-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
-  }
-  
-  .delivery-table th {
-    background-color: #ddd;
-    color: black;
-  }
-  
-  .product-image {
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-    margin-right: 10px;
-  }
-  
-  .button-group {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .button-group button {
-    padding: 5px 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .button-group button:hover {
-    background-color: #0056b3;
-  }
-  
-  .button-group button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
-  
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.delivery-manager-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.delivery-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.delivery-table th,
+.delivery-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+.delivery-table th {
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+.delivery-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.delivery-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.product-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* DeliveryManager 전용 버튼 그룹 */
+.delivery-manager-container .button-group {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.delivery-manager-container .button-group button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  color: white;
+  cursor: pointer;
+}
+
+/* 배송시작 버튼 (파란색) */
+.delivery-manager-container .start-delivery {
+  background-color: blue;
+}
+
+.delivery-manager-container .start-delivery:hover {
+  background-color: darkblue;
+}
+
+/* 리뷰보기 버튼 (초록색) */
+.delivery-manager-container .review-completed {
+  background-color: green;
+}
+
+.delivery-manager-container .review-completed:hover {
+  background-color: darkgreen;
+}
+
+/* 주문취소 버튼 (빨간색) */
+.delivery-manager-container .cancel-order {
+  background-color: #dc3545;
+}
+
+.delivery-manager-container .cancel-order:hover {
+  background-color: #c82333;
+}

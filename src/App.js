@@ -11,6 +11,10 @@ import StudentApproval from "./pages/StudentApproval";
 import EmployeeRole from "./pages/EmployeeRole";
 import EmployeeForm from "./pages/EmployeeForm";
 import DeliveryManager from "./pages/DeliveryManager";
+import DeliveryStop from "./pages/DeliveryStop";
+import ReturnManager from "./pages/ReturnManager";
+import ChangeManager from "./pages/ChangeManager";
+import OrderCheck from "./pages/OrderCheck";
 
 // 메인 콘텐츠를 렌더링할 AppContent 컴포넌트 생성
 function AppContent() {
@@ -103,6 +107,18 @@ function AppContent() {
 
           {/* 배송 관리 페이지 */}
           <Route path="delivery-manager" element={<DeliveryManager />} />
+
+          {/* 출고 중지 요청 페이지 */}
+          <Route path="delivery-stop" element={<DeliveryStop />} />
+
+          {/* 반품 관리 페이지 */}
+          <Route path="return-manager" element={<ReturnManager />} />
+
+          {/* 교환 관리 페이지 */}
+          <Route path="change-manager" element={<ChangeManager />} />
+
+          {/* 주문 조회 페이지 */}
+          <Route path="order-check" element={<OrderCheck />} />
         </Routes>
       </main>
     </div>

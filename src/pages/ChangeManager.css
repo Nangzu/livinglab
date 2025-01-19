@@ -1,0 +1,76 @@
+.change-manager-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+  
+  .change-manager-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .change-manager-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .change-manager-table th,
+  .change-manager-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .change-manager-table th {
+    background-color: #f4f4f4;
+    color: #333;
+  }
+  
+  .change-manager-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .change-manager-table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .product-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+  
+  .button-group {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+  }
+  
+  .approve-change {
+    background-color: green;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .approve-change:hover {
+    background-color: darkgreen;
+  }
+  
+  .reject-change {
+    background-color: red;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .reject-change:hover {
+    background-color: darkred;
+  }
+  

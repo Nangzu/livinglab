@@ -1,0 +1,76 @@
+.order-check-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+  
+  .order-check-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .order-check-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .order-check-table th,
+  .order-check-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .order-check-table th {
+    background-color: #f4f4f4;
+    color: #333;
+  }
+  
+  .order-check-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .order-check-table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .product-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+  
+  .button-group {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+  }
+  
+  .track-delivery {
+    background-color: blue;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .track-delivery:hover {
+    background-color: darkblue;
+  }
+  
+  .end-delivery {
+    background-color: green;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .end-delivery:hover {
+    background-color: darkgreen;
+  }
+  

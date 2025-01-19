@@ -116,12 +116,27 @@ const DeliveryManager = () => {
               <td>
                 <div className="button-group">
                   {order.status === "결제완료" && (
-                    <button onClick={() => handleAction(order.id, "배송시작")}>배송시작</button>
+                    <button
+                      className="start-delivery"
+                      onClick={() => handleAction(order.id, "배송시작")}
+                    >
+                      배송시작
+                    </button>
                   )}
                   {order.status === "배송시작" && (
-                    <button onClick={() => handleAction(order.id, "리뷰완료")}>리뷰보기</button>
+                    <button
+                      className="review-completed"
+                      onClick={() => handleAction(order.id, "리뷰완료")}
+                    >
+                      리뷰보기
+                    </button>
                   )}
-                  <button onClick={() => handleAction(order.id, "주문취소")}>주문취소</button>
+                  <button
+                    className="cancel-order"
+                    onClick={() => handleAction(order.id, "주문취소")}
+                  >
+                    주문취소
+                  </button>
                 </div>
               </td>
             </tr>

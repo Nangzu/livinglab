@@ -1,0 +1,76 @@
+.return-manager-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+  
+  .return-manager-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .return-manager-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .return-manager-table th,
+  .return-manager-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .return-manager-table th {
+    background-color: #f4f4f4;
+    color: #333;
+  }
+  
+  .return-manager-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .return-manager-table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .product-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+  
+  .button-group {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+  }
+  
+  .approve-return {
+    background-color: green;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .approve-return:hover {
+    background-color: darkgreen;
+  }
+  
+  .reject-return {
+    background-color: red;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .reject-return:hover {
+    background-color: darkred;
+  }
+  

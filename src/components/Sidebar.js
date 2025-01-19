@@ -194,10 +194,50 @@ const Sidebar = ({ isOpen }) => {
             >
               배송 관리
             </Link>
-            <div style={styles.subMenuItem}>출고중지 요청</div>
-            <div style={styles.subMenuItem}>반품 관리</div>
-            <div style={styles.subMenuItem}>교환 관리</div>
-            <div style={styles.subMenuItem}>주문 조회</div>
+            <Link
+              to="/delivery-stop"
+              style={{
+                ...styles.subMenuItem,
+                ...(location.pathname === "/delivery-stop"
+                  ? styles.activeMenuItem
+                  : {}),
+              }}
+            >
+              출고 중지 요청
+            </Link>
+            <Link
+              to="/return-manager"
+              style={{
+                ...styles.subMenuItem,
+                ...(location.pathname === "/return-manager"
+                  ? styles.activeMenuItem
+                  : {}),
+              }}
+            >
+              반품 관리
+            </Link>
+            <Link
+              to="/change-manager"
+              style={{
+                ...styles.subMenuItem,
+                ...(location.pathname === "/change-manager"
+                  ? styles.activeMenuItem
+                  : {}),
+              }}
+            >
+              교환 관리
+            </Link>
+            <Link
+              to="/order-check"
+              style={{
+                ...styles.subMenuItem,
+                ...(location.pathname === "/order-check"
+                  ? styles.activeMenuItem
+                  : {}),
+              }}
+            >
+              주문 조회
+            </Link>
           </div>
         )}
 
