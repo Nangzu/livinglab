@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './mypage.css';
 import profile from '../images/profile.png';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const MyPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -18,20 +19,19 @@ const MyPage = () => {
     completed: 0
   });
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        // sessionStorage에서 사용자 정보 가져오기
         const userString = sessionStorage.getItem('user');
         if (userString) {
           const userInfo = JSON.parse(userString);
-          setUserName(userInfo.username);  // UserDTO의 username 필드 사용
+          setUserName(userInfo.username);
 
-          // 사용자 주문 정보 가져오기
           const response = await axios.get(`http://localhost:8082/api/orders/user/${userInfo.usernum}`);
           setOrders(response.data);
 
-          // 배송 상태별 주문 수 계산
           const counts = response.data.reduce(
             (acc, order) => {
               switch (order.deliveryStatus) {
@@ -56,7 +56,6 @@ const MyPage = () => {
           );
           setOrderCount(counts);
         } else {
-          // 로그인 정보가 없는 경우, 로그인 페이지로 리디렉션
           window.location.href = '/login';
         }
       } catch (error) {
@@ -69,16 +68,14 @@ const MyPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
     try {
       const userInfo = JSON.parse(sessionStorage.getItem('user'));
-      
-      // 비밀번호 변경 요청
+
       await axios.put(`http://localhost:8082/api/users/change-password/${userInfo.usernum}`, {
         currentPassword,
         newPassword
       });
-      
+
       setShowSuccess(true);
 
       setTimeout(() => {
@@ -97,13 +94,13 @@ const MyPage = () => {
   return (
     <div className="profile-container">
       <h1>마이쇼핑</h1>
-      
+
       <div className="profile-info">
         <div className="profile-section">
           <div className="profile-image">
             <img src={profile} alt="프로필" />
           </div>
-          <div 
+          <div
             className="password-change-button"
             onClick={() => setIsModalOpen(true)}
           >
@@ -111,7 +108,13 @@ const MyPage = () => {
           </div>
         </div>
         <p className="greeting">안녕하세요. {userName} 님</p>
-        <p className="status-text">나의 주문처리 현황</p>
+        <p
+          className="status-text"
+          onClick={() => navigate('/order-confirmation')} 
+          style={{ cursor: 'pointer', textDecoration: 'underline' }} 
+        >
+          나의 주문처리 현황
+        </p>
       </div>
 
       <div className="order-status">
@@ -151,7 +154,7 @@ const MyPage = () => {
       {isModalOpen && (
         <div className="modal-overlay">
           <div className="modal-content">
-            <button 
+            <button
               className="modal-close"
               onClick={() => setIsModalOpen(false)}
             >
