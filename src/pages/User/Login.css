@@ -1,0 +1,89 @@
+/* 로그인 컨테이너 */
+.login-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 30px;
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+  
+  /* 제목 */
+  .login-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  /* 폼 그룹 */
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+  }
+  
+  /* 아이디/비밀번호 찾기 */
+  .find-links {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 12px;
+    margin-bottom: 20px;
+  }
+  
+  .find-links span {
+    margin-left: 10px;
+    cursor: pointer;
+    color: #007bff;
+  }
+  
+  .find-links span:hover {
+    text-decoration: underline;
+  }
+  
+  /* 로그인 버튼 */
+  .login-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #1e90ff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+  
+  .login-button:hover {
+    background-color: #1c86ee;
+  }
+  
+  /* 회원가입 버튼 */
+  .signup-button {
+    width: 100%;
+    padding: 12px;
+    background-color: white;
+    color: #1e90ff;
+    border: 1px solid #1e90ff;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .signup-button:hover {
+    background-color: #f0f8ff;
+  }
+  
+  /* 오류 메시지 */
+  .error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+    text-align: left;
+  }

@@ -3,18 +3,18 @@ import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "r
 import "./App.css";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
-import Sign from "./pages/Sign";
-import Login from "./pages/Login";
-import Registration from "./pages/Registration";
-import ProductEdit from "./pages/ProductEdit";
-import StudentApproval from "./pages/StudentApproval";
-import EmployeeRole from "./pages/EmployeeRole";
-import EmployeeForm from "./pages/EmployeeForm";
-import DeliveryManager from "./pages/DeliveryManager";
-import DeliveryStop from "./pages/DeliveryStop";
-import ReturnManager from "./pages/ReturnManager";
-import ChangeManager from "./pages/ChangeManager";
-import OrderCheck from "./pages/OrderCheck";
+import Sign from "./pages/User/Sign";
+import Login from "./pages/User/Login";
+import Registration from "./pages/Product/Registration";
+import ProductEdit from "./pages/Product/ProductEdit";
+import StudentApproval from "./pages/Employee/StudentApproval";
+import EmployeeRole from "./pages/Employee/EmployeeRole";
+import EmployeeForm from "./pages/Employee/EmployeeForm";
+import DeliveryManager from "./pages/Delivery/DeliveryManager";
+import DeliveryStop from "./pages/Delivery/DeliveryStop";
+import ReturnManager from "./pages/Delivery/ReturnManager";
+import ChangeManager from "./pages/Delivery/ChangeManager";
+import OrderCheck from "./pages/Delivery/OrderCheck";
 
 // 메인 콘텐츠를 렌더링할 AppContent 컴포넌트 생성
 function AppContent() {
