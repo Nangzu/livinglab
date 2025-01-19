@@ -91,27 +91,27 @@ const Header = ({ toggleSidebar, user, onLogout }) => {
           <img src="logo.png" alt="Logo" style={styles.logoImage} />
         </div>
       </div>
-      {/* 오른쪽: 로그인 여부에 따른 메뉴 변경경 */}
+      {/* 오른쪽: 로그인 여부에 따른 메뉴 변경 */}
       <nav style={styles.nav}>
-      {!user ? (
-          <>
-            <span style={styles.navItem} onClick={handleSignupClick}>
-              회원가입
-            </span>
-            <span style={styles.navItem} onClick={handleLoginClick}>
-              로그인
-            </span>
-            <span style={styles.navItem}>고객센터</span>
-          </>
-        ) : (
-          <>
-            <span style={styles.navItem}>도움말</span>
-            <span style={styles.navItem}>안녕하세요, {user.userName}님!</span>
-            <span style={styles.navItem} onClick={onLogout}>
-              로그아웃
-            </span>
-          </>
-        )}
+      {user ? (
+        <>
+          <span style={styles.navItem}>도움말</span>
+          <span style={styles.navItem}>안녕하세요, {user.userid}님!</span>
+          <span style={styles.navItem} onClick={onLogout}>
+            로그아웃
+          </span>
+        </>
+      ) : (
+        <>
+          <span style={styles.navItem} onClick={handleSignupClick}>
+            회원가입
+          </span>
+          <span style={styles.navItem} onClick={handleLoginClick}>
+            로그인
+          </span>
+          <span style={styles.navItem}>고객센터</span>
+        </>
+      )}
       </nav>
     </header>
   );

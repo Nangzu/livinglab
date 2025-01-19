@@ -30,14 +30,14 @@ const Login = ({ onLogin }) => {
 
       // 서버로 로그인 요청
       const response = await axios.post("http://localhost:8082/api/users/login", credentials, {withCredentials: true});
-      const { usernum,marketcode, role } = response.data;
+      const { userid, usernum,marketcode, role } = response.data;
 
-      sessionStorage.setItem("userid", formData.userid);
-      sessionStorage.setItem("usernum", formData.usernum);
-      sessionStorage.setItem("marketcode", formData.marketcode);
-      sessionStorage.setItem("role", formData.role);
+      sessionStorage.setItem("userid", userid);
+      sessionStorage.setItem("usernum", usernum);
+      sessionStorage.setItem("marketcode", marketcode);
+      sessionStorage.setItem("role", role);
       alert("로그인 성공!");
-      onLogin({ usernum, role, marketcode }); // 로그인 콜백 호출
+      onLogin({ userid, usernum, role, marketcode }); // 로그인 콜백 호출
       navigate("/main"); // 메인 페이지로 이동
     } catch (error) {
       console.error("로그인 오류:", error.response || error);

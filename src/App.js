@@ -29,9 +29,9 @@ function AppContent() {
   const [user, setUser] = useState(null); // 사용자 상태
 
   useEffect(() => {
-    const storedUser = JSON.parse(sessionStorage.getItem("user"));
-    if(storedUser) {
-      setUser(storedUser); // sessionStorage에 저장된 사용자 정보 불러오기
+    const storedUserId = JSON.parse(sessionStorage.getItem("user"));
+    if(storedUserId) {
+      setUser(storedUserId); // sessionStorage에 저장된 사용자 정보 불러오기
     }
   }, []);
 
@@ -89,7 +89,7 @@ function AppContent() {
           <Route
             path="/main" element = {
               user ? (
-              <h1>안녕하세요, {user.userName}님!</h1>
+              <h1>안녕하세요, {user.userid}님!</h1>
               ) : (
                 <Navigate to ="/login" />
               )
