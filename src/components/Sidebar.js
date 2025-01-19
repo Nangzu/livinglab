@@ -322,8 +322,28 @@ const Sidebar = ({ isOpen }) => {
         </div>
         {expanded["고객관리"] && (
           <div style={styles.subMenu}>
-            <div style={styles.subMenuItem}>고객문의</div>
-            <div style={styles.subMenuItem}>상품평</div>
+            <Link
+              to="/customer-query"
+              style={{
+                ...styles.subMenuItem,
+                ...(location.pathname === "/customer-query"
+                  ? styles.activeMenuItem
+                  : {}),
+              }}
+            >
+              고객문의
+            </Link>
+            <Link
+              to="/review"
+              style={{
+                ...styles.subMenuItem,
+                ...(location.pathname === "/review"
+                  ? styles.activeMenuItem
+                  : {}),
+              }}
+            >
+              상품평
+            </Link>
           </div>
         )}
       </div>

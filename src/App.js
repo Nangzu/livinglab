@@ -19,6 +19,8 @@ import SettlementHistory from "./pages/Calculate/SettlementHistory";
 import SalesHistory from "./pages/Calculate/SalesHistory";
 import TaxHistory from "./pages/Calculate/TaxHistory";
 import PaymentHistory from "./pages/Calculate/PaymentHistory";
+import CustomerQuery from "./pages/Customer/CustomerQuery";
+import Review from "./pages/Customer/Review";
 
 // 메인 콘텐츠를 렌더링할 AppContent 컴포넌트 생성
 function AppContent() {
@@ -137,7 +139,10 @@ function AppContent() {
           <Route path="payment-history" element={<PaymentHistory />} />
 
           {/* 고객 문의 페이지 */}
-          <Route path="sales-history" element={<SalesHistory />} />
+          <Route path="customer-query" element={<CustomerQuery />} />
+
+          {/* 상품평 페이지 */}
+          <Route path="review" element={<Review />} />
         </Routes>
       </main>
     </div>
