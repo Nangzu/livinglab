@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Registration.css";
 import axios from "axios";
 
 const Registration = ({ isSidebarOpen }) => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     goodsname: "", // 상품명
     price: "", // 가격
@@ -100,7 +102,11 @@ const Registration = ({ isSidebarOpen }) => {
       });
 
       if(response.status === 200) {
-        alert("상품이 성공적으로 등록되었습니다!");
+        const userConfirmation = window.confirm("정말로 이 상품을 등록하시겠습니까?");
+        if(userConfirmation) {
+          alert("상품이 성공적으로 등록되었습니다.");
+          navigate("product-edit");
+        }
       }
       console.log("등록된 상품 데이터:", response.data);
     } catch (error) {
