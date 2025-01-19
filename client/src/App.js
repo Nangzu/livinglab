@@ -11,7 +11,12 @@ import Headerbar from './components/Header';
 import SearchPage from './pages/SearchPage';
 import SignupPage from './pages/Signup';
 import Loginpage from './pages/Login';
+import Mypage from './pages/MyPage';
 import Footer from './components/Footer';
+import GoodsDetail from "./pages/GoodsDetail";
+import CartPage from './pages/Cart';
+import OrderPage from './pages/Order';
+import OrderConfirmation from "./pages/OrderConfirmation";
 
 function App() {
   return (
@@ -24,8 +29,13 @@ function App() {
           <Route path="/search" element={<SearchPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/login" element={<Loginpage />} />
+          <Route path="/mypage" element={<Mypage />} />
+          <Route path="/goods/:goodsnum" element={<GoodsDetail />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/order" element={<OrderPage />} />
+          <Route path="/order-confirmation" element={<OrderConfirmation />} />  
         </Routes>
-        <Footer /> {/* 푸터 하단 고정 */}
+        <Footer />
       </Router>
     </div>
   );

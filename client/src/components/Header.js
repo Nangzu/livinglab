@@ -1,21 +1,45 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './header.css';
-import SearchBar from './SearchBar'; // SearchBar 컴포넌트 임포트
+import SearchBar from './SearchBar';
 import logo from "../images/logo.png";
-import { Link } from 'react-router-dom'; // react-router-dom을 사용하여 페이지 간 이동
-import like from "../images/like.png"; // 좋아요 이미지 임포트
-import basket from "../images/basket.png"; // 장바구니 이미지 임포트
-import categories from "../images/categories.png"; // 카테고리 이미지 임포트
+import { Link, useNavigate } from 'react-router-dom';
+import like from "../images/like.png";
+import basket from "../images/basket.png";
+import categories from "../images/categories.png";
+import Collaboration from "./Collaboration";
 
 const Header = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
+
+  // 컴포넌트 마운트 시와 세션스토리지 변경 시 로그인 상태 확인
+  useEffect(() => {
+    const checkLoginStatus = () => {
+      const user = sessionStorage.getItem('user');
+      setIsLoggedIn(!!user);
+    };
+
+    checkLoginStatus();
+    // 세션스토리지 변경 이벤트 리스너
+    window.addEventListener('storage', checkLoginStatus);
+
+    return () => {
+      window.removeEventListener('storage', checkLoginStatus);
+    };
+  }, []);
+
+  const handleLogout = () => {
+    // 세션스토리지에서 사용자 정보 삭제
+    sessionStorage.removeItem('user');
+    setIsLoggedIn(false);
+    alert('로그아웃 되었습니다.');
+    navigate('/main');  // 메인 페이지로 이동
+  };
+
   return (
     <header className="header">
-      {/* 파란색 일자바 */}
       <div className="blue-bar"></div>
-
-      {/* 로고, 서치바, 회원가입, 로그인*/}
       <div className="top-bar">
-        {/* 로고 컨테이너 */}
         <div className="logo-container">
           <a href="/main" className="d-flex align-items-center">
             <img
@@ -26,34 +50,43 @@ const Header = () => {
             />
           </a>
         </div>
-
-        {/* 서치바 컨테이너 */}
         <div className="search-bar-container">
           <SearchBar />
         </div>
-
-        {/* 회원가입, 로그인 컨테이너 */}
         <div className="header-icons-container">
-          <Link to="/signup" className="icon">회원가입</Link>
-          <Link to="/login" className="icon">로그인</Link>
+          <Collaboration />
+          {isLoggedIn ? (
+            // 로그인 상태일 때
+            <>
+              <Link to="/mypage" className="icon">마이페이지</Link>
+              <span className="icon" onClick={handleLogout} style={{ cursor: 'pointer' }}>
+                로그아웃
+              </span>
+            </>
+          ) : (
+            // 로그아웃 상태일 때
+            <>
+              <Link to="/signup" className="icon">회원가입</Link>
+              <Link to="/login" className="icon">로그인</Link>
+            </>
+          )}
         </div>
       </div>
-
-      {/* 카테고리와 다른 메뉴 */}
+      
       <div className="nav-bar">
         <div className="category">
           <div className="category-icons">
-            <Link to="/like" className="icon">
-              <img src={like} alt="favorite" className="like-icon" /> {/* 좋아요 아이콘 */}
+            <Link to="/mypage" className="icon">
+              <img src={like} alt="favorite" className="like-icon" />
             </Link>
             <Link to="/cart" className="icon">
-              <img src={basket} alt="cart" className="basket-icon" /> {/* 장바구니 아이콘 */}
+              <img src={basket} alt="cart" className="basket-icon" />
             </Link>
           </div>
           <ul>
             <li>
               <Link to="/categories" className="icon">
-                <img src={categories} alt="category" style={{ height: "20px", marginRight: "5px" }} /> {/* 카테고리 아이콘 */}
+                <img src={categories} alt="category" style={{ height: "20px", marginRight: "5px" }} />
                 카테고리
               </Link>
             </li>

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';  // useNavigate 추가
 import axios from 'axios';
 import "./SearchBar.css";
 
-const SearchBar = ({ setSearchResults }) => {
+const SearchBar = ({ setSearchResults = () => {} }) => { // 기본값 추가
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();  // navigate 훅 추가
 
@@ -12,7 +12,7 @@ const SearchBar = ({ setSearchResults }) => {
       if (searchQuery) {
         handleSearchChange();
       } else {
-        setSearchResults([]);
+        setSearchResults([]); // 빈 값으로 초기화
       }
     }, 500);
 
@@ -22,13 +22,14 @@ const SearchBar = ({ setSearchResults }) => {
   const handleSearchChange = async () => {
     if (searchQuery) {
       try {
-        const response = await axios.get(`http://localhost:8080/api/goods/search`, {
+        const response = await axios.get(`http://localhost:8082/api/goods/search`, {
           params: {
-            query: searchQuery
+            goodsname: searchQuery
           },
         });
 
         setSearchResults(response.data);
+        console.log("서치데이터:", response.data);
       } catch (error) {
         console.error('Error searching for recipes:', error);
       }

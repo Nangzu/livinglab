@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
-import SearchBar from '../components/SearchBar';
+import Card from '../components/Card';
 import './searchPage.css';
 
 const SearchPage = () => {
@@ -18,10 +18,11 @@ const SearchPage = () => {
 
   const fetchSearchResults = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/api/goods/search`, {
-        params: { query: searchQuery },
+      const response = await axios.get(`http://localhost:8082/api/goods/search`, {
+        params: { goodsname: searchQuery },
       });
       setSearchResults(response.data);
+      console.log("서치데이터:", response.data);
     } catch (error) {
       console.error('Error fetching search results:', error);
       setSearchResults([]);
@@ -30,23 +31,22 @@ const SearchPage = () => {
 
   return (
     <div className="search-page-container">
-      {/* SearchBar는 SearchPage 상단에 위치 */}
-      <div className="search-bar-container">
-        <SearchBar setSearchResults={setSearchResults} />
-      </div>
-
       {/* 검색 결과 출력 */}
       <div className="search-results-container">
-        <h2>
-          "{searchQuery}" 검색 결과
-        </h2>
+        <h2>"{searchQuery}" 검색 결과</h2>
         <div className="search-results">
           {searchResults.length > 0 ? (
-            searchResults.map((item, index) => (
-              <div key={index} className="search-result-item">
-                <p>{item.name}</p>
-                <p>{item.price}</p>
-              </div>
+            searchResults.map((item) => (
+              <Card
+                key={item.goodsnum}
+                goodsnum={item.goodsnum}
+                image={`data:image/png;base64,${item.firstFileData}`}
+                name={item.firstGoodsname}
+                description={item.marketname}
+                originalPrice={item.price}
+                salePrice={item.price} // 할인된 가격은 없으므로 동일하게 설정
+                discount={0} // 할인율이 없다면 0으로 설정
+              />
             ))
           ) : (
             <p>검색 결과가 없습니다.</p>

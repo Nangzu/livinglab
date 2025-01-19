@@ -1,3 +1,4 @@
+// Login.js
 import React, { useState } from 'react';
 import './login.css';
 import axios from 'axios';
@@ -16,13 +17,23 @@ const Login = () => {
     }));
   };
 
+  const credentials = {
+    userid: formData.userid, 
+    pw: formData.pw, 
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8082/api/users/login', formData);
+      const response = await axios.post("http://localhost:8082/api/users/login", credentials, {withCredentials: true});
+      
+      // 로그인 성공 시 사용자 정보를 세션스토리지에 저장
+      // response.data에는 UserDTO 정보가 들어있음 (user_num, role, username 등)
+      sessionStorage.setItem('user', JSON.stringify(response.data));
+      
       console.log('로그인 성공:', response.data);
       alert('로그인 성공!');
-      window.location.href = '/main';
+      window.location.href = '/mypage';
     } catch (error) {
       console.error('로그인 실패:', error);
       alert('로그인에 실패했습니다. 아이디와 비밀번호를 확인해주세요.');
@@ -38,7 +49,6 @@ const Login = () => {
             <p>서비스를 이용하시려면 로그인해주세요.</p>
           </div>
         </div>
-        
         <div className="login-right">
           <div className="login-box">
             <h2 className="login-title">로그인</h2>
@@ -56,7 +66,6 @@ const Login = () => {
                   required
                 />
               </div>
-              
               <div className="form-group">
                 <label htmlFor="pw">비밀번호</label>
                 <input
@@ -70,22 +79,19 @@ const Login = () => {
                   required
                 />
               </div>
-
               <div className="links">
                 <a href="/find-username">아이디 찾기</a>
                 <span className="divider">|</span>
                 <a href="/find-password">비밀번호 찾기</a>
               </div>
-
               <button type="submit" className="login-button">
                 로그인
               </button>
-
               <div className="signup-section">
                 <p>아직 계정이 없으신가요?</p>
-                <button 
-                  type="button" 
-                  className="signup-button" 
+                <button
+                  type="button"
+                  className="signup-button"
                   onClick={() => window.location.href = '/signup'}
                 >
                   회원가입

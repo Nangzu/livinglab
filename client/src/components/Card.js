@@ -2,11 +2,11 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './card.css';
 
-const Card = ({ id, image, name, description, originalPrice, salePrice, discount }) => {
+const Card = ({ goodsnum, image, name, description, originalPrice, salePrice, discount }) => {
   const navigate = useNavigate();
 
   const handleCardClick = () => {
-    navigate(`/recipe/${id}`); // 레시피 번호를 URL에 전달
+    navigate(`/goods/${goodsnum}`); // 레시피 번호를 URL에 전달
   };
 
   return (

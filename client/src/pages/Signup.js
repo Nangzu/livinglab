@@ -36,7 +36,7 @@ const Signup = () => {
     const data = {
       userid: formData.userid,
       pw: formData.pw,
-      user_name: formData.user_name,
+      username: formData.user_name,
       email: formData.email,
       phone: formData.phone,
       address: formData.address,
@@ -63,6 +63,9 @@ const Signup = () => {
         <h2>회원가입</h2>
       </div>
 
+      {/* 일자바 추가 */}
+      <div className="divider-bar"></div>
+      
       <form className="signup-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="userid">아이디<span className="required">*</span></label>

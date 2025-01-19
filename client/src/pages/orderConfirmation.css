@@ -1,0 +1,125 @@
+.order-confirmation-page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Roboto', Arial, sans-serif;
+  }
+  
+  .order-confirmation-page h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px;
+    color: #222;
+  }
+  
+  .order-item {
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #ffffff, #f8f9fa);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
+  
+  .order-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+  }
+  
+  .order-item h2 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #222;
+  }
+  
+  .order-item p {
+    font-size: 16px;
+    color: #555;
+    margin: 5px 0;
+  }
+  
+  .order-products {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+  }
+  
+  .product-item {
+    text-align: center;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    padding: 10px;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .product-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  .product-thumbnail {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
+  
+  .product-name {
+    font-size: 14px;
+    color: #333;
+    font-weight: 500;
+  }
+  
+  .order-confirmation-loading,
+  .order-confirmation-error,
+  .order-confirmation-empty {
+    text-align: center;
+    font-size: 18px;
+    color: #666;
+    margin-top: 50px;
+  }
+  
+  .order-summary {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #f7f7f7;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .order-summary p {
+    font-size: 16px;
+    margin: 5px 0;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .order-summary p strong {
+    color: #222;
+  }
+  
+  .pay-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(90deg, #4caf50, #81c784);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    transition: background 0.3s;
+  }
+  
+  .pay-button:hover {
+    background: linear-gradient(90deg, #388e3c, #66bb6a);
+  }
+  

@@ -1,171 +1,184 @@
-/* header.css */
-
 .header {
-    width: 100%;
-    background-color: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .blue-bar {
-    height: 15px;
-    background: linear-gradient(90deg, #1e88e5, #64b5f6);
-    width: 100%;
-  }
-  
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.blue-bar {
+  height: 15px;
+  background: linear-gradient(90deg, #1e88e5, #64b5f6);
+  width: 100%;
+}
+
+.top-bar {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.logo-container {
+  flex-shrink: 0;
+}
+
+.logo-container img {
+  transition: transform 0.2s ease;
+}
+
+.logo-container img:hover {
+  transform: scale(1.05);
+}
+
+.search-bar-container {
+  flex-grow: 1;
+  max-width: 600px;
+}
+
+.header-icons-container {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.header-icons-container .icon {
+  color: #333;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  display: inline-block;
+}
+
+.header-icons-container .icon:hover {
+  color: #1e88e5;
+}
+
+.header-icons-container .collaboration-icon {
+  background-color: #ff9800;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.header-icons-container .collaboration-icon:hover {
+  background-color: #f57c00;
+}
+
+.nav-bar {
+  border-top: 1px solid #eee;
+  background-color: #f8f9fa;
+}
+
+.category {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.category-icons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  order: 2;
+}
+
+.category-icons .icon img {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.2s ease;
+}
+
+.category-icons .icon:hover img {
+  transform: scale(1.1);
+}
+
+.category ul {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  order: 1;
+}
+
+.category ul li {
+  display: flex;
+  align-items: center;
+}
+
+.category ul li:first-child {
+  margin-right: 2rem;
+}
+
+.category ul li .icon {
+  display: flex;
+  align-items: center;
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.category ul li .icon:hover {
+  color: #1e88e5;
+  background-color: rgba(30, 136, 229, 0.1);
+  border-radius: 4px;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 968px) {
   .top-bar {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 1rem 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
-  }
-  
-  .logo-container {
-    flex-shrink: 0;
-  }
-  
-  .logo-container img {
-    transition: transform 0.2s ease;
-  }
-  
-  .logo-container img:hover {
-    transform: scale(1.05);
-  }
-  
-  .search-bar-container {
-    flex-grow: 1;
-    max-width: 600px;
-  }
-  
-  .header-icons-container {
-    display: flex;
-    gap: 1.5rem;
-    align-items: center;
-    white-space: nowrap;
-  }
-  
-  .header-icons-container .icon {
-    color: #333;
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: color 0.2s ease;
-    display: inline-block;
-  }
-  
-  .header-icons-container .icon:hover {
-    color: #1e88e5;
-  }
-  
-  .nav-bar {
-    border-top: 1px solid #eee;
-    background-color: #f8f9fa;
-  }
-  
-  .category {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0.5rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .category-icons {
-    display: flex;
+    flex-direction: column;
     gap: 1rem;
-    align-items: center;
-    order: 2; /* 변경: 순서를 뒤로 */
+    padding: 1rem;
   }
-  
-  .category-icons .icon img {
-    width: 24px;
-    height: 24px;
-    transition: transform 0.2s ease;
+
+  .search-bar-container {
+    width: 100%;
+    max-width: 100%;
   }
-  
-  .category-icons .icon:hover img {
-    transform: scale(1.1);
-  }
-  
+
   .category ul {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    order: 1; /* 변경: 순서를 앞으로 */
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
   }
-  
-  .category ul li {
-    display: flex;
-    align-items: center;
+
+  .header-icons-container {
+    gap: 1rem;
   }
-  
-  .category ul li:first-child {
-    margin-right: 2rem; /* 카테고리 메뉴와 다른 항목들 사이 간격 */
+}
+
+@media (max-width: 576px) {
+  .header-icons-container {
+    width: 100%;
+    justify-content: center;
   }
-  
-  .category ul li .icon {
-    display: flex;
-    align-items: center;
-    color: #333;
-    text-decoration: none;
-    font-weight: 500;
-    padding: 0.5rem;
-    transition: all 0.2s ease;
+
+  .category {
+    flex-direction: column;
+    gap: 1rem;
   }
-  
-  .category ul li .icon:hover {
-    color: #1e88e5;
-    background-color: rgba(30, 136, 229, 0.1);
-    border-radius: 4px;
+
+  .category-icons {
+    width: 100%;
+    justify-content: center;
+    order: 2;
   }
-  
-  /* 반응형 디자인 */
-  @media (max-width: 968px) {
-    .top-bar {
-      flex-direction: column;
-      gap: 1rem;
-      padding: 1rem;
-    }
-    
-    .search-bar-container {
-      width: 100%;
-      max-width: 100%;
-    }
-    
-    .category ul {
-      gap: 1rem;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-  
-    .header-icons-container {
-      gap: 1rem;
-    }
+
+  .category ul {
+    order: 1;
   }
-  
-  @media (max-width: 576px) {
-    .header-icons-container {
-      width: 100%;
-      justify-content: center;
-    }
-    
-    .category {
-      flex-direction: column;
-      gap: 1rem;
-    }
-    
-    .category-icons {
-      width: 100%;
-      justify-content: center;
-      order: 2; /* 모바일에서도 순서 유지 */
-    }
-    
-    .category ul {
-      order: 1; /* 모바일에서도 순서 유지 */
-    }
-  }
+}
