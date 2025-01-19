@@ -29,9 +29,9 @@ function AppContent() {
   const [user, setUser] = useState(null); // 사용자 상태
 
   useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem("user"));
+    const storedUser = JSON.parse(sessionStorage.getItem("user"));
     if(storedUser) {
-      setUser(storedUser); // localStorage에 저장된 사용자 정보 불러오기
+      setUser(storedUser); // sessionStorage에 저장된 사용자 정보 불러오기
     }
   }, []);
 
@@ -41,7 +41,7 @@ function AppContent() {
 
   const handleLogout = () => {
     setUser(null);
-    localStorage.removeItem("user");
+    sessionStorage.removeItem("user");
     window.location.href = "/login"; // 로그인 페이지로 리디렉션
   };
 
