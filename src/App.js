@@ -102,7 +102,7 @@ function AppContent() {
           <Route path="employee-management" element={<EmployeeForm />} />
 
           {/* 배송 관리 페이지 */}
-          <Route path="delivey-manager" element={<DeliveryManager />} />
+          <Route path="delivery-manager" element={<DeliveryManager />} />
         </Routes>
       </main>
     </div>

@@ -10,9 +10,58 @@ const DeliveryManager = () => {
     const fetchOrders = async () => {
       try {
         const response = await axios.get("http://localhost:8082/api/orders"); // 나중에 백엔드에 맞는 URL로 변경
-        setOrders(response.data);
+        if (response.data.length === 0) {
+          // 주문이 없으면 샘플 데이터 추가
+          setOrders([
+            {
+              id: "샘플1",
+              productName: "샘플 상품 1",
+              productCode: "SAMPLE-001",
+              productImage: "https://via.placeholder.com/50",
+              orderDate: "2025-01-01",
+              customerEmail: "sample1@example.com",
+              price: 10000,
+              status: "결제완료",
+            },
+            {
+              id: "샘플2",
+              productName: "샘플 상품 2",
+              productCode: "SAMPLE-002",
+              productImage: "https://via.placeholder.com/50",
+              orderDate: "2025-01-02",
+              customerEmail: "sample2@example.com",
+              price: 20000,
+              status: "배송시작",
+            },
+          ]);
+        } else {
+          setOrders(response.data);
+        }
       } catch (error) {
         console.error("주문 데이터 가져오기 오류:", error);
+        // 오류 시 샘플 데이터 표시
+        setOrders([
+          {
+            id: "샘플1",
+            productName: "샘플 상품 1",
+            productCode: "SAMPLE-001",
+            productImage: "https://via.placeholder.com/50",
+            orderDate: "2025-01-01",
+            customerEmail: "sample1@example.com",
+            price: 10000,
+            status: "결제완료",
+          },
+          {
+            id: "샘플2",
+            productName: "샘플 상품 2",
+            productCode: "SAMPLE-002",
+            productImage: "https://via.placeholder.com/50",
+            orderDate: "2025-01-02",
+            customerEmail: "sample2@example.com",
+            price: 20000,
+            status: "배송시작",
+          },
+        ]);
       }
     };
 
@@ -53,12 +102,7 @@ const DeliveryManager = () => {
           </tr>
         </thead>
         <tbody>
-        {orders.length === 0 ? (
-          <tr>
-            <td colSpan="6">현재 등록된 주문이 없습니다.</td>
-          </tr>
-        ) : (
-          orders.map((order) => (
+          {orders.map((order) => (
             <tr key={order.id}>
               <td>
                 <img src={order.productImage} alt={order.productName} className="product-image" />
@@ -81,7 +125,7 @@ const DeliveryManager = () => {
                 </div>
               </td>
             </tr>
-          )))}
+          ))}
         </tbody>
       </table>
     </div>
