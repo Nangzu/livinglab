@@ -108,7 +108,7 @@ const Sidebar = ({ isOpen }) => {
                   : {}),
               }}
             >
-              상품수정
+              상품 조회/수정
             </Link>
           </div>
         )}

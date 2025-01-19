@@ -16,8 +16,8 @@ const Registration = ({ isSidebarOpen }) => {
     weightcapacity: "",
     expirydate: "",
     notes: "",
-    images: [],
-    detailImages: [],
+    file1: [],
+    file2: [],
   });
 
   useEffect(() => {
@@ -41,10 +41,10 @@ const Registration = ({ isSidebarOpen }) => {
 
   const handleImageUpload = (e, type) => {
     const files = Array.from(e.target.files);
-    if (type === "images") {
-      setFormData({ ...formData, images: files });
-    } else if (type === "detailImages") {
-      setFormData({ ...formData, detailImages: files });
+    if (type === "file1") {
+      setFormData({ ...formData, file1: files });
+    } else if (type === "file2") {
+      setFormData({ ...formData, file2: files });
     }
   };
 
@@ -63,7 +63,8 @@ const Registration = ({ isSidebarOpen }) => {
         tag: formData.tag,
         details: formData.details,
         goodsOption: formData.goodsOption,
-        usernum: formData.usernum
+        usernum: formData.usernum,
+        marketCode: formData.marketCode,
       })
     );
 
@@ -74,19 +75,20 @@ const Registration = ({ isSidebarOpen }) => {
         salesunit: formData.salesunit,
         weightcapacity: formData.weightcapacity,
         expirydate: formData.expirydate,
-        notes: formData.notes
+        notes: formData.notes,
+        // file2: [],
       })
     );
 
 
     // 일반 이미지 추가
-    formData.images.forEach((image) => {
-      formDataToSend.append("file", image); // "file"은 백엔드의 키 이름
+    formData.file1.forEach((file) => {
+      formDataToSend.append("file", file); // "file"은 백엔드의 키 이름
     });
 
     // 상세 이미지 추가
-    formData.detailImages.forEach((image) => {
-      formDataToSend.append("detailFile", image); // "detailFile"은 상세 이미지 키 이름
+    formData.file2.forEach((file) => {
+      formDataToSend.append("detailFile", file); // "detailFile"은 상세 이미지 키 이름
     });
 
     try {
@@ -272,11 +274,11 @@ const Registration = ({ isSidebarOpen }) => {
                 <input
                   type="file"
                   multiple
-                  onChange={(e) => handleImageUpload(e, "images")}
+                  onChange={(e) => handleImageUpload(e, "file1")}
                   accept="image/*"
                 />
                 <div className="image-preview">
-                  {formData.images.map((image, index) => (
+                  {formData.file1.map((image, index) => (
                     <img
                       key={index}
                       src={URL.createObjectURL(image)}
@@ -294,11 +296,11 @@ const Registration = ({ isSidebarOpen }) => {
                 <input
                   type="file"
                   multiple
-                  onChange={(e) => handleImageUpload(e, "detailImages")}
+                  onChange={(e) => handleImageUpload(e, "file2")}
                   accept="image/*"
                 />
                 <div className="image-preview">
-                  {formData.detailImages.map((image, index) => (
+                  {formData.file2.map((image, index) => (
                     <img
                       key={index}
                       src={URL.createObjectURL(image)}

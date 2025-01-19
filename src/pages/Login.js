@@ -23,20 +23,6 @@ const Login = ({ onLogin }) => {
     e.preventDefault();
 
     try {
-      // 마스터 계정 확인 추가!!! 나중에 삭제제
-      if (formData.userid === "master" && formData.pw === "master") {
-        alert("마스터 계정으로 로그인 성공!");
-        const masterData = {
-          user_num: 0, // 마스터 계정에 대한 고유 식별자 (예: 0)
-          role: "admin", // 마스터 계정의 역할
-        };
-        sessionStorage.setItem("usernum", masterData.user_num);
-        sessionStorage.setItem("role", masterData.role);
-        onLogin(masterData);
-        navigate("/main"); // 메인 페이지로 이동
-        return;
-      } //나중에 삭제제
-
       const credentials = {
         userid: formData.userid, 
         pw: formData.pw, 
@@ -44,16 +30,14 @@ const Login = ({ onLogin }) => {
 
       // 서버로 로그인 요청
       const response = await axios.post("http://localhost:8082/api/users/login", credentials, {withCredentials: true});
-      const { user_num, role } = response.data;
+      const { usernum,marketcode, role } = response.data;
 
-      // // 로컬 스토리지에 사용자 정보 저장
-      // sessionStorage.setItem("userNum", user_num);
-      // sessionStorage.setItem("role", role);
-
-      alert("로그인 성공!");
-      onLogin({ user_num, role }); // 로그인 콜백 호출
       sessionStorage.setItem("userid", formData.userid);
-      sessionStorage.setItem("usernum", formData.user_num);
+      sessionStorage.setItem("usernum", formData.usernum);
+      sessionStorage.setItem("marketcode", formData.marketcode);
+      sessionStorage.setItem("role", formData.role);
+      alert("로그인 성공!");
+      onLogin({ usernum, role, marketcode }); // 로그인 콜백 호출
       navigate("/main"); // 메인 페이지로 이동
     } catch (error) {
       console.error("로그인 오류:", error.response || error);

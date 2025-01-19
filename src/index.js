@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import axios from 'axios';
+
+axios.defaults.withCredentials = true; // 크로스 도메인 요청에서 쿠키를 허용
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

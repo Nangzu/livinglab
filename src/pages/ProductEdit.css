@@ -1,57 +1,131 @@
-.product-edit-container {
-    padding: 20px;
-    background-color: #f9f9f9;
-  }
-  
-  .product-edit-container h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  
-  .product-edit-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: white;
-  }
-  
-  .product-edit-table th,
-  .product-edit-table td {
-    border: 1px solid #ddd;
-    text-align: center;
-    padding: 10px;
-  }
-  
-  .product-edit-table th {
-    background-color: #f4f4f4;
-    font-weight: bold;
-  }
-  
-  .product-info {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  .product-info img {
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-  }
-  
-  .edit-button {
-    padding: 5px 10px;
-    font-size: 14px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .edit-button:hover {
-    background-color: #0056b3;
-  }
-  
+.product-edit {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+.product-edit h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.product-edit table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.product-edit table th, .product-edit table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+.product-edit table th {
+  background-color: #f4f4f4;
+}
+
+.product-edit table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.product-edit table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.product-edit button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.product-edit button:hover {
+  background-color: #0056b3;
+}
+
+/* 삭제 버튼 스타일 */
+.product-edit .delete-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.product-edit .delete-button:hover {
+  background-color: #c82333;
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.popup-content h2 {
+  margin-top: 0;
+}
+
+.popup-content label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.popup-content input,
+.popup-content select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.popup-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.popup-actions button {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.popup-actions button:first-child {
+  background-color: #28a745;
+  color: white;
+}
+
+.popup-actions button:first-child:hover {
+  background-color: #218838;
+}
+
+.popup-actions button:last-child {
+  background-color: #dc3545;
+  color: white;
+}
+
+.popup-actions button:last-child:hover {
+  background-color: #c82333;
+}
